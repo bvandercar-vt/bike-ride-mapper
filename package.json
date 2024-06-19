@@ -1,0 +1,60 @@
+{
+  "name": "MapMyRideMapper",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "MapMyRide Mapper",
+  "main": "index.js",
+  "homepage": "TODO.com",
+  "scripts": {
+    "start": "yarn dev",
+    "dev": "vite --open",
+    "build": "vite build",
+    "preview": "yarn build && vite preview --open",
+    "lint": "yarn format && yarn ts:check && yarn eslint && yarn format:check",
+    "ts:check": "tsc",
+    "eslint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "get-data": "npx tsx ./src/downloadWorkoutGeoJsons.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bvandercar-vt/TODO"
+  },
+  "keywords": [
+    "MapMyRide"
+  ],
+  "author": "Blake Vandercar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bvandercar-vt/TODO/issues"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9",
+    "@types/leaflet-polylinedecorator": "^1.6",
+    "@types/lodash": "^4",
+    "@types/luxon": "^3.4",
+    "@types/node": "^20",
+    "@types/xmldom": "^0.1",
+    "@typescript-eslint/eslint-plugin": "^8",
+    "@typescript-eslint/parser": "^8",
+    "eslint": "^9",
+    "eslint-config-prettier": "^9",
+    "eslint-plugin-prettier": "^5",
+    "prettier": "^3",
+    "type-fest": "^4.20",
+    "typescript": "^5",
+    "vite": "^5.4"
+  },
+  "dependencies": {
+    "@tmcw/togeojson": "^5.8",
+    "dotenv": "^16",
+    "leaflet": "^1.9",
+    "leaflet-polylinedecorator": "^1.6",
+    "lodash": "^4",
+    "luxon": "^3.5",
+    "sanitize-filename": "^1.6",
+    "xmldom": "^0.6"
+  }
+}
