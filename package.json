@@ -1,0 +1,45 @@
+{
+  "name": "MapMyRideMapper",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "MapMyRide Mapper",
+  "main": "index.js",
+  "homepage": "TODO.com",
+  "scripts": {
+    "lint": "yarn format && yarn ts:check && yarn eslint && yarn format:check",
+    "ts:check": "tsc",
+    "eslint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "start": "npx tsx ./src/downloadRides.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bvandercar-vt/TODO"
+  },
+  "keywords": [
+    "MapMyRide"
+  ],
+  "author": "Blake Vandercar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bvandercar-vt/TODO/issues"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4",
+    "@types/node": "^20",
+    "@typescript-eslint/eslint-plugin": "^6",
+    "@typescript-eslint/parser": "^6",
+    "eslint": "^8",
+    "eslint-config-prettier": "^9",
+    "eslint-plugin-prettier": "^5",
+    "prettier": "^3",
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "lodash": "^4",
+    "sanitize-filename": "^1.6.3"
+  }
+}
