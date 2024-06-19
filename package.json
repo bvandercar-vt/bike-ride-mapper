@@ -12,7 +12,7 @@
     "eslint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "start": "npx tsx ./src/downloadRides.ts"
+    "get-kmls": "npx tsx ./src/downloadWorkoutKmls.ts"
   },
   "repository": {
     "type": "git",

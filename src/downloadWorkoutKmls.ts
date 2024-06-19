@@ -6,7 +6,7 @@ config({ path: '.env.local' })
 
 const API_URL = 'https://mapmyride.api.ua.com'
 
-const DIR = 'ride_files'
+const DIR = 'workout_kml_files'
 
 interface Link {
   href: string
@@ -118,7 +118,7 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
     return items
   }
 
-  const routes = await getAll<Route>('route', 'routes', { user: user_id, order_by: 'date_created' })
+  // const routes = await getAll<Route>('route', 'routes', { user: user_id, order_by: 'date_created' })
 
   const workouts = await getAll<Workout>('workout', 'workouts', {
     user: user_id,
@@ -127,21 +127,34 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
 
   console.log('# workouts', workouts.length)
 
-  if (!fs.existsSync(DIR)) {
-    fs.mkdirSync(DIR)
+  if (fs.existsSync(DIR)) {
+    fs.rmdirSync(DIR, { recursive: true })
   }
+  fs.mkdirSync(DIR)
 
-  routes.forEach(async (route) => {
-    const response = await get(route._links.alternate[0].href)
-    const result = await response.arrayBuffer()
-    fs.writeFileSync(`${DIR}/${sanitize(route.name)}.kml`, Buffer.from(result))
-  })
+  await Promise.all(
+    workouts.map(async (workout) => {
+      const routeResponse = await get(workout._links.route[0].href)
+      const routeResult = (await routeResponse.json()) as Route
+
+      const kmlResponse = await get(routeResult._links.alternate[0].href)
+      const kmlResult = await kmlResponse.arrayBuffer()
+
+      const date = new Date(workout.start_datetime)
+      const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+
+      fs.writeFileSync(
+        `${DIR}/${sanitize(dateStr + ' ' + workout.name)}.kml`,
+        Buffer.from(kmlResult),
+      )
+    }),
+  )
+
+  const exportedFiles = fs.readdirSync(DIR)
+  if (exportedFiles.length !== workouts.length) throw new Error('overwritten files?')
 }
 
 const { MMR_AUTH_TOKEN, MMR_USER_ID } = process.env
 if (!MMR_AUTH_TOKEN || !MMR_USER_ID) throw new Error('need env file')
-
-console.log(MMR_AUTH_TOKEN)
-console.log(MMR_USER_ID)
 
 await downloadAllRoutes(MMR_AUTH_TOKEN, MMR_USER_ID)
