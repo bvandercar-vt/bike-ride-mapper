@@ -25,6 +25,10 @@ const map = createMap('map', {
 })
 
 const { MAPTILER_API_KEY } = process.env
+if (!MAPTILER_API_KEY) {
+  console.error(process.env)
+  throw new Error('need env file')
+}
 
 tileLayer(`https://api.maptiler.com/maps/streets-v2-dark/{z}/{x}/{y}.png?key=${MAPTILER_API_KEY}`, {
   //style URL
