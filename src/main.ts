@@ -77,15 +77,19 @@ geoJsons.forEach((geoJson) => {
     style: lineStyle,
     filter: (feature) => feature.geometry.type !== 'Point',
   }).addTo(map)
-
-  feature.bindTooltip(popover.outerHTML, { direction: 'top', sticky: true })
-  let d: PolylineDecorator
-  feature.on('mouseover', function () {
+  const featureHover = geoJSON(geoJson, {
+    style: { weight: 30, opacity: 0 },
+    filter: (feature) => feature.geometry.type !== 'Point',
+  }).addTo(map)
+  featureHover.bindTooltip(popover.outerHTML, { direction: 'top', sticky: true })
+  let arrowsDecorator: PolylineDecorator
+  featureHover.on('mouseover', function () {
     feature.setStyle(lineStyleHovered)
     feature.bringToFront()
+    featureHover.bringToFront()
     feature.getLayers().map((layer) => {
       // @ts-expect-error WORKS
-      d = polylineDecorator(layer, {
+      arrowsDecorator = polylineDecorator(layer, {
         patterns: [
           {
             repeat: 60,
@@ -102,9 +106,9 @@ geoJsons.forEach((geoJson) => {
       }).addTo(map)
     })
   })
-  feature.on('mouseout', function () {
+  featureHover.on('mouseout', function () {
     feature.setStyle(lineStyle)
-    d.remove()
+    arrowsDecorator.remove()
   })
 })
 
