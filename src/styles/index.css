@@ -1,8 +1,28 @@
 /* General */
 
+body {
+  background-color: Black;
+  color: white;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bold;
+  text-shadow: 3px 3px 2px black;
+  color: orange;
+}
+
 #map {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
+  z-index: 1;
 }
