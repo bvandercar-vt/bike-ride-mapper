@@ -75,7 +75,20 @@ const overlayMaps = {
 
 control.layers(baseMaps, overlayMaps, { position: 'topleft', collapsed: false }).addTo(map)
 
-// TODO: change trails color when on sattelite view (map.on('baselayerchange')
+function setBikeTrailsStyle(isSatellite: boolean) {
+  const bikeTrails = document.getElementsByClassName('bike-trails')[0]! as HTMLElement
+  bikeTrails.classList.toggle('bike-trails-satellite', isSatellite)
+  bikeTrails.classList.toggle('bike-trails-dark', !isSatellite)
+}
+map.on('baselayerchange', (e) => {
+  const isSatellite = e.name === 'Satellite'
+  setBikeTrailsStyle(isSatellite)
+})
+
+map.on('overlayadd', () => {
+  const isSatellite = map.hasLayer(satelliteLayer)
+  setBikeTrailsStyle(isSatellite)
+})
 
 const lineStyle: PathOptions = {
   color: 'lime',
