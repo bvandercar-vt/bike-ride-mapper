@@ -10,22 +10,22 @@ export interface Route {
   city: string
   country: string
   state: string
-  starting_location: string
+  starting_location: { type: string; coordinates: number[] }
   start_point_type: string
   postal_code: string
-  distance: string
+  distance: number
   name: string
   description: string
   data_source: string
-  images: string
+  images?: string
   created_datetime: string
   updated_datetime: string
-  points: string
-  climbs: string
-  total_ascent: string
-  total_descent: string
-  min_elevation: string
-  max_elevation: string
+  points: string | null
+  climbs: string | null
+  total_ascent: number
+  total_descent: number
+  min_elevation: number
+  max_elevation: number
   _links: Record<
     'alternate' | 'privacy' | 'self' | 'activity_types' | 'user' | 'thumbnail' | 'documentation',
     Link[]
@@ -55,9 +55,9 @@ export interface Workout {
     speed_min?: number
     speed_max?: number
     speed_avg: number
-    cadence_min: number
-    cadence_max: number
-    cadence_avg: number
+    cadence_min?: number
+    cadence_max?: number
+    cadence_avg?: number
     power_min?: number
     power_max?: number
     power_avg?: number
@@ -68,4 +68,9 @@ export interface Workout {
   _links: Record<'self' | 'route' | 'user' | 'privacy' | 'workout_attribution', Link[]>
 }
 
-export type CustomGeoJson = GeoJsonObject & { properties: Workout }
+export type CustomGeoJson = GeoJsonObject & {
+  properties: {
+    workout: Omit<Workout, '_links' | 'time_series' | 'sharing' | 'attachments'>
+    route: Omit<Route, '_links'>
+  }
+}

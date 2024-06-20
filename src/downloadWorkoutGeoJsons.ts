@@ -1,6 +1,7 @@
 import { kml } from '@tmcw/togeojson'
 import { config } from 'dotenv'
 import * as fs from 'fs'
+import _ from 'lodash'
 import * as prettier from 'prettier'
 import { DOMParser } from 'xmldom'
 import type { CustomGeoJson, Route, Workout } from './mapMyRide.d.ts'
@@ -64,7 +65,16 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
       const kmlParsed = new DOMParser().parseFromString(kmlText)
       const geoJsonObj = {
         ...kml(kmlParsed),
-        properties: workout,
+        properties: {
+          workout: _.omitBy(
+            workout,
+            (val, key) => _.isObject(val) && key !== 'aggregates',
+          ) as CustomGeoJson['properties']['workout'],
+          route: _.omitBy(
+            route,
+            (val, key) => _.isObject(val) && key !== 'starting_location',
+          ) as CustomGeoJson['properties']['route'],
+        },
       } satisfies CustomGeoJson
       return geoJsonObj
     }),

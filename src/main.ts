@@ -57,14 +57,15 @@ const geoJsons = geoJsons_ as CustomGeoJson[]
 
 await Promise.all(
   geoJsons.map(async (geoJson) => {
+    const { workout, route } = geoJson.properties
     const feature = geoJSON(geoJson, {
       style: lineStyle,
       filter: (feature) => feature.geometry.type !== 'Point',
     }).addTo(map)
 
-    const date = new Date(geoJson.properties.start_datetime)
+    const date = new Date(workout.start_datetime)
     const dateStr = `${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')} ${date.getFullYear()} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
-    const distanceMiles = geoJson.properties.aggregates.distance_total * 0.000621371
+    const distanceMiles = route.distance * 0.000621371
     const distanceStr = _.round(distanceMiles, 2)
     const popover = document.createElement('div')
     popover.classList.add('route-popover')
