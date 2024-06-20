@@ -9,8 +9,6 @@ config({ path: '.env.local' })
 
 const API_URL = 'https://mapmyride.api.ua.com'
 
-const DIR = 'workout_geojsons'
-
 const downloadAllRoutes = async (token: string, user_id: string) => {
   async function get(endpoint: string) {
     const response = await fetch(`${API_URL}${endpoint}`, {
@@ -58,11 +56,6 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
 
   console.log('# workouts', workouts.length)
 
-  if (fs.existsSync(DIR)) {
-    fs.rmdirSync(DIR, { recursive: true })
-  }
-  fs.mkdirSync(DIR)
-
   const geoJsonObjects = await Promise.all(
     workouts.map(async (workout) => {
       const route: Route = await get(workout._links.route[0].href).then((r) => r.json())
@@ -79,7 +72,7 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
   const geoJsons = await prettier.format(JSON.stringify(geoJsonObjects, null, 2), {
     parser: 'json',
   })
-  fs.writeFileSync(`${DIR}/geoJsons.json`, geoJsons)
+  fs.writeFileSync(`geoJsons.json`, geoJsons)
 }
 
 const { MMR_AUTH_TOKEN, MMR_USER_ID } = process.env

@@ -48,9 +48,7 @@ const lineStyleHovered: PathOptions = {
   opacity: 0.5,
 }
 
-const geoJsons: CustomGeoJson[] = await fetch('../workout_geojsons/geoJsons.json').then((r) =>
-  r.json(),
-)
+const geoJsons: CustomGeoJson[] = await fetch('../geoJsons.json').then((r) => r.json())
 geoJsons.forEach(async (geoJson) => {
   const feature = geoJSON(geoJson, {
     style: lineStyle,
