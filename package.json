@@ -7,6 +7,10 @@
   "main": "index.js",
   "homepage": "TODO.com",
   "scripts": {
+    "start": "yarn dev",
+    "dev": "vite --open",
+    "build": "vite build",
+    "preview": "yarn build && vite preview --open",
     "lint": "yarn format && yarn ts:check && yarn eslint && yarn format:check",
     "ts:check": "tsc",
     "eslint": "eslint .",
@@ -27,6 +31,7 @@
     "url": "https://github.com/bvandercar-vt/TODO/issues"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.12",
     "@types/lodash": "^4",
     "@types/node": "^20",
     "@typescript-eslint/eslint-plugin": "^6",
@@ -35,10 +40,12 @@
     "eslint-config-prettier": "^9",
     "eslint-plugin-prettier": "^5",
     "prettier": "^3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^5.3.1"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
+    "leaflet": "^1.9.4",
     "lodash": "^4",
     "sanitize-filename": "^1.6.3"
   }
