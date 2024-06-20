@@ -55,30 +55,33 @@ const lineStyleHovered: PathOptions = {
 import geoJsons_ from '../geoJsons.json' assert { type: 'json' }
 const geoJsons = geoJsons_ as CustomGeoJson[]
 
-geoJsons.forEach(async (geoJson) => {
-  const feature = geoJSON(geoJson, {
-    style: lineStyle,
-    filter: (feature) => feature.geometry.type !== 'Point',
-  }).addTo(map)
+await Promise.all(
+  geoJsons.map(async (geoJson) => {
+    const feature = geoJSON(geoJson, {
+      style: lineStyle,
+      filter: (feature) => feature.geometry.type !== 'Point',
+    }).addTo(map)
 
-  const date = new Date(geoJson.properties.start_datetime)
-  const dateStr = `${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')} ${date.getFullYear()} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
-  const distanceStr = _.round(geoJson.properties.aggregates.distance_total * 0.000621371, 2)
-  const popover = document.createElement('div')
-  popover.classList.add('route-popover')
-  popover.innerHTML = `Date: ${dateStr}<br>Distance: ${distanceStr} miles`
+    const date = new Date(geoJson.properties.start_datetime)
+    const dateStr = `${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')} ${date.getFullYear()} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+    const distanceMiles = geoJson.properties.aggregates.distance_total * 0.000621371
+    const distanceStr = _.round(distanceMiles, 2)
+    const popover = document.createElement('div')
+    popover.classList.add('route-popover')
+    popover.innerHTML = `Date: ${dateStr}<br>Distance: ${distanceStr} miles`
 
-  let layerPopup: Popup | null
-  feature.on('mouseover', function (e) {
-    layerPopup = popup().setLatLng(e.latlng).setContent(popover.outerHTML).openOn(map)
-    feature.setStyle(lineStyleHovered)
-    feature.bringToFront()
-  })
-  feature.on('mouseout', function () {
-    if (layerPopup) {
-      map.closePopup(layerPopup)
-      layerPopup = null
-    }
-    feature.setStyle(lineStyle)
-  })
-})
+    let layerPopup: Popup | null
+    feature.on('mouseover', function (e) {
+      layerPopup = popup().setLatLng(e.latlng).setContent(popover.outerHTML).openOn(map)
+      feature.setStyle(lineStyleHovered)
+      feature.bringToFront()
+    })
+    feature.on('mouseout', function () {
+      if (layerPopup) {
+        map.closePopup(layerPopup)
+        layerPopup = null
+      }
+      feature.setStyle(lineStyle)
+    })
+  }),
+)
