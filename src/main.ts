@@ -9,6 +9,7 @@ import './styles/index.css'
  */
 import {
   Symbol,
+  control,
   map as createMap,
   geoJSON,
   latLng,
@@ -36,25 +37,32 @@ if (!MAPTILER_API_KEY) {
   throw new Error('need env file')
 }
 
-tileLayer(`https://api.maptiler.com/maps/streets-v2-dark/{z}/{x}/{y}.png?key=${MAPTILER_API_KEY}`, {
-  //style URL
-  tileSize: 512,
-  zoomOffset: -1,
-  minZoom: 1,
-  crossOrigin: true,
-}).addTo(map)
+const mapLayer = tileLayer(
+  `https://api.maptiler.com/maps/streets-v2-dark/{z}/{x}/{y}.png?key=${MAPTILER_API_KEY}`,
+  {
+    tileSize: 512,
+    zoomOffset: -1,
+    minZoom: 1,
+    crossOrigin: true,
+  },
+).addTo(map)
 
-const bikeLayer = tileLayer('http://{s}.google.com/vt/lyrs=bike&x={x}&y={y}&z={z}', {
+const trailLayer = tileLayer('http://{s}.google.com/vt/lyrs=bike&x={x}&y={y}&z={z}', {
   maxZoom: 20,
   subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-  opacity: 0,
+  opacity: 0.5,
   className: 'bike-trails',
-}).addTo(map)
-
-const bikeTrailCheckbox = document.getElementById('trail-layer-checkbox')! as HTMLInputElement
-bikeTrailCheckbox.addEventListener('change', (event) => {
-  bikeLayer.setOpacity((event.currentTarget as HTMLInputElement)?.checked ? 0.5 : 0)
 })
+
+const baseMaps = {
+  Map: mapLayer,
+}
+
+const overlayMaps = {
+  'Bike Trails': trailLayer,
+}
+
+control.layers(baseMaps, overlayMaps, { position: 'topleft', collapsed: false }).addTo(map)
 
 const lineStyle: PathOptions = {
   color: 'lime',
