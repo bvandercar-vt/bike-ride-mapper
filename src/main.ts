@@ -8,6 +8,8 @@ import './styles/index.css'
  * Regular imports
  */
 import {
+  Browser,
+  control,
   map as createMap,
   geoJSON,
   latLng,
@@ -19,11 +21,16 @@ import {
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { type CustomGeoJson } from './mapMyRide'
+import './touchHover'
 
 const map = createMap('map', {
   center: latLng(39.7327258, -104.9851469),
   zoom: 13,
 })
+
+if (Browser.touch) {
+  control.touchHover().addTo(map)
+}
 
 const { MAPTILER_API_KEY } = process.env
 if (!MAPTILER_API_KEY) {
