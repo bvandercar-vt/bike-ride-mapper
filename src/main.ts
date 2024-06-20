@@ -69,7 +69,7 @@ await Promise.all(
 
     const date = DateTime.fromISO(workout.start_datetime)
     const dateStr = date.toFormat('EEE. MMMM d, yyyy h:mma')
-    const distanceStr = _.round(route.distance * METERS_TO_MILES, 2)
+    const distanceStr = _.round(route.distance * METERS_TO_MILES, 1)
     const ascentStr = _.round(route.total_ascent * METERS_TO_FEET, 0)
     const popover = document.createElement('div')
     popover.classList.add('route-popover')
@@ -90,3 +90,10 @@ await Promise.all(
     })
   }),
 )
+
+const numRoutes = geoJsons.length
+const totalDistance = _.sum(geoJsons.map(({ properties }) => properties.route.distance))
+const distanceStr = _.round(totalDistance * METERS_TO_MILES, 1)
+
+document.getElementById('total-stats')!.innerHTML =
+  `# Rides: ${numRoutes}<br>Total Distance: ${distanceStr}mi`
