@@ -88,3 +88,12 @@ header {
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 5px;
 }
+
+@media (max-width: 600px) {
+  #checkbox-overlay {
+    top: unset;
+    right: unset;
+    bottom: 0.5em;
+    left: 1em;
+  }
+}
