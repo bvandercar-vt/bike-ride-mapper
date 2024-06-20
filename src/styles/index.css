@@ -1,5 +1,9 @@
 /* General */
 
+:root {
+  --popup-bg-color: rgba(255, 255, 255, 0.85);
+}
+
 body {
   background-color: Black;
   color: white;
@@ -59,7 +63,6 @@ header {
 }
 
 .leaflet-popup-content-wrapper {
-  --popup-bg-color: rgba(255, 255, 255, 0.85);
   background-color: var(--popup-bg-color);
 }
 

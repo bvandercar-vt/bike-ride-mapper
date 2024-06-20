@@ -8,8 +8,6 @@ import './styles/index.css'
  * Regular imports
  */
 import {
-  Browser,
-  control,
   map as createMap,
   geoJSON,
   latLng,
@@ -21,16 +19,11 @@ import {
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { type CustomGeoJson } from './mapMyRide'
-import './touchHover'
 
 const map = createMap('map', {
   center: latLng(39.7327258, -104.9851469),
   zoom: 13,
 })
-
-if (Browser.touch) {
-  control.touchHover().addTo(map)
-}
 
 const { MAPTILER_API_KEY } = process.env
 if (!MAPTILER_API_KEY) {
@@ -84,6 +77,11 @@ await Promise.all(
 
     let layerPopup: Popup | null
     feature.on('mouseover', function (e) {
+      layerPopup = popup().setLatLng(e.latlng).setContent(popover.outerHTML).openOn(map)
+      feature.setStyle(lineStyleHovered)
+      feature.bringToFront()
+    })
+    feature.on('click', function (e) {
       layerPopup = popup().setLatLng(e.latlng).setContent(popover.outerHTML).openOn(map)
       feature.setStyle(lineStyleHovered)
       feature.bringToFront()
