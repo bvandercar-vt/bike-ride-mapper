@@ -1,4 +1,4 @@
 node_modules
 dist
-workout_kml_files
+workout_geojsons
 *.local

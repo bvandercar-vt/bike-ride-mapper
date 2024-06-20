@@ -1,12 +1,15 @@
+import { kml } from '@tmcw/togeojson'
 import { config } from 'dotenv'
 import * as fs from 'fs'
+import * as prettier from 'prettier'
 import sanitize from 'sanitize-filename'
+import { DOMParser } from 'xmldom'
 
 config({ path: '.env.local' })
 
 const API_URL = 'https://mapmyride.api.ua.com'
 
-const DIR = 'workout_kml_files'
+const DIR = 'workout_geojsons'
 
 interface Link {
   href: string
@@ -138,15 +141,18 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
       const routeResult = (await routeResponse.json()) as Route
 
       const kmlResponse = await get(routeResult._links.alternate[0].href)
-      const kmlResult = await kmlResponse.arrayBuffer()
+      const kmlResult = await kmlResponse.text()
+
+      const kmlParsed = new DOMParser().parseFromString(kmlResult)
+      const geoJsonObj = kml(kmlParsed)
+      const geoJson = await prettier.format(JSON.stringify(geoJsonObj, null, 2), { parser: 'json' })
 
       const date = new Date(workout.start_datetime)
       const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+      const fileName = sanitize(dateStr + ' ' + workout.name)
 
-      fs.writeFileSync(
-        `${DIR}/${sanitize(dateStr + ' ' + workout.name)}.kml`,
-        Buffer.from(kmlResult),
-      )
+      // fs.writeFileSync(`${DIR}/${fileName}.kml`, kmlResult)
+      fs.writeFileSync(`${DIR}/${fileName}.json`, geoJson)
     }),
   )
 
