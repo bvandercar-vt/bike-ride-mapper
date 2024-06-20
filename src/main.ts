@@ -83,13 +83,13 @@ geoJsons.forEach((geoJson) => {
   }
   feature.on('mouseover', createPopover)
   feature.on('click', createPopover)
-  feature.on('mouseout', function () {
-    if (layerPopup) {
-      map.closePopup(layerPopup)
-      layerPopup = null
-    }
-    feature.setStyle(lineStyle)
-  })
+  // feature.on('mouseout', function () {
+  //   if (layerPopup) {
+  //     map.closePopup(layerPopup)
+  //     layerPopup = null
+  //   }
+  //   feature.setStyle(lineStyle)
+  // })
 })
 
 const numRoutes = geoJsons.length
