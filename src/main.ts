@@ -56,6 +56,9 @@ const lineStyleHovered: PathOptions = {
 import geoJsons_ from '../geoJsons.json' assert { type: 'json' }
 const geoJsons = geoJsons_ as CustomGeoJson[]
 
+const METERS_TO_MILES = 0.000621371
+const METERS_TO_FEET = 3.28084
+
 await Promise.all(
   geoJsons.map(async (geoJson) => {
     const { workout, route } = geoJson.properties
@@ -66,11 +69,11 @@ await Promise.all(
 
     const date = DateTime.fromISO(workout.start_datetime)
     const dateStr = date.toFormat('EEE. MMMM d, yyyy h:mma')
-    const distanceMiles = route.distance * 0.000621371
-    const distanceStr = _.round(distanceMiles, 2)
+    const distanceStr = _.round(route.distance * METERS_TO_MILES, 2)
+    const ascentStr = _.round(route.total_ascent * METERS_TO_FEET, 0)
     const popover = document.createElement('div')
     popover.classList.add('route-popover')
-    popover.innerHTML = `Date: ${dateStr}<br>Distance: ${distanceStr} miles`
+    popover.innerHTML = `<b>${dateStr}</b><br><i><b>Distance: ${distanceStr}mi</b></i><br><i>Total Ascent: ${ascentStr}ft</i>`
 
     let layerPopup: Popup | null
     feature.on('mouseover', function (e) {
