@@ -40,8 +40,8 @@ export interface Workout {
   updated_datetime: string
   reference_key: string
   source: string
-  attachments: Record<string, any>
-  sharing: Record<string, any>
+  attachments?: Record<string, unknown>
+  sharing?: Record<string, unknown>
   notes: string
   aggregates: {
     distance_total: number
@@ -49,26 +49,23 @@ export interface Workout {
     active_time_total: number
     elapsed_time_total: number
     steps_total: number
-    heartrate_min: number
-    heartrate_max: number
-    heartrate_avg: number
-    speed_min: number
-    speed_max: number
+    heartrate_min?: number
+    heartrate_max?: number
+    heartrate_avg?: number
+    speed_min?: number
+    speed_max?: number
     speed_avg: number
     cadence_min: number
     cadence_max: number
     cadence_avg: number
-    power_min: number
-    power_max: number
-    power_avg: number
+    power_min?: number
+    power_max?: number
+    power_avg?: number
   }
   has_time_series: boolean
-  time_series: Record<string, any> // could type
-  activity_type: string
-  _links: Record<
-    'self' | 'route' | 'activity_type' | 'user' | 'privacy' | 'workout_attribution',
-    Link[]
-  >
+  time_series?: Record<string, unknown> // could type
+  activity_type?: string
+  _links: Record<'self' | 'route' | 'user' | 'privacy' | 'workout_attribution', Link[]>
 }
 
 export type CustomGeoJson = GeoJsonObject & { properties: Workout }

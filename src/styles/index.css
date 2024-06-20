@@ -13,10 +13,13 @@ header {
 
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  font-size: xx-large;
   font-weight: bold;
   text-shadow: 3px 3px 2px black;
   color: orange;
+}
+
+h1 {
+  margin-top: 0.2em;
 }
 
 #map {

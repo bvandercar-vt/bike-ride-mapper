@@ -8,16 +8,16 @@ import './styles/index.css'
  * Regular imports
  */
 import {
-  PathOptions,
   map as createMap,
   geoJSON,
   latLng,
   popup,
   tileLayer,
+  type PathOptions,
   type Popup,
 } from 'leaflet'
 import _ from 'lodash'
-import { CustomGeoJson } from './mapMyRide'
+import { type CustomGeoJson } from './mapMyRide'
 
 const map = createMap('map', {
   center: latLng(39.7327258, -104.9851469),
@@ -48,7 +48,9 @@ const lineStyleHovered: PathOptions = {
   opacity: 0.5,
 }
 
-const geoJsons: CustomGeoJson[] = await fetch('../geoJsons.json').then((r) => r.json())
+import geoJsons_ from '../geoJsons.json' assert { type: 'json' }
+const geoJsons = geoJsons_ as CustomGeoJson[]
+
 geoJsons.forEach(async (geoJson) => {
   const feature = geoJSON(geoJson, {
     style: lineStyle,
@@ -58,7 +60,7 @@ geoJsons.forEach(async (geoJson) => {
   const date = new Date(geoJson.properties.start_datetime)
   const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
 
-  var layerPopup: Popup | null
+  let layerPopup: Popup | null
   feature.on('mouseover', function (e) {
     layerPopup = popup()
       .setLatLng(e.latlng)
@@ -70,7 +72,7 @@ geoJsons.forEach(async (geoJson) => {
     feature.setStyle(lineStyleHovered)
     feature.bringToFront()
   })
-  feature.on('mouseout', function (e) {
+  feature.on('mouseout', function () {
     if (layerPopup) {
       map.closePopup(layerPopup)
       layerPopup = null
