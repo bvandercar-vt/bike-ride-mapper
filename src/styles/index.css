@@ -69,3 +69,22 @@ header {
 .leaflet-popup-tip {
   background-color: var(--popup-bg-color);
 }
+
+.bike-trails {
+  filter: invert(100%) hue-rotate(350deg) saturate(1.5) brightness(85%) contrast(100%);
+}
+
+#checkbox-overlay {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  padding: 0.2em;
+  margin: 0.1em;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  color: orange;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+}

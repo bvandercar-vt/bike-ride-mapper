@@ -46,6 +46,18 @@ tileLayer(`https://api.maptiler.com/maps/streets-v2-dark/{z}/{x}/{y}.png?key=${M
   crossOrigin: true,
 }).addTo(map)
 
+const bikeLayer = tileLayer('http://{s}.google.com/vt/lyrs=bike&x={x}&y={y}&z={z}', {
+  maxZoom: 20,
+  subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+  opacity: 0,
+  className: 'bike-trails',
+}).addTo(map)
+
+const bikeTrailCheckbox = document.getElementById('trail-layer-checkbox')! as HTMLInputElement
+bikeTrailCheckbox.addEventListener('change', (event) => {
+  bikeLayer.setOpacity((event.currentTarget as HTMLInputElement)?.checked ? 0.5 : 0)
+})
+
 const lineStyle: PathOptions = {
   color: 'lime',
   weight: 3,
