@@ -15,7 +15,7 @@ header {
   text-align: center;
   font-weight: bold;
   text-shadow: 3px 3px 2px black;
-  color: orange;
+  color: yellow;
 }
 
 h1 {
@@ -28,4 +28,11 @@ h1 {
   bottom: 0;
   width: 100%;
   z-index: 1;
+}
+
+.route-popover {
+  font-weight: bold;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
 }
