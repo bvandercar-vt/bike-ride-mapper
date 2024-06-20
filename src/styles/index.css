@@ -57,3 +57,12 @@ header {
   margin: 0;
   padding: 0;
 }
+
+.leaflet-popup-content-wrapper {
+  --popup-bg-color: rgba(255, 255, 255, 0.85);
+  background-color: var(--popup-bg-color);
+}
+
+.leaflet-popup-tip {
+  background-color: var(--popup-bg-color);
+}
