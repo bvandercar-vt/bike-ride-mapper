@@ -8,6 +8,7 @@ import './styles/index.css'
  * Regular imports
  */
 import {
+  LeafletMouseEvent,
   map as createMap,
   geoJSON,
   latLng,
@@ -76,16 +77,13 @@ await Promise.all(
     popover.innerHTML = `<b>${dateStr}</b><br><i><b>Distance: ${distanceStr}mi</b></i><br><i>Total Ascent: ${ascentStr}ft</i>`
 
     let layerPopup: Popup | null
-    feature.on('mouseover', function (e) {
+    const createPopover = function (e: LeafletMouseEvent) {
       layerPopup = popup().setLatLng(e.latlng).setContent(popover.outerHTML).openOn(map)
       feature.setStyle(lineStyleHovered)
       feature.bringToFront()
-    })
-    feature.on('click', function (e) {
-      layerPopup = popup().setLatLng(e.latlng).setContent(popover.outerHTML).openOn(map)
-      feature.setStyle(lineStyleHovered)
-      feature.bringToFront()
-    })
+    }
+    feature.on('mouseover', createPopover)
+    feature.on('click', createPopover)
     feature.on('mouseout', function () {
       if (layerPopup) {
         map.closePopup(layerPopup)
