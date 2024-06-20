@@ -17,6 +17,7 @@ import {
   type Popup,
 } from 'leaflet'
 import _ from 'lodash'
+import { DateTime } from 'luxon'
 import { type CustomGeoJson } from './mapMyRide'
 
 const map = createMap('map', {
@@ -63,8 +64,8 @@ await Promise.all(
       filter: (feature) => feature.geometry.type !== 'Point',
     }).addTo(map)
 
-    const date = new Date(workout.start_datetime)
-    const dateStr = `${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')} ${date.getFullYear()} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+    const date = DateTime.fromISO(workout.start_datetime)
+    const dateStr = date.toFormat('EEE. MMMM d, yyyy h:mma')
     const distanceMiles = route.distance * 0.000621371
     const distanceStr = _.round(distanceMiles, 2)
     const popover = document.createElement('div')
