@@ -7,16 +7,7 @@ import './styles/index.css'
 /**
  * Regular imports
  */
-import {
-  LeafletMouseEvent,
-  map as createMap,
-  geoJSON,
-  latLng,
-  popup,
-  tileLayer,
-  type PathOptions,
-  type Popup,
-} from 'leaflet'
+import { map as createMap, geoJSON, latLng, tileLayer, type PathOptions } from 'leaflet'
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { type CustomGeoJson } from './mapMyRide'
@@ -62,34 +53,29 @@ const geoJsons = geoJsons_ as CustomGeoJson[]
 
 geoJsons.forEach((geoJson) => {
   const { workout, route } = geoJson.properties
-  const feature = geoJSON(geoJson, {
-    style: lineStyle,
-    filter: (feature) => feature.geometry.type !== 'Point',
-  }).addTo(map)
-
   const date = DateTime.fromISO(workout.start_datetime)
   const dateStr = date.toFormat('EEE. MMMM d, yyyy h:mma')
   const distanceStr = _.round(route.distance * METERS_TO_MILES, 1)
   const ascentStr = _.round(route.total_ascent * METERS_TO_FEET, 0)
   const popover = document.createElement('div')
   popover.classList.add('route-popover')
-  popover.innerHTML = `<b>${dateStr}</b><br><i><b>Distance: ${distanceStr}mi</b></i><br><i>Total Ascent: ${ascentStr}ft</i>`
+  popover.innerHTML = `<b>${dateStr}</b>
+  <br><i><b>Distance: ${distanceStr}mi</b></i>
+  <br><i>Total Ascent: ${ascentStr}ft</i>`
 
-  let layerPopup: Popup | null
-  const createPopover = function (e: LeafletMouseEvent) {
-    layerPopup = popup().setLatLng(e.latlng).setContent(popover.outerHTML).openOn(map)
+  const feature = geoJSON(geoJson, {
+    style: lineStyle,
+    filter: (feature) => feature.geometry.type !== 'Point',
+  }).addTo(map)
+
+  feature.bindTooltip(popover.outerHTML, { direction: 'top', sticky: true })
+  feature.on('mouseover', function () {
     feature.setStyle(lineStyleHovered)
     feature.bringToFront()
-  }
-  feature.on('mouseover', createPopover)
-  feature.on('click', createPopover)
-  // feature.on('mouseout', function () {
-  //   if (layerPopup) {
-  //     map.closePopup(layerPopup)
-  //     layerPopup = null
-  //   }
-  //   feature.setStyle(lineStyle)
-  // })
+  })
+  feature.on('mouseout', function () {
+    feature.setStyle(lineStyle)
+  })
 })
 
 const numRoutes = geoJsons.length
