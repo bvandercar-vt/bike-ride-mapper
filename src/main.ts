@@ -17,7 +17,6 @@ import {
   type Popup,
 } from 'leaflet'
 import _ from 'lodash'
-import fs from 'vite-plugin-fs/browser'
 import { CustomGeoJson } from './mapMyRide'
 
 const map = createMap('map', {
@@ -49,11 +48,10 @@ const lineStyleHovered: PathOptions = {
   opacity: 0.5,
 }
 
-const GEOJSON_DIR = '../workout_geojsons'
-const geoJsonFiles = await fs.readdir(GEOJSON_DIR)
-geoJsonFiles.forEach(async (geoJsonFile) => {
-  const geoJsonText = await fs.readFile(GEOJSON_DIR + '/' + geoJsonFile)
-  const geoJson = JSON.parse(geoJsonText) as CustomGeoJson
+const geoJsons: CustomGeoJson[] = await fetch('../workout_geojsons/geoJsons.json').then((r) =>
+  r.json(),
+)
+geoJsons.forEach(async (geoJson) => {
   const feature = geoJSON(geoJson, {
     style: lineStyle,
     filter: (feature) => feature.geometry.type !== 'Point',

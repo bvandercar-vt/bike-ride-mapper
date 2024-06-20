@@ -2,7 +2,6 @@ import { kml } from '@tmcw/togeojson'
 import { config } from 'dotenv'
 import * as fs from 'fs'
 import * as prettier from 'prettier'
-import sanitize from 'sanitize-filename'
 import { DOMParser } from 'xmldom'
 import type { CustomGeoJson, Route, Workout } from './mapMyRide.d.ts'
 
@@ -30,15 +29,14 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
 
   async function getAll<T>(endpoint: string, key: string, params: Record<string, string>) {
     async function getBatch(limit: number, offset: number) {
-      const response = await get(
+      const result = await get(
         `/v7.2/${endpoint}/?` +
           new URLSearchParams({
             limit: String(limit),
             offset: String(offset),
             ...params,
           }),
-      )
-      const result = await response.json()
+      ).then((r) => r.json())
       return result._embedded[key] as T[]
     }
 
@@ -65,32 +63,23 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
   }
   fs.mkdirSync(DIR)
 
-  await Promise.all(
+  const geoJsonObjects = await Promise.all(
     workouts.map(async (workout) => {
-      const routeResponse = await get(workout._links.route[0].href)
-      const routeResult = (await routeResponse.json()) as Route
+      const route: Route = await get(workout._links.route[0].href).then((r) => r.json())
 
-      const kmlResponse = await get(routeResult._links.alternate[0].href)
-      const kmlResult = await kmlResponse.text()
-
-      const kmlParsed = new DOMParser().parseFromString(kmlResult)
+      const kmlText = await get(route._links.alternate[0].href).then((r) => r.text())
+      const kmlParsed = new DOMParser().parseFromString(kmlText)
       const geoJsonObj = {
         ...kml(kmlParsed),
         properties: workout,
       } satisfies CustomGeoJson
-      const geoJson = await prettier.format(JSON.stringify(geoJsonObj, null, 2), { parser: 'json' })
-
-      const date = new Date(workout.start_datetime)
-      const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
-      const fileName = sanitize(dateStr + ' ' + workout.name)
-
-      // fs.writeFileSync(`${DIR}/${fileName}.kml`, kmlResult)
-      fs.writeFileSync(`${DIR}/${fileName}.json`, geoJson)
+      return geoJsonObj
     }),
   )
-
-  const exportedFiles = fs.readdirSync(DIR)
-  if (exportedFiles.length !== workouts.length) throw new Error('overwritten files?')
+  const geoJsons = await prettier.format(JSON.stringify(geoJsonObjects, null, 2), {
+    parser: 'json',
+  })
+  fs.writeFileSync(`${DIR}/geoJsons.json`, geoJsons)
 }
 
 const { MMR_AUTH_TOKEN, MMR_USER_ID } = process.env
