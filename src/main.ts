@@ -7,7 +7,17 @@ import './styles/index.css'
 /**
  * Regular imports
  */
-import { map as createMap, geoJSON, latLng, tileLayer, type PathOptions } from 'leaflet'
+import {
+  Symbol,
+  map as createMap,
+  geoJSON,
+  latLng,
+  polylineDecorator,
+  tileLayer,
+  type PathOptions,
+  type PolylineDecorator,
+} from 'leaflet'
+import 'leaflet-polylinedecorator'
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { type CustomGeoJson } from './mapMyRide'
@@ -69,12 +79,32 @@ geoJsons.forEach((geoJson) => {
   }).addTo(map)
 
   feature.bindTooltip(popover.outerHTML, { direction: 'top', sticky: true })
+  let d: PolylineDecorator
   feature.on('mouseover', function () {
     feature.setStyle(lineStyleHovered)
     feature.bringToFront()
+    feature.getLayers().map((layer) => {
+      // @ts-expect-error WORKS
+      d = polylineDecorator(layer, {
+        patterns: [
+          {
+            repeat: 60,
+            symbol: Symbol.arrowHead({
+              pixelSize: 13,
+              pathOptions: {
+                fillOpacity: lineStyleHovered.opacity,
+                color: lineStyleHovered.color,
+                weight: 0,
+              },
+            }),
+          },
+        ],
+      }).addTo(map)
+    })
   })
   feature.on('mouseout', function () {
     feature.setStyle(lineStyle)
+    d.remove()
   })
 })
 
