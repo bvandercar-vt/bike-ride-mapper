@@ -92,8 +92,9 @@ await Promise.all(
 )
 
 const numRoutes = geoJsons.length
-const totalDistance = _.sum(geoJsons.map(({ properties }) => properties.route.distance))
-const distanceStr = _.round(totalDistance * METERS_TO_MILES, 1)
+const distances = geoJsons.map(({ properties }) => properties.route.distance)
+const totalDistanceStr = _.round(_.sum(distances) * METERS_TO_MILES, 1)
+const longestDistanceStr = _.round(_.max(distances)! * METERS_TO_MILES, 1)
 
 document.getElementById('total-stats')!.innerHTML =
-  `# Rides: ${numRoutes}<br>Total Distance: ${distanceStr}mi`
+  `# Rides: ${numRoutes}<br>Total Distance: ${totalDistanceStr}mi<br>Longest Ride: ${longestDistanceStr}mi`
