@@ -47,6 +47,16 @@ const mapLayer = tileLayer(
   },
 ).addTo(map)
 
+const satelliteLayer = tileLayer(
+  `https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=${MAPTILER_API_KEY}`,
+  {
+    tileSize: 512,
+    zoomOffset: -1,
+    minZoom: 1,
+    crossOrigin: true,
+  },
+)
+
 const trailLayer = tileLayer('http://{s}.google.com/vt/lyrs=bike&x={x}&y={y}&z={z}', {
   maxZoom: 20,
   subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
@@ -55,7 +65,8 @@ const trailLayer = tileLayer('http://{s}.google.com/vt/lyrs=bike&x={x}&y={y}&z={
 })
 
 const baseMaps = {
-  Map: mapLayer,
+  Default: mapLayer,
+  Satellite: satelliteLayer,
 }
 
 const overlayMaps = {
@@ -63,6 +74,8 @@ const overlayMaps = {
 }
 
 control.layers(baseMaps, overlayMaps, { position: 'topleft', collapsed: false }).addTo(map)
+
+// TODO: change trails color when on sattelite view (map.on('baselayerchange')
 
 const lineStyle: PathOptions = {
   color: 'lime',
