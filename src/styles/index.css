@@ -89,3 +89,7 @@ header {
 .bike-trails-satellite {
   filter: invert(0%) hue-rotate(120deg) saturate(2) brightness(100%) contrast(100%);
 }
+
+.error-text {
+  color: red;
+}
