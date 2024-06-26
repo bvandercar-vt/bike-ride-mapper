@@ -39,7 +39,9 @@ header {
   font-weight: bold;
   font-size: xx-large;
   color: yellow;
-  text-shadow: 3px 3px 2px Indigo;
+  --h1-text-shadow: indigo 0px 0px 10px;
+  text-shadow: var(--h1-text-shadow), var(--h1-text-shadow), var(--h1-text-shadow),
+    var(--h1-text-shadow), var(--h1-text-shadow), var(--h1-text-shadow);
 }
 
 #header-text #total-stats {
@@ -47,9 +49,11 @@ header {
   display: inline-block;
 
   color: orange;
-  border-radius: 10px;
+  font-size: medium;
   font-style: italic;
   line-height: 1.3;
+  --stats-text-shadow: black 0px 0px 10px;
+  text-shadow: var(--stats-text-shadow), var(--stats-text-shadow);
 }
 
 @media (max-width: 600px) {
