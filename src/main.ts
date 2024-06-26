@@ -31,6 +31,7 @@ const METERS_TO_FEET = 3.28084
 const map = createMap('map', {
   center: latLng(39.7327258, -104.9851469),
   zoom: 13,
+  zoomControl: false,
 })
 
 const { MAPTILER_API_KEY } = process.env

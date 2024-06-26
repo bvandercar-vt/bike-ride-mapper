@@ -2,6 +2,8 @@
 
 :root {
   --popup-bg-color: rgba(255, 255, 255, 0.85);
+  --heading-bg-color: rgba(0, 0, 0, 0.4);
+  --heading-border-radius: 10px;
 }
 
 body {
@@ -20,35 +22,24 @@ header {
   text-align: center;
 }
 
-@media (max-width: 600px) {
-  header {
-    text-align: right;
-  }
-
-  #header-text {
-    text-align: center;
-    padding-right: 0.7em;
-  }
-}
-
 #header-text {
   display: inline-block;
 
-  --h1-bg-color: rgba(0, 0, 0, 0.4);
-  background-color: var(--h1-bg-color);
-  box-shadow: 0 0 10px 10px var(--h1-bg-color);
+  background-color: var(--heading-bg-color);
+  box-shadow: 0 0 10px 7px var(--heading-bg-color);
   border-radius: 10px;
+  margin-top: 0.7em;
+  margin-right: 0.7em;
 }
 
 #header-text h1 {
-  margin: 0.2em;
-  margin-bottom: 0.1em;
+  margin: 3px 0.2em 0.1em 0.2em;
   display: inline-block;
 
   font-weight: bold;
+  font-size: xx-large;
   color: yellow;
   text-shadow: 3px 3px 2px Indigo;
-  border-radius: 20px;
 }
 
 #header-text #total-stats {
@@ -58,6 +49,22 @@ header {
   color: orange;
   border-radius: 10px;
   font-style: italic;
+  line-height: 1.3;
+}
+
+@media (max-width: 600px) {
+  header {
+    text-align: right;
+  }
+
+  #header-text {
+    text-align: center;
+    box-shadow: none;
+  }
+
+  #header-text h1 {
+    font-size: 1.7em;
+  }
 }
 
 #map {
@@ -72,6 +79,12 @@ header {
   font-size: 1em;
   margin: 0;
   padding: 0;
+}
+
+.leaflet-control-layers {
+  color: lightgray;
+  background-color: var(--heading-bg-color);
+  border-radius: var(--heading-border-radius);
 }
 
 .leaflet-popup-content-wrapper {
