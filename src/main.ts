@@ -21,7 +21,7 @@ import {
 import 'leaflet-polylinedecorator'
 import _ from 'lodash'
 import { DateTime } from 'luxon'
-import { type CustomGeoJson } from './mapMyRide'
+import { type CustomGeoJson } from './types/mapMyRide'
 
 const METERS_TO_MILES = 0.000621371
 const METERS_TO_FEET = 3.28084

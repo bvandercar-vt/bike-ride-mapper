@@ -4,7 +4,13 @@ import * as fs from 'fs'
 import _ from 'lodash'
 import * as prettier from 'prettier'
 import { DOMParser } from 'xmldom'
-import type { CustomGeoJson, Route, Workout } from './mapMyRide.d.ts'
+import {
+  ActivityName,
+  type ActivityType,
+  type CustomGeoJson,
+  type Route,
+  type Workout,
+} from './types/mapMyRide'
 
 config({ path: '.env.local' })
 
@@ -60,6 +66,11 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
   const geoJsonObjects = await Promise.all(
     workouts.map(async (workout) => {
       const route: Route = await get(workout._links.route[0].href).then((r) => r.json())
+      const activityType: ActivityType = await get(workout._links.activity_type[0].href).then((r) =>
+        r.json(),
+      )
+      if (!Object.values(ActivityName).includes(activityType.name))
+        throw new Error(`unexpected activity name ${activityType.name}`)
 
       const kmlText = await get(route._links.alternate[0].href).then((r) => r.text())
       const kmlParsed = new DOMParser().parseFromString(kmlText)
@@ -74,6 +85,9 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
             route,
             (val, key) => _.isObject(val) && key !== 'starting_location',
           ) as CustomGeoJson['properties']['route'],
+          activityType: _.omitBy(activityType, (val) =>
+            _.isObject(val),
+          ) as CustomGeoJson['properties']['activityType'],
         },
       } satisfies CustomGeoJson
       return geoJsonObj

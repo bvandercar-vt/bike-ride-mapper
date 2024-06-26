@@ -1,10 +1,15 @@
 import type { GeoJsonObject } from 'geojson'
+import type { Simplify } from 'type-fest'
 
 export interface Link {
   href: string
   id?: string
   name?: string
 }
+
+type Links<R extends string | undefined = undefined, O extends string | undefined = undefined> =
+  // @ts-expect-error doesnt actually create an error
+  Simplify<Record<R, Link[]> & Partial<Record<O, Link[]>>>
 
 export interface Route {
   city: string
@@ -26,9 +31,9 @@ export interface Route {
   total_descent: number
   min_elevation: number
   max_elevation: number
-  _links: Record<
-    'alternate' | 'privacy' | 'self' | 'activity_types' | 'user' | 'thumbnail' | 'documentation',
-    Link[]
+  _links: Links<
+    'self' | 'documentation' | 'alternate' | 'thumbnail',
+    'privacy' | 'user' | 'activity_types'
   >
 }
 
@@ -65,12 +70,38 @@ export interface Workout {
   has_time_series: boolean
   time_series?: Record<string, unknown> // could type
   activity_type?: string
-  _links: Record<'self' | 'route' | 'user' | 'privacy' | 'workout_attribution', Link[]>
+  _links: Links<
+    | 'self'
+    | 'documentation'
+    | 'user'
+    | 'activity_type'
+    | 'route'
+    | 'privacy'
+    | 'alternate'
+    | 'thumbnail'
+  >
+}
+
+export enum ActivityName {
+  BIKE_RIDE = 'Bike Ride',
+  WALK = 'Walk',
+  RUN = 'Run',
+}
+
+export interface ActivityType {
+  name: ActivityName
+  short_name: string
+  location_aware: boolean
+  import_only: boolean
+  mets: number
+  mets_speed: Array<{ speed: number; mets: number }>
+  _links: Links<'self' | 'documentation' | 'root' | 'icon_url'>
 }
 
 export type CustomGeoJson = GeoJsonObject & {
   properties: {
     workout: Omit<Workout, '_links' | 'time_series' | 'sharing' | 'attachments'>
     route: Omit<Route, '_links'>
+    activityType: Omit<ActivityType, '_links' | 'mets_speed'>
   }
 }

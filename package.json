@@ -43,6 +43,7 @@
     "eslint-config-prettier": "^9",
     "eslint-plugin-prettier": "^5",
     "prettier": "^3",
+    "type-fest": "^4.20.1",
     "typescript": "^5",
     "vite": "^5.3.1"
   },
