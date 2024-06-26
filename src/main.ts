@@ -176,7 +176,7 @@ geoJsons.forEach((geoJson) => {
             }),
           },
         ],
-      }).addTo(geoJsonLayer.layerGroup)
+      }).addTo(map)
     })
   })
   featureHover.on('mouseout', function () {
