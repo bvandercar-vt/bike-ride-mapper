@@ -108,9 +108,8 @@ const lineStyleHovered: PathOptions = {
   opacity: 0.6,
 }
 
-import * as geoJsons_ from '../geoJsons'
-// @ts-ignore works.
-const geoJsons = geoJsons_.default as CustomGeoJson[]
+import geoJsons_ from '../geoJsons.json' assert { type: 'json' }
+const geoJsons = geoJsons_ as CustomGeoJson[]
 
 enum RecordLayerKeys {
   BIKE_RECORDS = 'Bike Records',

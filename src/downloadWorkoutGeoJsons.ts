@@ -16,8 +16,6 @@ config({ path: '.env.local' })
 
 const API_URL = 'https://mapmyride.api.ua.com'
 
-const FOLDER = './geoJsons'
-
 const downloadAllRoutes = async (token: string, user_id: string) => {
   async function get(endpoint: string) {
     const response = await fetch(`${API_URL}${endpoint}`, {
@@ -65,7 +63,7 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
 
   console.log('# workouts', workouts.length)
 
-  const filenames = await Promise.all(
+  const geoJsonObjects = await Promise.all(
     workouts.map(async (workout) => {
       const route: Route = await get(workout._links.route[0].href).then((r) => r.json())
       const activityType: ActivityType = await get(workout._links.activity_type[0].href).then((r) =>
@@ -92,23 +90,13 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
           ) as CustomGeoJson['properties']['activityType'],
         },
       } satisfies CustomGeoJson
-      const geoJsonText = await prettier.format(JSON.stringify(geoJsonObj, null, 2), {
-        parser: 'json',
-      })
-      const filename = `${workout.start_datetime.split('+')[0].replaceAll(':', '')}.json`
-      fs.writeFileSync(`${FOLDER}/${filename}`, geoJsonText)
-      return filename
+      return geoJsonObj
     }),
   )
-
-  fs.writeFileSync(
-    `${FOLDER}/index.ts`,
-    filenames
-      .map(
-        (fname, i) => `export { default as route${i} } from './${fname}' assert { type: 'json' }`,
-      )
-      .join('\n'),
-  )
+  const geoJsons = await prettier.format(JSON.stringify(geoJsonObjects, null, 2), {
+    parser: 'json',
+  })
+  fs.writeFileSync(`geoJsons.json`, geoJsons)
 }
 
 const { MMR_AUTH_TOKEN, MMR_USER_ID } = process.env
