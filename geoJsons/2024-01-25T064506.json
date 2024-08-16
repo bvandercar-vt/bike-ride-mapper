@@ -1,0 +1,132 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-104.98233, 39.73274, 0],
+          [-104.98234, 39.73303, 0],
+          [-104.98222, 39.73303, 0],
+          [-104.98222, 39.73366, 0],
+          [-104.98224, 39.73663, 0],
+          [-104.98223, 39.73682, 0],
+          [-104.98223, 39.73682, 0],
+          [-104.98223, 39.73685, 0],
+          [-104.98174, 39.73685, 0],
+          [-104.98114, 39.73685, 0],
+          [-104.97992, 39.73685, 0],
+          [-104.97767, 39.73685, 0],
+          [-104.97307, 39.73684, 0],
+          [-104.97072, 39.73687, 0],
+          [-104.97072, 39.73687, 0],
+          [-104.97072, 39.73672, 0],
+          [-104.97063, 39.73672, 0],
+          [-104.97063, 39.73577, 0],
+          [-104.97063, 39.7351, 0],
+          [-104.97063, 39.7351, 0],
+          [-104.97061, 39.73364, 0],
+          [-104.97061, 39.73364, 0],
+          [-104.97061, 39.73369, 0],
+          [-104.97071, 39.73369, 0],
+          [-104.97128, 39.73369, 0],
+          [-104.97188, 39.73369, 0],
+          [-104.97417, 39.73366, 0],
+          [-104.97764, 39.73365, 0],
+          [-104.98131, 39.73366, 0],
+          [-104.98131, 39.73366, 0],
+          [-104.98222, 39.73366, 0],
+          [-104.98234, 39.73366, 0],
+          [-104.98234, 39.7331, 0],
+          [-104.98233, 39.73274, 0]
+        ]
+      },
+      "properties": {
+        "name": "13th Walk",
+        "styleUrl": "#kmlLineStyle",
+        "stroke-opacity": 0.4980392156862745,
+        "stroke": "#ff0000",
+        "stroke-width": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-104.98233, 39.73274, 0]
+      },
+      "properties": {
+        "name": "13th Walk",
+        "styleUrl": "#start_marker",
+        "icon": "https://static.mapmyfitness.com/d/mapping_api/stable/img/markers/start.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-104.98233, 39.73274, 0]
+      },
+      "properties": {
+        "name": "13th Walk",
+        "styleUrl": "#finish_marker",
+        "icon": "https://static.mapmyfitness.com/d/mapping_api/stable/img/markers/stop.png"
+      }
+    }
+  ],
+  "properties": {
+    "workout": {
+      "contexts": null,
+      "name": "13th Walk",
+      "is_default_name": false,
+      "notes": "",
+      "reference_key": "222187270-cf5ccd77-de7f-4534-bc5b-9f4e2cc342f7-1706165106056-",
+      "is_verified": false,
+      "aggregates": {
+        "distance_total": 2929.00608,
+        "active_time_total": 0,
+        "steps_total": 3705,
+        "elapsed_time_total": 0
+      },
+      "source": "MapMyFitness Web",
+      "source_manufacturer": "mapmyfitness",
+      "has_time_series": false,
+      "start_datetime": "2024-01-25T06:45:06+00:00",
+      "start_locale_timezone": "America/Denver",
+      "created_datetime": "2024-01-25T06:45:06+00:00",
+      "updated_datetime": "2024-01-25T06:45:06+00:00"
+    },
+    "route": {
+      "city": "Denver",
+      "country": "us",
+      "updated_datetime": "2024-01-25T06:44:39+00:00",
+      "created_datetime": "2024-01-25T06:44:31+00:00",
+      "data_source": "run:RE",
+      "description": "",
+      "distance": 2932.6251514022647,
+      "name": "13th Walk",
+      "postal_code": "",
+      "state": "CO",
+      "starting_location": {
+        "type": "Point",
+        "coordinates": [-104.98233, 39.73274]
+      },
+      "start_point_type": "",
+      "points": null,
+      "climbs": null,
+      "total_ascent": 16.2,
+      "total_descent": -18.1,
+      "max_elevation": 1633.4,
+      "min_elevation": 1618.01
+    },
+    "activityType": {
+      "mets": 3,
+      "name": "Walk",
+      "short_name": "walk",
+      "has_children": true,
+      "location_aware": true,
+      "import_only": false
+    }
+  }
+}

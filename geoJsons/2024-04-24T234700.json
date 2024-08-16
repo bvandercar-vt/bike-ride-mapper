@@ -1,0 +1,150 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-104.98236, 39.73276, 0],
+          [-104.98237, 39.73304, 0],
+          [-104.98233, 39.73309, 0],
+          [-104.98233, 39.73365, 0],
+          [-104.98238, 39.73365, 0],
+          [-104.98238, 39.73365, 0],
+          [-104.98223, 39.73363, 0],
+          [-104.98222, 39.73377, 0],
+          [-104.9819, 39.73377, 0],
+          [-104.98171, 39.73376, 0],
+          [-104.98119, 39.73376, 0],
+          [-104.98119, 39.73376, 0],
+          [-104.98099, 39.73376, 0],
+          [-104.981, 39.73449, 0],
+          [-104.98103, 39.73693, 0],
+          [-104.98104, 39.73839, 0],
+          [-104.98104, 39.74049, 0],
+          [-104.98103, 39.74266, 0],
+          [-104.98103, 39.74448, 0],
+          [-104.98103, 39.74562, 0],
+          [-104.98102, 39.74612, 0],
+          [-104.98098, 39.74625, 0],
+          [-104.98099, 39.74653, 0],
+          [-104.98099, 39.74684, 0],
+          [-104.98103, 39.74696, 0],
+          [-104.98103, 39.74748, 0],
+          [-104.98103, 39.74748, 0],
+          [-104.97996, 39.74748, 0],
+          [-104.97996, 39.74748, 0],
+          [-104.97997, 39.74624, 0],
+          [-104.97995, 39.74571, 0],
+          [-104.97995, 39.74433, 0],
+          [-104.97995, 39.74281, 0],
+          [-104.97996, 39.73853, 0],
+          [-104.97996, 39.73853, 0],
+          [-104.97996, 39.73848, 0],
+          [-104.98045, 39.73848, 0],
+          [-104.98072, 39.73848, 0],
+          [-104.98072, 39.73848, 0],
+          [-104.98105, 39.73848, 0],
+          [-104.98104, 39.73839, 0],
+          [-104.98104, 39.73785, 0],
+          [-104.98101, 39.7352, 0],
+          [-104.98099, 39.73376, 0],
+          [-104.98093, 39.73376, 0],
+          [-104.98093, 39.73376, 0],
+          [-104.98233, 39.73376, 0],
+          [-104.98233, 39.73309, 0],
+          [-104.98237, 39.73304, 0],
+          [-104.98236, 39.73276, 0]
+        ]
+      },
+      "properties": {
+        "name": "Denver Route",
+        "styleUrl": "#kmlLineStyle",
+        "stroke-opacity": 0.4980392156862745,
+        "stroke": "#ff0000",
+        "stroke-width": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-104.98236, 39.73276, 0]
+      },
+      "properties": {
+        "name": "Denver Route",
+        "styleUrl": "#start_marker",
+        "icon": "https://static.mapmyfitness.com/d/mapping_api/stable/img/markers/start.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-104.98236, 39.73276, 0]
+      },
+      "properties": {
+        "name": "Denver Route",
+        "styleUrl": "#finish_marker",
+        "icon": "https://static.mapmyfitness.com/d/mapping_api/stable/img/markers/stop.png"
+      }
+    }
+  ],
+  "properties": {
+    "workout": {
+      "contexts": null,
+      "name": "2.31 mi Run",
+      "is_default_name": false,
+      "notes": "",
+      "reference_key": "222187270-3097df17-d222-4ba1-98e5-b7a0f8971a9d-1714005594765-",
+      "is_verified": false,
+      "aggregates": {
+        "distance_total": 3717.56854656,
+        "active_time_total": 2400,
+        "elapsed_time_total": 2400,
+        "speed_avg": 1.5489936,
+        "metabolic_energy_total": 1297040,
+        "steps_total": 5908
+      },
+      "source": "MapMyFitness Web",
+      "source_manufacturer": "mapmyfitness",
+      "has_time_series": false,
+      "start_datetime": "2024-04-24T23:47:00+00:00",
+      "start_locale_timezone": "America/Denver",
+      "created_datetime": "2024-04-25T00:39:58+00:00",
+      "updated_datetime": "2024-04-25T00:39:57+00:00"
+    },
+    "route": {
+      "city": "Denver",
+      "country": "us",
+      "updated_datetime": "2024-04-25T00:39:14+00:00",
+      "created_datetime": "2024-04-25T00:39:06+00:00",
+      "data_source": "run:RE",
+      "description": "",
+      "distance": 3716.047127459215,
+      "name": "Denver Route",
+      "postal_code": "",
+      "state": "CO",
+      "starting_location": {
+        "type": "Point",
+        "coordinates": [-104.98236000000001, 39.732760000000006]
+      },
+      "start_point_type": "",
+      "points": null,
+      "climbs": null,
+      "total_ascent": 16.7,
+      "total_descent": -18.8,
+      "max_elevation": 1627.1099999999994,
+      "min_elevation": 1608.36
+    },
+    "activityType": {
+      "mets": 8,
+      "name": "Run",
+      "short_name": "run",
+      "has_children": true,
+      "location_aware": true,
+      "import_only": false
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-104.98234, 39.73296, 0],
+          [-104.98232, 39.73231, 0],
+          [-104.98221, 39.73231, 0],
+          [-104.98221, 39.73207, 0],
+          [-104.98221, 39.732, 0],
+          [-104.98221, 39.732, 0],
+          [-104.97754, 39.73199, 0],
+          [-104.97648, 39.73201, 0],
+          [-104.97648, 39.73201, 0],
+          [-104.97646, 39.73062, 0],
+          [-104.97646, 39.73048, 0],
+          [-104.97637, 39.73048, 0],
+          [-104.97637, 39.73048, 0],
+          [-104.97578, 39.73049, 0],
+          [-104.97578, 39.73042, 0],
+          [-104.97532, 39.73041, 0],
+          [-104.97473, 39.73042, 0],
+          [-104.97424, 39.73042, 0],
+          [-104.97424, 39.73042, 0],
+          [-104.97876, 39.7304, 0],
+          [-104.97876, 39.7304, 0],
+          [-104.98199, 39.73041, 0],
+          [-104.98199, 39.73041, 0],
+          [-104.98222, 39.73041, 0],
+          [-104.98221, 39.73049, 0],
+          [-104.98221, 39.732, 0],
+          [-104.98221, 39.73231, 0],
+          [-104.98232, 39.73231, 0],
+          [-104.98232, 39.73235, 0],
+          [-104.98234, 39.73296, 0]
+        ]
+      },
+      "properties": {
+        "name": "Home to Ace",
+        "styleUrl": "#kmlLineStyle",
+        "stroke-opacity": 0.4980392156862745,
+        "stroke": "#ff0000",
+        "stroke-width": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-104.98234, 39.73296, 0]
+      },
+      "properties": {
+        "name": "Home to Ace",
+        "styleUrl": "#start_marker",
+        "icon": "https://static.mapmyfitness.com/d/mapping_api/stable/img/markers/start.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-104.98234, 39.73296, 0]
+      },
+      "properties": {
+        "name": "Home to Ace",
+        "styleUrl": "#finish_marker",
+        "icon": "https://static.mapmyfitness.com/d/mapping_api/stable/img/markers/stop.png"
+      }
+    }
+  ],
+  "properties": {
+    "workout": {
+      "contexts": null,
+      "name": "Home to Ace",
+      "is_default_name": false,
+      "notes": "",
+      "reference_key": "222187270-a283f824-66b9-472c-9cd9-871b2b92d01f-1705469272066-",
+      "is_verified": false,
+      "aggregates": {
+        "distance_total": 0,
+        "active_time_total": 3600,
+        "elapsed_time_total": 3600,
+        "metabolic_energy_total": 1376536
+      },
+      "source": "MapMyFitness Web",
+      "source_manufacturer": "mapmyfitness",
+      "has_time_series": false,
+      "start_datetime": "2024-01-13T05:27:52+00:00",
+      "start_locale_timezone": "America/Denver",
+      "created_datetime": "2024-01-17T05:28:05+00:00",
+      "updated_datetime": "2024-01-17T05:28:31+00:00"
+    },
+    "route": {
+      "city": "Denver",
+      "country": "us",
+      "updated_datetime": "2024-01-17T05:27:41+00:00",
+      "created_datetime": "2024-01-17T05:27:33+00:00",
+      "data_source": "run:RE",
+      "description": "Home to Ace Hardware",
+      "distance": 1951.6252039547446,
+      "name": "Home to Ace",
+      "postal_code": "",
+      "state": "CO",
+      "starting_location": {
+        "type": "Point",
+        "coordinates": [-104.98234000000001, 39.732960000000006]
+      },
+      "start_point_type": "",
+      "points": null,
+      "climbs": null,
+      "total_ascent": 8.2,
+      "total_descent": -9.5,
+      "max_elevation": 1633.22,
+      "min_elevation": 1623.26
+    },
+    "activityType": {
+      "mets": 3,
+      "name": "Walk",
+      "short_name": "walk",
+      "has_children": true,
+      "location_aware": true,
+      "import_only": false
+    }
+  }
+}
