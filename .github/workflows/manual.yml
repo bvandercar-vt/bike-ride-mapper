@@ -14,6 +14,9 @@ jobs:
   build:
     name: Install Deps
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./bike-ride-mapper
 
     steps:
       - name: Checkout repo
