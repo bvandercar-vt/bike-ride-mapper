@@ -19,7 +19,6 @@ jobs:
           MMR_AUTH_TOKEN: ${{ secrets.MMR_AUTH_TOKEN }}
           MMR_USER_ID : ${{ secrets.MMR_USER_ID }}
         run: npm run get-data
-      - name: Commit DatA
 
 
 
