@@ -11,12 +11,24 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
-  getdata:
-    # The type of runner that the job will run on
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Get Data
-      run: npm run get-data
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+  getdata:
+    name: Get Data
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get The Data
+        run: npm run get-data
