@@ -1,37 +1,25 @@
-# This is a basic workflow that is manually triggered
+name: get-data
 
-name: Get Data
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   workflow_dispatch:
     
-      
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
-    name: Install Deps
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-
-  getdata:
+  get-data:
     name: Get Data
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
       - uses: bahmutov/npm-install@v1
-      - name: Get The Data
+      - name: Get Data
+        env:
+          MMR_AUTH_TOKEN: ${{ secrets.MMR_AUTH_TOKEN }}
+          MMR_USER_ID : ${{ secrets.MMR_USER_ID }}
         run: npm run get-data
+      - name: Commit DatA
+      - uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
+        with:
+          message: 'GeoJsons updated by GitHub Actions'
+
+
+   
