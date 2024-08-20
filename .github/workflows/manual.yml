@@ -11,14 +11,14 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
       - uses: bahmutov/npm-install@v1
-      - uses: EndBug/add-and-commit@v9
-        with:
-          message: 'GeoJsons updated by GitHub Actions'
       - name: Get Data
         env:
           MMR_AUTH_TOKEN: ${{ secrets.MMR_AUTH_TOKEN }}
           MMR_USER_ID : ${{ secrets.MMR_USER_ID }}
         run: npm run get-data
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: 'GeoJsons updated by GitHub Actions'
 
 
 
