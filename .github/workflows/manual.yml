@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./bike-ride-mapper
+        working-directory: .
 
     steps:
       - name: Checkout repo
