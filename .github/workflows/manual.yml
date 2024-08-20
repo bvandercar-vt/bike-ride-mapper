@@ -14,9 +14,6 @@ jobs:
   build:
     name: Install Deps
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: .
 
     steps:
       - name: Checkout repo
@@ -34,4 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get The Data
-        run: npm run get-data
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - uses: bahmutov/npm-install@v1
+      - run: npm run get-data
