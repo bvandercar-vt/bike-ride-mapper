@@ -96,16 +96,22 @@ map.on('overlayadd', () => {
   setBikeTrailsStyle(isSatellite)
 })
 
-const lineStyle: PathOptions = {
-  color: 'lime',
-  weight: 3,
-  opacity: 0.45,
+function getBaseLineStyle(): PathOptions {
+  const isSatellite = map.hasLayer(satelliteLayer)
+  return {
+    color: isSatellite ? 'magenta' : 'lime',
+    weight: 3,
+    opacity: 0.45,
+  }
 }
 
-const lineStyleHovered: PathOptions = {
-  color: 'red',
-  weight: 5,
-  opacity: 0.6,
+function getHoveredLineStyle(): PathOptions {
+  const isSatellite = map.hasLayer(satelliteLayer)
+  return {
+    color: isSatellite ? 'yellow' : 'red',
+    weight: 5,
+    opacity: 0.6,
+  }
 }
 
 import geoJsons_ from '../geoJsons.json' assert { type: 'json' }
@@ -148,7 +154,7 @@ geoJsons.forEach((geoJson) => {
 
   // create the route features
   const feature = geoJSON(geoJson, {
-    style: lineStyle,
+    style: getBaseLineStyle(),
     filter: (feature) => feature.geometry.type !== 'Point',
   }).addTo(geoJsonLayer.layerGroup)
   const featureHover = geoJSON(geoJson, {
@@ -158,7 +164,8 @@ geoJsons.forEach((geoJson) => {
   featureHover.bindTooltip(popover.outerHTML, { direction: 'top', sticky: true })
   let arrowsDecorator: PolylineDecorator
   featureHover.on('mouseover', function () {
-    feature.setStyle(lineStyleHovered)
+    const style = getHoveredLineStyle()
+    feature.setStyle(style)
     feature.bringToFront()
     featureHover.bringToFront()
     feature.getLayers().map((layer) => {
@@ -170,8 +177,8 @@ geoJsons.forEach((geoJson) => {
             symbol: Symbol.arrowHead({
               pixelSize: 13,
               pathOptions: {
-                fillOpacity: lineStyleHovered.opacity,
-                color: lineStyleHovered.color,
+                fillOpacity: style.opacity,
+                color: style.color,
                 weight: 0,
               },
             }),
@@ -181,8 +188,12 @@ geoJsons.forEach((geoJson) => {
     })
   })
   featureHover.on('mouseout', function () {
-    feature.setStyle(lineStyle)
+    feature.setStyle(getBaseLineStyle())
     arrowsDecorator.remove()
+  })
+
+  map.on('baselayerchange', () => {
+    feature.setStyle(getBaseLineStyle())
   })
 })
 
