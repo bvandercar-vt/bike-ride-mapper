@@ -151,7 +151,6 @@ export const App = () => {
               subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
               opacity={0.5}
               maxZoom={20}
-              crossOrigin={true}
               className="bike-trails"
             />
           </LayersControl.Overlay>
