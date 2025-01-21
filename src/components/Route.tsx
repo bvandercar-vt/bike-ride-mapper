@@ -1,10 +1,10 @@
 import { type GeoJSON as GeoJSONType } from 'leaflet'
 import { round } from 'lodash'
-import { DateTime } from 'luxon'
+import { type DateTime } from 'luxon'
 import { useRef, useState } from 'react'
-import { GeoJSON, GeoJSONProps, Tooltip } from 'react-leaflet'
+import { GeoJSON, type GeoJSONProps, Tooltip } from 'react-leaflet'
 import { METERS_TO_FEET, METERS_TO_MILES } from '../constants'
-import { Route as RouteType } from '../types/mapMyRide'
+import { type Route as RouteType } from '../types/mapMyRide'
 
 export interface RouteProps extends Pick<GeoJSONProps, 'data'> {
   date: DateTime

@@ -1,7 +1,12 @@
 import 'leaflet/dist/leaflet.css'
 import './styles/index.css'
 
-import { latLng, LayerGroup as LayerGroupType, LayersControlEventHandlerFn, Map } from 'leaflet'
+import {
+  latLng,
+  type LayerGroup as LayerGroupType,
+  type LayersControlEventHandlerFn,
+  type Map,
+} from 'leaflet'
 import 'leaflet-polylinedecorator'
 import { max, round, sum } from 'lodash'
 import { useEffect, useMemo, useRef, useState } from 'react'

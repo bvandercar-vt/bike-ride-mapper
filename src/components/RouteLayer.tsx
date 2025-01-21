@@ -1,8 +1,8 @@
-import { LayerGroup as LayerGroupType } from 'leaflet'
+import { type LayerGroup as LayerGroupType } from 'leaflet'
 import { DateTime } from 'luxon'
 import { LayerGroup } from 'react-leaflet'
 import { type CustomGeoJson } from '../types/mapMyRide'
-import { Route, RouteProps } from './Route'
+import { Route, type RouteProps } from './Route'
 
 export interface RouteLayerProps extends Pick<RouteProps, 'color' | 'hoverColor'> {
   data: CustomGeoJson[]
