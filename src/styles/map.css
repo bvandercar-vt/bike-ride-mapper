@@ -1,0 +1,46 @@
+#map {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Route popovers */
+
+.route-popover {
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: var(--popup-bg-color);
+}
+
+.leaflet-popup-tip {
+  background-color: var(--popup-bg-color);
+}
+
+/* Layer control */
+
+.leaflet-control-layers {
+  color: lightgray;
+  background-color: var(--heading-bg-color);
+  border-radius: var(--heading-border-radius);
+}
+
+.leaflet-control-layers-overlays label:first-of-type {
+  color: Silver;
+  font-style: italic;
+}
+
+/* Bike trails*/
+
+.bike-trails-dark {
+  filter: invert(100%) hue-rotate(350deg) saturate(1.5) brightness(85%) contrast(100%);
+}
+
+.bike-trails-satellite {
+  filter: invert(0%) hue-rotate(120deg) saturate(2) brightness(100%) contrast(100%);
+}

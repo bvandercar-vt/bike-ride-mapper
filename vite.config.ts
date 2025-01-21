@@ -1,3 +1,4 @@
+import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
 
 export default defineConfig(({ mode }) => {
@@ -8,8 +9,10 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env': JSON.stringify(env),
     },
+    plugins: [react()],
     build: {
       target: 'esnext',
+      modulePreload: false,
     },
   }
 })
