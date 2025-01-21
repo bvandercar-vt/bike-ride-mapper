@@ -4,9 +4,8 @@
 /* General */
 
 :root {
-  --popup-bg-color: rgba(255, 255, 255, 0.85);
-  --heading-bg-color: rgba(0, 0, 0, 0.4);
-  --heading-border-radius: 10px;
+  --tooltip-bg-color: rgba(255, 255, 255, 0.85);
+  --overlay-bg-color: rgba(0, 0, 0, 0.4);
 }
 
 body {

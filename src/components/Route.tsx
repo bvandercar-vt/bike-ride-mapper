@@ -1,8 +1,15 @@
-import { type GeoJSON as GeoJSONType } from 'leaflet'
+import {
+  PolylineDecorator,
+  polylineDecorator,
+  Symbol,
+  type GeoJSON as GeoJSONType,
+  type PathOptions,
+  type Polyline,
+} from 'leaflet'
 import { round } from 'lodash'
 import { type DateTime } from 'luxon'
-import { useRef, useState } from 'react'
-import { GeoJSON, type GeoJSONProps, Tooltip } from 'react-leaflet'
+import { useEffect, useRef, useState } from 'react'
+import { GeoJSON, Tooltip, useMap, type GeoJSONProps } from 'react-leaflet'
 import { METERS_TO_FEET, METERS_TO_MILES } from '../constants'
 import { type Route as RouteType } from '../types/mapMyRide'
 
@@ -14,11 +21,13 @@ export interface RouteProps extends Pick<GeoJSONProps, 'data'> {
 }
 
 export const Route = ({ data, date, route, color, hoverColor }: RouteProps) => {
+  const map = useMap()
   const [isHovered, setIsHovered] = useState<boolean>(false)
   const lineRef = useRef<GeoJSONType>(null)
   const hoverLineRef = useRef<GeoJSONType>(null)
+  const arrowsDecorator = useRef<PolylineDecorator>()
 
-  const style = isHovered
+  const style: PathOptions = isHovered
     ? {
         color: hoverColor,
         weight: 5,
@@ -29,6 +38,29 @@ export const Route = ({ data, date, route, color, hoverColor }: RouteProps) => {
         weight: 3,
         opacity: 0.45,
       }
+
+  const arrow = Symbol.arrowHead({
+    pixelSize: 13,
+    pathOptions: {
+      fillOpacity: style.opacity,
+      color: style.color,
+      weight: 0,
+    },
+  })
+
+  useEffect(() => {
+    if (isHovered) {
+      const lineLayer = lineRef.current?.getLayers()[0]
+      if (!lineLayer) return
+      arrowsDecorator.current = polylineDecorator(lineLayer as Polyline, {
+        patterns: [{ repeat: 60, symbol: arrow }],
+      }).addTo(map)
+      lineRef.current?.bringToFront()
+      hoverLineRef.current?.bringToFront()
+    } else {
+      arrowsDecorator.current?.remove()
+    }
+  }, [isHovered])
 
   return (
     <>
