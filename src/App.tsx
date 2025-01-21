@@ -196,7 +196,7 @@ export const App = () => {
                 data={data}
                 layerRef={layerRef}
                 color={isSatellite ? 'magenta' : 'lime'}
-                hoverColor={isSatellite ? 'yellow' : 'red'}
+                hoverColor={isSatellite ? 'yellow' : 'orangered'}
               />
             </LayersControl.Overlay>
           ))}
