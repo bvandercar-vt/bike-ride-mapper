@@ -4,13 +4,13 @@ import './styles/index.css'
 import {
   latLng,
   type LayerGroup as LayerGroupType,
-  type LayersControlEventHandlerFn,
+  type LeafletEventHandlerFnMap,
   type Map,
 } from 'leaflet'
 import 'leaflet-polylinedecorator'
 import { max, round, sum } from 'lodash'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { LayersControl, MapContainer, TileLayer, useMap } from 'react-leaflet'
+import { LayersControl, MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
 import geoJsons_ from '../geoJsons.json'
 import { RouteLayer } from './components/RouteLayer'
 import { METERS_TO_MILES } from './constants'
@@ -24,42 +24,8 @@ if (!MAPTILER_API_KEY) {
   throw new Error('need env file')
 }
 
-const BaseLayerChangeHandler = ({ fn }: { fn: LayersControlEventHandlerFn }) => {
-  const map = useMap()
-
-  useEffect(() => {
-    map.on('baselayerchange', fn)
-    return () => {
-      map.off('baselayerchange', fn)
-    }
-  }, [map, fn])
-
-  return null
-}
-
-const OverlayAddHandler = ({ fn }: { fn: LayersControlEventHandlerFn }) => {
-  const map = useMap()
-
-  useEffect(() => {
-    map.on('overlayadd', fn)
-    return () => {
-      map.off('overlayadd', fn)
-    }
-  }, [map, fn])
-
-  return null
-}
-
-const OverlayRemoveHandler = ({ fn }: { fn: LayersControlEventHandlerFn }) => {
-  const map = useMap()
-
-  useEffect(() => {
-    map.on('overlayremove', fn)
-    return () => {
-      map.off('overlayremove', fn)
-    }
-  }, [map, fn])
-
+const MapHandlers = ({ ...handlers }: LeafletEventHandlerFnMap) => {
+  useMapEvents(handlers)
   return null
 }
 
@@ -148,15 +114,15 @@ export const App = () => {
         id="map"
         ref={mapRef}
       >
-        <BaseLayerChangeHandler fn={(e) => setIsSatellite(e.name === 'Satellite')} />
-        <OverlayAddHandler
-          fn={() => {
+        <MapHandlers
+          baselayerchange={(e) => {
+            setIsSatellite(e.name === 'Satellite')
+          }}
+          overlayadd={() => {
             setBikeTrailsStyle()
             changeVisibleData()
           }}
-        />
-        <OverlayRemoveHandler
-          fn={() => {
+          overlayremove={() => {
             changeVisibleData()
           }}
         />
