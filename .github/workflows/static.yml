@@ -6,10 +6,9 @@ on:
       - master
   workflow_dispatch:
   workflow_run:
-    workflows: ["get-data"]
+    workflows: ['get-data']
     types:
       - completed
-
 
 jobs:
   build:
