@@ -14,8 +14,8 @@ header {
 #header-text {
   display: inline-block;
 
-  background-color: var(--heading-bg-color);
-  box-shadow: 0 0 10px 7px var(--heading-bg-color);
+  background-color: var(--overlay-bg-color);
+  box-shadow: 0 0 10px 7px var(--overlay-bg-color);
   border-radius: 10px;
   margin-top: 0.7em;
   margin-right: 0.7em;

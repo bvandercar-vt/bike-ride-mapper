@@ -11,23 +11,23 @@
 .route-popover {
   font-size: 1em;
   margin: 0;
-  padding: 0;
+  padding: 0 0.5em;
 }
 
 .leaflet-popup-content-wrapper {
-  background-color: var(--popup-bg-color);
+  background-color: var(--tooltip-bg-color);
 }
 
 .leaflet-popup-tip {
-  background-color: var(--popup-bg-color);
+  background-color: var(--tooltip-bg-color);
 }
 
 /* Layer control */
 
 .leaflet-control-layers {
   color: lightgray;
-  background-color: var(--heading-bg-color);
-  border-radius: var(--heading-border-radius);
+  background-color: var(--overlay-bg-color);
+  border-radius: 10px;
 }
 
 .leaflet-control-layers-overlays label:first-of-type {
