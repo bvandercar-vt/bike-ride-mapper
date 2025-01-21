@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 0'
-    
+
 jobs:
   get-data:
     name: Get Data
@@ -16,12 +16,8 @@ jobs:
       - name: Get Data
         env:
           MMR_AUTH_TOKEN: ${{ secrets.MMR_AUTH_TOKEN }}
-          MMR_USER_ID : ${{ secrets.MMR_USER_ID }}
+          MMR_USER_ID: ${{ secrets.MMR_USER_ID }}
         run: npm run get-data
       - uses: EndBug/add-and-commit@v9
         with:
           message: 'GeoJsons updated by GitHub Actions'
-
-
-
-   
