@@ -47,7 +47,7 @@ const Stats = ({ data }: { data: CustomGeoJson['properties'][] }) => {
           <br />
           Total Distance: {round(sum(distances) * METERS_TO_MILES, 1)}mi
           <br />
-          Longest Route: {round(max(distances)! * METERS_TO_MILES, 1)}mi`
+          Longest Route: {round(max(distances)! * METERS_TO_MILES, 1)}mi
         </>
       )}
     </div>
