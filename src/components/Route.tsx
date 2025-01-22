@@ -1,10 +1,10 @@
 import {
-  PolylineDecorator,
   polylineDecorator,
   Symbol,
   type GeoJSON as GeoJSONType,
   type PathOptions,
   type Polyline,
+  type PolylineDecorator,
 } from 'leaflet'
 import { round } from 'lodash'
 import { type DateTime } from 'luxon'
