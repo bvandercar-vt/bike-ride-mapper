@@ -59,15 +59,6 @@ export const App = () => {
   const [isSatellite, setIsSatellite] = useState<boolean>(false)
   const [visibleData, setVisibleData] = useState<CustomGeoJson['properties'][]>([])
 
-  function setBikeTrailsStyle() {
-    const bikeTrails = document.getElementsByClassName('bike-trails')[0]
-    if (!bikeTrails) return
-    bikeTrails.classList.toggle('bike-trails-satellite', isSatellite)
-    bikeTrails.classList.toggle('bike-trails-dark', !isSatellite)
-  }
-
-  useEffect(setBikeTrailsStyle, [isSatellite])
-
   const layerData_ = useMemo(
     () => [
       {
@@ -97,6 +88,15 @@ export const App = () => {
   }
 
   useEffect(() => changeVisibleData(), [mapRef.current])
+
+  function setBikeTrailsStyle() {
+    const bikeTrails = document.getElementsByClassName('bike-trails')[0]
+    if (!bikeTrails) return
+    bikeTrails.classList.toggle('bike-trails-satellite', isSatellite)
+    bikeTrails.classList.toggle('bike-trails-dark', !isSatellite)
+  }
+
+  useEffect(setBikeTrailsStyle, [isSatellite])
 
   return (
     <>
