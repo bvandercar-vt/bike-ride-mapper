@@ -18,5 +18,5 @@
     "noImplicitAny": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "./*.ts", "postcss.config.cjs"]
+  "include": ["src", "get-data", "./*.ts", "postcss.config.cjs"]
 }

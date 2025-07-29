@@ -16,7 +16,7 @@
     "eslint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "get-data": "npx tsx ./src/downloadWorkoutGeoJsons.ts"
+    "get-data": "npx tsx ./get-data/get-workouts.ts"
   },
   "repository": {
     "type": "git",
