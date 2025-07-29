@@ -1,24 +1,34 @@
-import { kml } from '@tmcw/togeojson'
+import { createClient as createSanityClient } from '@sanity/client'
+import { kml as kmlToGeoJson } from '@tmcw/togeojson'
 import { config } from 'dotenv'
-import * as fs from 'fs'
 import _ from 'lodash'
-import * as prettier from 'prettier'
+import { DateTime } from 'luxon'
 import { DOMParser } from 'xmldom'
-import {
-  ActivityName,
-  type ActivityType,
-  type CustomGeoJson,
-  type Route,
-  type Workout,
-} from './types/mapMyRide'
+import { type CustomWorkout } from './types'
+import { ActivityName, type ActivityType, type Route, type Workout } from './types/mapMyRide'
+import { getEnv } from './utils'
 
 config({ path: '.env.local' })
 
-const API_URL = 'https://mapmyride.api.ua.com'
+const { MMR_AUTH_TOKEN, MMR_USER_ID, SANITY_API_TOKEN_WRITE, SANITY_PROJECT_ID } = getEnv(
+  'MMR_AUTH_TOKEN',
+  'MMR_USER_ID',
+  'SANITY_API_TOKEN_WRITE',
+  'SANITY_PROJECT_ID',
+)
+
+const MMR_API_URL = 'https://mapmyride.api.ua.com'
+
+const sanityClient = createSanityClient({
+  projectId: SANITY_PROJECT_ID,
+  dataset: 'production',
+  token: SANITY_API_TOKEN_WRITE,
+  // useCdn: false,
+})
 
 const downloadAllRoutes = async (token: string, user_id: string) => {
   async function get(endpoint: string) {
-    const response = await fetch(`${API_URL}${endpoint}`, {
+    const response = await fetch(`${MMR_API_URL}${endpoint}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +73,7 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
 
   console.log('# workouts', workouts.length)
 
-  const geoJsonObjects = await Promise.all(
+  await Promise.all(
     workouts.map(async (workout) => {
       const route: Route = await get(workout._links.route[0].href).then((r) => r.json())
       const activityType: ActivityType = await get(workout._links.activity_type[0].href).then((r) =>
@@ -74,32 +84,29 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
 
       const kmlText = await get(route._links.alternate[0].href).then((r) => r.text())
       const kmlParsed = new DOMParser().parseFromString(kmlText)
-      const geoJsonObj = {
-        ...kml(kmlParsed),
-        properties: {
-          workout: _.omitBy(
-            workout,
-            (val, key) => _.isObject(val) && key !== 'aggregates',
-          ) as CustomGeoJson['properties']['workout'],
-          route: _.omitBy(
-            route,
-            (val, key) => _.isObject(val) && key !== 'starting_location',
-          ) as CustomGeoJson['properties']['route'],
-          activityType: _.omitBy(activityType, (val) =>
-            _.isObject(val),
-          ) as CustomGeoJson['properties']['activityType'],
-        },
-      } satisfies CustomGeoJson
-      return geoJsonObj
+      const obj = {
+        geoJson: kmlToGeoJson(kmlParsed),
+        workout: _.omitBy(
+          workout,
+          (val, key) => _.isObject(val) && key !== 'aggregates',
+        ) as CustomWorkout['workout'],
+        route: _.omitBy(
+          route,
+          (val, key) => _.isObject(val) && key !== 'starting_location',
+        ) as CustomWorkout['route'],
+        activityType: _.omitBy(activityType, (val) =>
+          _.isObject(val),
+        ) as CustomWorkout['activityType'],
+      } satisfies CustomWorkout
+
+      await sanityClient.createOrReplace({
+        _type: 'workout',
+        _id: `workout-${DateTime.fromISO(obj.workout.start_datetime).toFormat('yyyy-LL-dd-HH-mm-ss')}`,
+        title: obj.workout.name,
+        ..._.mapValues(obj, (val) => JSON.stringify(val, null, 2)),
+      })
     }),
   )
-  const geoJsons = await prettier.format(JSON.stringify(geoJsonObjects, null, 2), {
-    parser: 'json',
-  })
-  fs.writeFileSync(`geoJsons.json`, geoJsons)
 }
-
-const { MMR_AUTH_TOKEN, MMR_USER_ID } = process.env
-if (!MMR_AUTH_TOKEN || !MMR_USER_ID) throw new Error('need env file')
 
 await downloadAllRoutes(MMR_AUTH_TOKEN, MMR_USER_ID)

@@ -11,25 +11,23 @@ import 'leaflet-polylinedecorator'
 import { max, round, sum } from 'lodash'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { LayersControl, MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
-import geoJsons_ from '../geoJsons.json'
+import { getWorkouts } from './api/sanity.api'
 import { RouteLayer } from './components/RouteLayer'
 import { METERS_TO_MILES } from './constants'
-import { ActivityName, type CustomGeoJson } from './types/mapMyRide'
+import { type CustomWorkout } from './types'
+import { ActivityName } from './types/mapMyRide'
+import { getEnv } from './utils'
 
-const geoJsons = geoJsons_ as CustomGeoJson[]
-
-const { MAPTILER_API_KEY } = process.env
-if (!MAPTILER_API_KEY) {
-  console.error(process.env)
-  throw new Error('need env file')
-}
+const { MAPTILER_API_KEY } = getEnv('MAPTILER_API_KEY')
 
 const MapHandlers = ({ ...handlers }: LeafletEventHandlerFnMap) => {
   useMapEvents(handlers)
   return null
 }
 
-const Stats = ({ data }: { data: CustomGeoJson['properties'][] }) => {
+const Stats = ({ data }: { data: CustomWorkout[] | null }) => {
+  if (data === null) return
+
   const numRoutes = data.length
   const distances = data.map(({ route }) => route.distance)
 
@@ -57,37 +55,52 @@ const Stats = ({ data }: { data: CustomGeoJson['properties'][] }) => {
 export const App = () => {
   const mapRef = useRef<Map>(null)
   const [isSatellite, setIsSatellite] = useState<boolean>(false)
-  const [visibleData, setVisibleData] = useState<CustomGeoJson['properties'][]>([])
+  const [allData, setAllData] = useState<CustomWorkout[] | null>(null)
+  const [visibleData, setVisibleData] = useState<CustomWorkout[] | null>(null)
 
-  const layerData_ = useMemo(
-    () => [
-      {
-        name: 'Bike Records',
-        data: geoJsons.filter((g) =>
-          [ActivityName.BIKE_RIDE].includes(g.properties.activityType.name),
-        ),
-      },
-      {
-        name: 'Walk Records',
-        data: geoJsons.filter((g) =>
-          [ActivityName.RUN, ActivityName.WALK].includes(g.properties.activityType.name),
-        ),
-      },
-    ],
-    [],
+  const bikeLayerRef = useRef<LayerGroupType>(null)
+  const walkLayerRef = useRef<LayerGroupType>(null)
+
+  useEffect(() => {
+    getWorkouts().then((data) => setAllData(data))
+  }, [])
+
+  const layerData = useMemo(
+    () =>
+      allData
+        ? [
+            {
+              name: 'Bike Records',
+              data: allData.filter((g) =>
+                [ActivityName.BIKE_RIDE, ActivityName.ROAD_CYCLING].includes(g.activityType.name),
+              ),
+              layerRef: bikeLayerRef,
+            },
+            {
+              name: 'Walk Records',
+              data: allData.filter((g) =>
+                [ActivityName.RUN, ActivityName.WALK].includes(g.activityType.name),
+              ),
+              layerRef: walkLayerRef,
+            },
+          ]
+        : null,
+    [allData],
   )
 
-  const layerData = layerData_.map((d) => ({ ...d, layerRef: useRef<LayerGroupType>(null) }))
-
   const changeVisibleData = () => {
+    const mapRefMap = mapRef.current
+    if (!mapRefMap || !layerData) return
     setVisibleData(
       layerData
-        .filter(({ layerRef }) => layerRef.current && mapRef.current?.hasLayer(layerRef.current))
-        .flatMap(({ data }) => data.map((d) => d.properties)),
+        .filter(({ layerRef }) => layerRef.current && mapRefMap.hasLayer(layerRef.current))
+        .flatMap(({ data }) => data),
     )
   }
 
-  useEffect(() => changeVisibleData(), [mapRef.current])
+  useEffect(() => {
+    changeVisibleData()
+  }, [mapRef.current])
 
   function setBikeTrailsStyle() {
     const bikeTrails = document.getElementsByClassName('bike-trails')[0]
@@ -96,7 +109,9 @@ export const App = () => {
     bikeTrails.classList.toggle('bike-trails-dark', !isSatellite)
   }
 
-  useEffect(setBikeTrailsStyle, [isSatellite])
+  useEffect(() => {
+    setBikeTrailsStyle()
+  }, [isSatellite])
 
   return (
     <>
@@ -154,10 +169,9 @@ export const App = () => {
               className="bike-trails"
             />
           </LayersControl.Overlay>
-          {layerData.map(({ name, data, layerRef }) => (
-            <LayersControl.Overlay name={name} checked>
+          {layerData?.map(({ name, data, layerRef }) => (
+            <LayersControl.Overlay name={name} checked key={name}>
               <RouteLayer
-                key={name}
                 data={data}
                 layerRef={layerRef}
                 color={isSatellite ? 'magenta' : 'lime'}
