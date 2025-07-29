@@ -4,20 +4,18 @@ import { config } from 'dotenv'
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { DOMParser } from 'xmldom'
-import { type CustomWorkout } from './types'
-import { ActivityName, type ActivityType, type Route, type Workout } from './types/mapMyRide'
-import { getEnv } from './utils'
+import { type CustomWorkout } from '../src/types'
+import { ActivityName, type ActivityType, type Route } from '../src/types/mapMyRide'
+import { getEnv } from '../src/utils'
+import { get, getWorkouts } from './api/mapmyride.api'
 
 config({ path: '.env.local' })
 
-const { MMR_AUTH_TOKEN, MMR_USER_ID, SANITY_API_TOKEN_WRITE, SANITY_PROJECT_ID } = getEnv(
-  'MMR_AUTH_TOKEN',
+const { MMR_USER_ID, SANITY_API_TOKEN_WRITE, SANITY_PROJECT_ID } = getEnv(
   'MMR_USER_ID',
   'SANITY_API_TOKEN_WRITE',
   'SANITY_PROJECT_ID',
 )
-
-const MMR_API_URL = 'https://mapmyride.api.ua.com'
 
 const sanityClient = createSanityClient({
   projectId: SANITY_PROJECT_ID,
@@ -26,51 +24,8 @@ const sanityClient = createSanityClient({
   // useCdn: false,
 })
 
-const downloadAllRoutes = async (token: string, user_id: string) => {
-  async function get(endpoint: string) {
-    const response = await fetch(`${MMR_API_URL}${endpoint}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: token,
-      },
-    })
-    if (!response.ok)
-      throw new Error(
-        `Failed to get from endpoint ${endpoint}. Status: ${response.status} ${response.statusText} ${await response.text()}`,
-      )
-    return response
-  }
-
-  async function getAll<T>(endpoint: string, key: string, params: Record<string, string>) {
-    async function getBatch(limit: number, offset: number) {
-      const result = await get(
-        `/v7.2/${endpoint}/?` +
-          new URLSearchParams({
-            limit: String(limit),
-            offset: String(offset),
-            ...params,
-          }),
-      ).then((r) => r.json())
-      return result._embedded[key] as T[]
-    }
-
-    const items: T[] = []
-    while (items.length % 10 == 0) {
-      const newItems = await getBatch(10, items.length)
-      items.push(...newItems)
-    }
-
-    return items
-  }
-
-  // const routes = await getAll<Route>('route', 'routes', { user: user_id, order_by: 'date_created' })
-
-  const workouts = await getAll<Workout>('workout', 'workouts', {
-    user: user_id,
-    order_by: 'start_datetime',
-  })
-
+const downloadAllRoutes = async (user_id: string) => {
+  const workouts = await getWorkouts({ user_id })
   console.log('# workouts', workouts.length)
 
   await Promise.all(
@@ -109,4 +64,4 @@ const downloadAllRoutes = async (token: string, user_id: string) => {
   )
 }
 
-await downloadAllRoutes(MMR_AUTH_TOKEN, MMR_USER_ID)
+await downloadAllRoutes(MMR_USER_ID)
