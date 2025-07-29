@@ -1,4 +1,3 @@
-import type { GeoJsonObject } from 'geojson'
 import type { Simplify } from 'type-fest'
 
 export interface Link {
@@ -83,6 +82,7 @@ export interface Workout {
 }
 
 export enum ActivityName {
+  ROAD_CYCLING = 'Road Cycling',
   BIKE_RIDE = 'Bike Ride',
   WALK = 'Walk',
   RUN = 'Run',
@@ -96,12 +96,4 @@ export interface ActivityType {
   mets: number
   mets_speed: Array<{ speed: number; mets: number }>
   _links: Links<'self' | 'documentation' | 'root' | 'icon_url'>
-}
-
-export type CustomGeoJson = GeoJsonObject & {
-  properties: {
-    workout: Omit<Workout, '_links' | 'time_series' | 'sharing' | 'attachments'>
-    route: Omit<Route, '_links'>
-    activityType: Omit<ActivityType, '_links' | 'mets_speed'>
-  }
 }
