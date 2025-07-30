@@ -15,8 +15,15 @@ export const sanityClient = createSanityClient({
   useCdn: false,
 })
 
+export const SanityTypes = {
+  WORKOUT: 'workout',
+} as const
+
 export async function getWorkouts(): Promise<CustomWorkout[]> {
-  const workouts = await sanityClient.fetch<SanityWorkoutResponse[]>('*[_type == "workout"]')
+  const workouts = await sanityClient.fetch<SanityWorkoutResponse[]>(
+    `*[_type == "${SanityTypes.WORKOUT}"]`,
+  )
+
   return workouts.map((w) => ({
     ...w,
     workout: JSON.parse(w.workout),
