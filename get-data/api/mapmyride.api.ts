@@ -34,8 +34,9 @@ export async function getAll<T>(endpoint: string, key: string, params: Record<st
   }
 
   const items: T[] = []
-  while (items.length % 10 == 0) {
+  while (true) {
     const newItems = await getBatch(10, items.length)
+    if (newItems.length == 0) break
     items.push(...newItems)
   }
 
