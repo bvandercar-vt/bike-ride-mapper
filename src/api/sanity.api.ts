@@ -11,7 +11,8 @@ export const sanityClient = createSanityClient({
   projectId: SANITY_PROJECT_ID,
   dataset: 'production',
   token: SANITY_API_TOKEN_READ,
-  // useCdn: false,
+  apiVersion: '2025-07-29',
+  useCdn: false,
 })
 
 export async function getWorkouts(): Promise<CustomWorkout[]> {
