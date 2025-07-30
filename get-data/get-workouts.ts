@@ -7,7 +7,7 @@ import { kml as kmlToGeoJson } from '@tmcw/togeojson'
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { DOMParser } from 'xmldom'
-import { type CustomWorkout } from '../src/types'
+import type { SanityWorkoutResponse } from '../src/api/sanity.api'
 import { ActivityName, type ActivityType, type Route } from '../src/types/mapMyRide'
 import { getEnv } from '../src/utils'
 
@@ -32,33 +32,42 @@ console.log('getting workouts from mapmyride...')
 const workouts = await getWorkouts({ user_id: MMR_USER_ID })
 console.log('# workouts', workouts.length)
 
-workouts.forEach(async (workout) => {
-  const route: Route = await get(workout._links.route[0].href).then((r) => r.json())
-  const activityType: ActivityType = await get(workout._links.activity_type[0].href).then((r) =>
-    r.json(),
-  )
-  if (!Object.values(ActivityName).includes(activityType.name))
-    throw new Error(`unexpected activity name ${activityType.name}`)
+await Promise.all(
+  workouts.map((workout) => async () => {
+    try {
+      const workoutDate = DateTime.fromISO(workout.start_datetime)
+      const route: Route = await get(workout._links.route[0].href).then((r) => r.json())
+      const activityType: ActivityType = await get(workout._links.activity_type[0].href).then((r) =>
+        r.json(),
+      )
+      if (!Object.values(ActivityName).includes(activityType.name))
+        throw new Error(`unexpected activity name ${activityType.name}`)
 
-  const kmlText = await get(route._links.alternate[0].href).then((r) => r.text())
-  const kmlParsed = new DOMParser().parseFromString(kmlText)
-  const obj = {
-    geoJson: kmlToGeoJson(kmlParsed),
-    workout: _.omitBy(
-      workout,
-      (val, key) => _.isObject(val) && key !== 'aggregates',
-    ) as CustomWorkout['workout'],
-    route: _.omitBy(
-      route,
-      (val, key) => _.isObject(val) && key !== 'starting_location',
-    ) as CustomWorkout['route'],
-    activityType: _.omitBy(activityType, (val) => _.isObject(val)) as CustomWorkout['activityType'],
-  } satisfies CustomWorkout
+      const kmlText = await get(route._links.alternate[0].href).then((r) => r.text())
+      const kmlParsed = new DOMParser().parseFromString(kmlText)
+      const geoJson = kmlToGeoJson(kmlParsed)
 
-  await sanityClient.createOrReplace({
-    _type: 'workout',
-    _id: `workout-${DateTime.fromISO(obj.workout.start_datetime).toFormat('yyyy-LL-dd-HH-mm-ss')}`,
-    title: obj.workout.name,
-    ..._.mapValues(obj, (val) => JSON.stringify(val, null, 2)),
-  })
-})
+      await sanityClient.createOrReplace<SanityWorkoutResponse>({
+        _type: 'workout',
+        _id: `workout-${workoutDate.toFormat('yyyy-LL-dd-HH-mm-ss')}`,
+        title: workoutDate.toFormat('yyyy-LL-dd') + ' ' + workout.name,
+        ..._.mapValues(
+          {
+            geoJson,
+            workout,
+            route,
+            activityType,
+          },
+          (val) => JSON.stringify(val, null, 2),
+        ),
+      })
+    } catch (error) {
+      console.error(`Error for workout: [name] ${workout.name} [time] ${workout.start_datetime}`)
+      if (error instanceof Error) {
+        console.error('Error:', error.message)
+      } else {
+        console.error('An unknown error occurred:', error)
+      }
+    }
+  }),
+)
