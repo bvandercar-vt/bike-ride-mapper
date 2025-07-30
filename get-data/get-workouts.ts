@@ -9,6 +9,8 @@ import { DOMParser } from 'xmldom'
 import type { SanityWorkoutResponse } from '../src/api/sanity.api'
 import { ActivityName, type ActivityType, type Route } from '../src/types/mapMyRide'
 import { getEnv } from '../src/utils'
+import { validatePointsDistance } from './utils/coordinates'
+import { getGpxPoints } from './utils/gpx'
 
 // have to import after due to getting the config vars
 const mapMyRide = await import('./api/map-my-ride.api')
@@ -26,10 +28,11 @@ const sanityWorkouts = await sanityClient.fetch<
 >(`*[_type == "${SanityTypes.WORKOUT}"]{_id, pathConfirmed}`)
 
 console.log('converting KML to GeoJson and uploading to Sanity..')
+let errored = false
 await Promise.all(
   workouts.map(async (workout) => {
+    const workoutDate = DateTime.fromISO(workout.start_datetime)
     try {
-      const workoutDate = DateTime.fromISO(workout.start_datetime)
       const route: Route = await mapMyRide.getRoute(workout)
       const activityType: ActivityType = await mapMyRide.getActivityType(workout)
 
@@ -43,7 +46,8 @@ await Promise.all(
       const id = `workout-${workoutDate.toFormat('yyyy-LL-dd-HH-mm-ss')}`
       const existingSanityWorkout = sanityWorkouts.find((w) => w._id == id)
       if (!existingSanityWorkout?.pathConfirmed) {
-        // TODO: check path for any issues
+        const pathPoints = getGpxPoints(gpxDoc)
+        validatePointsDistance(pathPoints, { maxRouteDistanceFt: 500, maxStartEndDistanceFt: 1000 })
       }
 
       const newData: SanityWorkoutResponse = {
@@ -70,7 +74,8 @@ await Promise.all(
         })
       }
     } catch (error) {
-      console.error(`Error for workout: [name] ${workout.name} [time] ${workout.start_datetime}`)
+      console.error(`Error for workout: ${workout.name} (${workoutDate.toFormat('yyyy-LL-dd')})`)
+      errored = true
       if (error instanceof Error) {
         console.error('Error:', error.message)
       } else {
@@ -85,4 +90,8 @@ if (!(sanityWorkoutCount == workouts.length)) {
   throw new Error(
     `should be same length. Workouts in Sanity: ${sanityWorkoutCount} Workouts in MMR: ${workouts.length}`,
   )
+}
+
+if (errored) {
+  throw new Error('one or more workouts errored')
 }
