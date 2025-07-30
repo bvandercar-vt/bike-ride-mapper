@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 
 await dotenv.config({ path: '.env.local' })
 
-import { kml as kmlToGeoJson } from '@tmcw/togeojson'
+import { gpx as gpxToGeoJson } from '@tmcw/togeojson'
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { DOMParser } from 'xmldom'
@@ -26,19 +26,14 @@ await Promise.all(
   workouts.map(async (workout) => {
     try {
       const workoutDate = DateTime.fromISO(workout.start_datetime)
-      const route: Route = await mapMyRide.get(workout._links.route[0].href).then((r) => r.json())
-      const activityType: ActivityType = await mapMyRide
-        .get(workout._links.activity_type[0].href)
-        .then((r) => r.json())
+      const route: Route = await mapMyRide.getRoute(workout)
+      const activityType: ActivityType = await mapMyRide.getActivityType(workout)
 
       if (!Object.values(ActivityName).includes(activityType.name))
         throw new Error(`unexpected activity name ${activityType.name}`)
 
-      const kmlText = await mapMyRide
-        .get(route._links.alternate.find((l) => l.name == 'kml')!.href)
-        .then((r) => r.text())
-      const kmlParsed = new DOMParser().parseFromString(kmlText)
-      const geoJson = kmlToGeoJson(kmlParsed)
+      const gpxText = await mapMyRide.getRoutePathData(route, 'gpx')
+      const geoJson = gpxToGeoJson(new DOMParser().parseFromString(gpxText))
 
       await sanityClient.createOrReplace<SanityWorkoutResponse>({
         _type: SanityTypes.WORKOUT,
