@@ -20,6 +20,3 @@ jobs:
           SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
           SANITY_API_TOKEN_WRITE: ${{ secrets.SANITY_API_TOKEN_WRITE }}
         run: npm run get-data
-      - uses: EndBug/add-and-commit@v9
-        with:
-          message: 'GeoJsons updated by GitHub Actions'
