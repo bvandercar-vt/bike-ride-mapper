@@ -1,15 +1,18 @@
+import dotenv from 'dotenv'
+
+await dotenv.config({ path: '.env.local' })
+
 import { createClient as createSanityClient } from '@sanity/client'
 import { kml as kmlToGeoJson } from '@tmcw/togeojson'
-import { config } from 'dotenv'
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { DOMParser } from 'xmldom'
 import { type CustomWorkout } from '../src/types'
 import { ActivityName, type ActivityType, type Route } from '../src/types/mapMyRide'
 import { getEnv } from '../src/utils'
-import { get, getWorkouts } from './api/mapmyride.api'
 
-config({ path: '.env.local' })
+// have to import after due to getting the config vars
+const { get, getWorkouts } = await import('./api/mapmyride.api')
 
 const { MMR_USER_ID, SANITY_API_TOKEN_WRITE, SANITY_PROJECT_ID } = getEnv(
   'MMR_USER_ID',
@@ -21,7 +24,8 @@ const sanityClient = createSanityClient({
   projectId: SANITY_PROJECT_ID,
   dataset: 'production',
   token: SANITY_API_TOKEN_WRITE,
-  // useCdn: false,
+  apiVersion: '2025-07-29',
+  useCdn: true,
 })
 
 const downloadAllRoutes = async (user_id: string) => {
