@@ -12,7 +12,7 @@ import { ActivityName, type ActivityType, type Route } from '../src/types/mapMyR
 import { getEnv } from '../src/utils'
 
 // have to import after due to getting the config vars
-const { get, getWorkouts } = await import('./api/mapmyride.api')
+const { get, getWorkouts } = await import('./api/map-my-ride.api')
 
 const { MMR_USER_ID, SANITY_API_TOKEN_WRITE, SANITY_PROJECT_ID } = getEnv(
   'MMR_USER_ID',
