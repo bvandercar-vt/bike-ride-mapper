@@ -25,30 +25,25 @@ const MapHandlers = ({ ...handlers }: LeafletEventHandlerFnMap) => {
   return null
 }
 
-const Stats = ({ data }: { data: CustomWorkout[] | null }) => {
-  if (data === null) return
+const HeaderSubtitle = ({ data }: { data: CustomWorkout[] | null }) => {
+  if (data === null) {
+    return <b className="loading-text">Loading Data...</b>
+  }
+  if (data.length == 0) {
+    return <b className="error-text">No data! Select layers!</b>
+  }
 
   const numRoutes = data.length
   const distances = data.map(({ route }) => route.distance)
 
   return (
-    <div id="total-stats">
-      {numRoutes === 0 ? (
-        <b className="error-text">
-          No data layers selected!
-          <br />
-          Select some!
-        </b>
-      ) : (
-        <>
-          # Routes: {numRoutes}
-          <br />
-          Total Distance: {round(sum(distances) * METERS_TO_MILES, 1)}mi
-          <br />
-          Longest Route: {round(max(distances)! * METERS_TO_MILES, 1)}mi
-        </>
-      )}
-    </div>
+    <>
+      # Routes: {numRoutes}
+      <br />
+      Total Distance: {round(sum(distances) * METERS_TO_MILES, 1)}mi
+      <br />
+      Longest Route: {round(max(distances)! * METERS_TO_MILES, 1)}mi
+    </>
   )
 }
 
@@ -119,7 +114,9 @@ export const App = () => {
         <div id="header-text">
           <h1>My Bike Rides</h1>
           <br />
-          {mapRef.current && <Stats data={visibleData} />}
+          <div id="header-subtitle">
+            <HeaderSubtitle data={visibleData} />
+          </div>
         </div>
       </header>
       <MapContainer
