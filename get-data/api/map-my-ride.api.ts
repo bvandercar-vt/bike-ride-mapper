@@ -1,4 +1,4 @@
-import type { Workout } from '../../src/types/mapMyRide'
+import type { ActivityType, Route, Workout } from '../../src/types/mapMyRide'
 import { getEnv } from '../../src/utils'
 
 const { MMR_AUTH_TOKEN } = getEnv('MMR_AUTH_TOKEN')
@@ -48,4 +48,16 @@ export async function getWorkouts({ user_id }: { user_id: string }) {
     user: user_id,
     order_by: 'start_datetime',
   })
+}
+
+export async function getRoute(workout: Workout): Promise<Route> {
+  return await get(workout._links.route[0].href).then((r) => r.json())
+}
+
+export async function getActivityType(workout: Workout): Promise<ActivityType> {
+  return await get(workout._links.activity_type[0].href).then((r) => r.json())
+}
+
+export async function getRoutePathData(route: Route, type: 'gpx' | 'kml') {
+  return await get(route._links.alternate.find((l) => l.name == type)!.href).then((r) => r.text())
 }
