@@ -33,4 +33,7 @@ export async function getWorkouts(): Promise<CustomWorkout[]> {
   }))
 }
 
-export type SanityWorkoutResponse = { [K in keyof CustomWorkout]: string } & { title: string }
+export type SanityWorkoutResponse = { [K in keyof CustomWorkout]: string } & {
+  title: string
+  pathConfirmed?: boolean
+}

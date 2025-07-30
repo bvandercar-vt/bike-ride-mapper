@@ -13,13 +13,17 @@ import { getEnv } from '../src/utils'
 // have to import after due to getting the config vars
 const mapMyRide = await import('./api/map-my-ride.api')
 const { sanityClient } = await import('./api/sanity.api')
-const { SanityTypes, ...sanity } = await import('../src/api/sanity.api')
+const { SanityTypes } = await import('../src/api/sanity.api')
 
 const { MMR_USER_ID } = getEnv('MMR_USER_ID')
 
 console.log('getting workouts from mapmyride...')
 const workouts = await mapMyRide.getWorkouts({ user_id: MMR_USER_ID })
 console.log('# workouts', workouts.length)
+
+const sanityWorkouts = await sanityClient.fetch<
+  ({ _id: string } & Pick<SanityWorkoutResponse, 'pathConfirmed'>)[]
+>(`*[_type == "${SanityTypes.WORKOUT}"]{_id, pathConfirmed}`)
 
 console.log('converting KML to GeoJson and uploading to Sanity..')
 await Promise.all(
@@ -33,11 +37,16 @@ await Promise.all(
         throw new Error(`unexpected activity name ${activityType.name}`)
 
       const gpxText = await mapMyRide.getRoutePathData(route, 'gpx')
-      const geoJson = gpxToGeoJson(new DOMParser().parseFromString(gpxText))
+      const gpxDoc = new DOMParser().parseFromString(gpxText)
+      const geoJson = gpxToGeoJson(gpxDoc)
 
-      await sanityClient.createOrReplace<SanityWorkoutResponse>({
-        _type: SanityTypes.WORKOUT,
-        _id: `workout-${workoutDate.toFormat('yyyy-LL-dd-HH-mm-ss')}`,
+      const id = `workout-${workoutDate.toFormat('yyyy-LL-dd-HH-mm-ss')}`
+      const existingSanityWorkout = sanityWorkouts.find((w) => w._id == id)
+      if (!existingSanityWorkout?.pathConfirmed) {
+        // TODO: check path for any issues
+      }
+
+      const newData: SanityWorkoutResponse = {
         title: workoutDate.toFormat('yyyy-LL-dd') + ' ' + workout.name,
         ..._.mapValues(
           {
@@ -48,7 +57,18 @@ await Promise.all(
           },
           (val) => JSON.stringify(val, null, 2),
         ),
-      })
+      }
+
+      if (existingSanityWorkout) {
+        // patch instead of replace so that don't replace other fields.
+        await sanityClient.patch(id).set(newData).commit()
+      } else {
+        await sanityClient.create({
+          _type: SanityTypes.WORKOUT,
+          _id: id,
+          ...newData,
+        })
+      }
     } catch (error) {
       console.error(`Error for workout: [name] ${workout.name} [time] ${workout.start_datetime}`)
       if (error instanceof Error) {
@@ -60,9 +80,9 @@ await Promise.all(
   }),
 )
 
-const sanityWorkouts = await sanity.getWorkouts()
-if (!(sanityWorkouts.length == workouts.length)) {
+const sanityWorkoutCount = await sanityClient.fetch(`count(*[_type == "${SanityTypes.WORKOUT}"])`)
+if (!(sanityWorkoutCount == workouts.length)) {
   throw new Error(
-    `should be same length. Workouts in Sanity: ${sanityWorkouts.length} Workouts in MMR: ${workouts.length}`,
+    `should be same length. Workouts in Sanity: ${sanityWorkoutCount} Workouts in MMR: ${workouts.length}`,
   )
 }
