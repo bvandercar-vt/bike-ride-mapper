@@ -21,7 +21,7 @@ export const SanityTypes = {
 
 export async function getWorkouts(): Promise<CustomWorkout[]> {
   const workouts = await sanityClient.fetch<SanityWorkoutResponse[]>(
-    `*[_type == "${SanityTypes.WORKOUT}"]`,
+    `*[_type == "${SanityTypes.WORKOUT}" && (pathHasIssue == false)]`,
   )
 
   return workouts.map((w) => ({
@@ -35,5 +35,5 @@ export async function getWorkouts(): Promise<CustomWorkout[]> {
 
 export type SanityWorkoutResponse = { [K in keyof CustomWorkout]: string } & {
   title: string
-  pathConfirmed?: boolean
+  pathHasIssue?: boolean
 }

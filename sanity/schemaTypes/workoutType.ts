@@ -31,7 +31,7 @@ export const workoutType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'pathConfirmed',
+      name: 'pathHasIssue',
       type: 'boolean',
       initialValue: false,
     }),
