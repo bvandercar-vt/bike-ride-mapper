@@ -24,14 +24,14 @@ const workouts = await mapMyRide.getWorkouts({ user_id: MMR_USER_ID })
 console.log('# workouts', workouts.length)
 
 const sanityWorkouts = await sanityClient.fetch<
-  ({ _id: string } & Pick<SanityWorkoutResponse, 'pathConfirmed'>)[]
->(`*[_type == "${SanityTypes.WORKOUT}"]{_id, pathConfirmed}`)
+  ({ _id: string } & Pick<SanityWorkoutResponse, 'pathHasIssue'>)[]
+>(`*[_type == "${SanityTypes.WORKOUT}"]{_id, pathHasIssue}`)
 
 console.log('converting KML to GeoJson and uploading to Sanity..')
 let errored = false
 await Promise.all(
   workouts.map(async (workout) => {
-    const workoutDate = DateTime.fromISO(workout.start_datetime)
+    const workoutDate = DateTime.fromISO(workout.start_datetime, { zone: 'America/Denver' })
     try {
       const route: Route = await mapMyRide.getRoute(workout)
       const activityType: ActivityType = await mapMyRide.getActivityType(workout)
@@ -45,13 +45,22 @@ await Promise.all(
 
       const id = `workout-${workoutDate.toFormat('yyyy-LL-dd-HH-mm-ss')}`
       const existingSanityWorkout = sanityWorkouts.find((w) => w._id == id)
-      if (!existingSanityWorkout?.pathConfirmed) {
+      let pathError: Error | undefined = undefined
+      if (!existingSanityWorkout || existingSanityWorkout.pathHasIssue) {
         const pathPoints = getGpxPoints(gpxDoc)
-        validatePointsDistance(pathPoints, { maxRouteDistanceFt: 500, maxStartEndDistanceFt: 1000 })
+        try {
+          validatePointsDistance(pathPoints, {
+            maxRouteDistanceFt: 500,
+            maxStartEndDistanceFt: 1000,
+          })
+        } catch (err) {
+          if (err instanceof Error) pathError = err
+        }
       }
 
       const newData: SanityWorkoutResponse = {
         title: workoutDate.toFormat('yyyy-LL-dd') + ' ' + workout.name,
+        pathHasIssue: Boolean(pathError),
         ..._.mapValues(
           {
             geoJson,
@@ -73,6 +82,8 @@ await Promise.all(
           ...newData,
         })
       }
+
+      if (pathError) throw pathError
     } catch (error) {
       console.error(`Error for workout: ${workout.name} (${workoutDate.toFormat('yyyy-LL-dd')})`)
       errored = true
