@@ -46,7 +46,11 @@ await Promise.all(
       const id = `workout-${workoutDate.toFormat('yyyy-LL-dd-HH-mm-ss')}`
       const existingSanityWorkout = sanityWorkouts.find((w) => w._id == id)
       let pathError: Error | undefined = undefined
-      if (!existingSanityWorkout || existingSanityWorkout.pathHasIssue) {
+      if (
+        (!existingSanityWorkout &&
+          !(route.description.includes('GOOD') || workout.notes.includes('GOOD'))) ||
+        existingSanityWorkout?.pathHasIssue
+      ) {
         const pathPoints = getGpxPoints(gpxDoc)
         try {
           validatePointsDistance(pathPoints, {
