@@ -27,7 +27,7 @@ const sanityWorkouts = await sanityClient.fetch<
   ({ _id: string } & Pick<SanityWorkoutResponse, 'pathHasIssue'>)[]
 >(`*[_type == "${SanityTypes.WORKOUT}"]{_id, pathHasIssue}`)
 
-console.log('converting KML to GeoJson and uploading to Sanity..')
+console.log('converting GPX to GeoJson and uploading to Sanity..')
 let errored = false
 await Promise.all(
   workouts.map(async (workout) => {
