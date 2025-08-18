@@ -3,14 +3,16 @@ import dotenv from 'dotenv'
 await dotenv.config({ path: '.env.local' })
 
 import { gpx as gpxToGeoJson } from '@tmcw/togeojson'
+import type { LineString } from 'geojson'
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { DOMParser } from 'xmldom'
 import type { SanityWorkoutResponse } from '../src/api/sanity.api'
 import { ActivityName, type ActivityType, type Route } from '../src/types/mapMyRide'
 import { getEnv } from '../src/utils'
+import type { Point } from './utils/coordinates'
 import { validatePointsDistance } from './utils/coordinates'
-import { getGpxPoints } from './utils/gpx'
+import { simplifyGeoJson } from './utils/geoJson'
 
 // have to import after due to getting the config vars
 const mapMyRide = await import('./api/map-my-ride.api')
@@ -29,6 +31,8 @@ const sanityWorkouts = await sanityClient.fetch<
 
 console.log('converting GPX to GeoJson and uploading to Sanity..')
 let errored = false
+let totalNumPointsUnsimplified = 0
+let totalNumPointsSimplified = 0
 await Promise.all(
   workouts.map(async (workout) => {
     const workoutDate = DateTime.fromISO(workout.start_datetime, { zone: 'America/Denver' })
@@ -51,7 +55,7 @@ await Promise.all(
           !(route.description.includes('GOOD') || workout.notes.includes('GOOD'))) ||
         existingSanityWorkout?.pathHasIssue
       ) {
-        const pathPoints = getGpxPoints(gpxDoc)
+        const pathPoints = (geoJson.features[0].geometry as LineString).coordinates as Point[]
         try {
           validatePointsDistance(pathPoints, {
             maxRouteDistanceFt: 500,
@@ -62,12 +66,19 @@ await Promise.all(
         }
       }
 
+      const { geoJsonSimplified, numPointsUnsimplified, numPointsSimplified } = simplifyGeoJson(
+        geoJson,
+        { tolerance: 0.0000001, highQuality: true },
+      )
+      totalNumPointsUnsimplified += numPointsUnsimplified
+      totalNumPointsSimplified += numPointsSimplified
+
       const newData: SanityWorkoutResponse = {
         title: workoutDate.toFormat('yyyy-LL-dd') + ' ' + workout.name,
         pathHasIssue: Boolean(pathError),
         ..._.mapValues(
           {
-            geoJson,
+            geoJson: geoJsonSimplified,
             workout,
             route,
             activityType,
@@ -98,6 +109,10 @@ await Promise.all(
       }
     }
   }),
+)
+
+console.log(
+  `GeoJsons simplified by ${totalNumPointsUnsimplified - totalNumPointsSimplified} data points (${(((totalNumPointsSimplified - totalNumPointsUnsimplified) / totalNumPointsUnsimplified) * 100).toFixed(0)}%)`,
 )
 
 const sanityWorkoutCount = await sanityClient.fetch(`count(*[_type == "${SanityTypes.WORKOUT}"])`)
