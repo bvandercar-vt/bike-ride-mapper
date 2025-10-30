@@ -1,19 +1,17 @@
-import type { ActivityType, Route, Workout } from '../../src/types/mapMyRide'
+import type { ActivityType, OAuthResponse, Route, Workout } from '../../src/types/mapMyRide'
 import { getEnv } from '../../src/utils'
+import { getInput } from '../utils/get-input'
 
-const { MMR_AUTH_TOKEN } = getEnv('MMR_AUTH_TOKEN')
+const MMR_API_URL = 'https://api.mapmyfitness.com'
 
-const MMR_API_URL = 'https://mapmyride.api.ua.com'
+const { MMR_CLIENT_ID, MMR_AUTH_TOKEN } = getEnv('MMR_CLIENT_ID', 'MMR_AUTH_TOKEN')
 
-export async function get(endpoint: string) {
+const apiKeyHeader = { 'Api-Key': MMR_CLIENT_ID }
+const authHeader = { Authorization: 'Bearer ' + MMR_AUTH_TOKEN }
+
+export async function request(endpoint: string, args: RequestInit) {
   try {
-    const response = await fetch(`${MMR_API_URL}${endpoint}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: MMR_AUTH_TOKEN,
-      },
-    })
+    const response = await fetch(`${MMR_API_URL}${endpoint}`, args)
 
     if (!response.ok) {
       throw new Error(
@@ -27,9 +25,60 @@ export async function get(endpoint: string) {
     throw err
   }
 }
+
+export async function get(endpoint: string) {
+  return await request(endpoint, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeader,
+      ...apiKeyHeader,
+    },
+  })
+}
+
+export async function getOAuthToken(params: {
+  grant_type: 'authorization_code' | 'client_credentials' | 'refresh_token'
+  code?: string
+  refresh_token?: string
+}) {
+  const { MMR_CLIENT_SECRET } = getEnv('MMR_CLIENT_SECRET')
+  const response: OAuthResponse = await request('/v7.2/oauth2/access_token/', {
+    method: 'POST',
+    headers: { ...apiKeyHeader, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      ...params,
+      client_id: MMR_CLIENT_ID,
+      client_secret: MMR_CLIENT_SECRET,
+    }),
+  }).then((r) => r.json())
+  return response
+}
+
+// @ts-expect-error for special use when uncommented
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function printAuthToken() {
+  const baseUrl = 'https://www.mapmyfitness.com/oauth2/authorize/'
+  const params = new URLSearchParams({
+    client_id: MMR_CLIENT_ID,
+    response_type: 'code',
+    redirect_uri: 'http://www.google.com',
+  })
+  console.log(`${baseUrl}?${params.toString()}`)
+  console.log('The code is in the code param at the URL')
+  const code = await getInput('Enter the code: ')
+  const tokenResponse = await getOAuthToken({ grant_type: 'authorization_code', code })
+
+  console.log('Enter to environment MMR_AUTH_TOKEN :\n', tokenResponse.access_token)
+  console.log(`Expires in: ${tokenResponse.expires_in / (24 * 60 * 60)} days`)
+  process.exit(0)
+}
+
+// await printAuthToken()
+
 export async function getAll<T>(endpoint: string, key: string, params: Record<string, string>) {
   async function getBatch(limit: number, offset: number) {
-    const result = await get(
+    const response = await get(
       `/v7.2/${endpoint}/?` +
         new URLSearchParams({
           limit: String(limit),
@@ -37,7 +86,7 @@ export async function getAll<T>(endpoint: string, key: string, params: Record<st
           ...params,
         }),
     ).then((r) => r.json())
-    return result._embedded[key] as T[]
+    return response._embedded[key] as T[]
   }
 
   const items: T[] = []

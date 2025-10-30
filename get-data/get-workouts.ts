@@ -1,7 +1,3 @@
-import dotenv from 'dotenv'
-
-await dotenv.config({ path: '.env.local' })
-
 import { gpx as gpxToGeoJson } from '@tmcw/togeojson'
 import type { LineString } from 'geojson'
 import _ from 'lodash'

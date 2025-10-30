@@ -1,3 +1,7 @@
+import dotenv from 'dotenv'
+
+await dotenv.config({ path: '.env.local' })
+
 export function getEnv<Keys extends string[]>(...keys: Keys) {
   return Object.fromEntries(
     keys.map((key) => {

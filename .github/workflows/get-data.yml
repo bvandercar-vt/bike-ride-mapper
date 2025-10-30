@@ -22,6 +22,7 @@ jobs:
 
       - name: Get Data
         env:
+          MMR_CLIENT_ID: ${{ secrets.MMR_CLIENT_ID }}
           MMR_AUTH_TOKEN: ${{ secrets.MMR_AUTH_TOKEN }}
           MMR_USER_ID: ${{ secrets.MMR_USER_ID }}
           SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
