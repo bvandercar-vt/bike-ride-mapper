@@ -27,7 +27,7 @@ const MapHandlers = ({ ...handlers }: LeafletEventHandlerFnMap) => {
 
 const HeaderSubtitle = ({ data }: { data: CustomWorkout[] | null }) => {
   if (data === null) {
-    return <b className="loading-text">Loading Data...</b>
+    return
   }
   if (data.length == 0) {
     return <b className="error-text">No data! Select layers!</b>
@@ -50,20 +50,52 @@ const HeaderSubtitle = ({ data }: { data: CustomWorkout[] | null }) => {
 export const App = () => {
   const mapRef = useRef<Map>(null)
   const [isSatellite, setIsSatellite] = useState<boolean>(false)
-  const [allData, setAllData] = useState<CustomWorkout[] | null>(null)
+  const [allData, setAllData] = useState<CustomWorkout[]>([])
   const [visibleData, setVisibleData] = useState<CustomWorkout[] | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const bikeLayerRef = useRef<LayerGroupType>(null)
   const walkLayerRef = useRef<LayerGroupType>(null)
 
   useEffect(() => {
-    getWorkouts().then((data) => setAllData(data))
+    const abortController = new AbortController()
+
+    const loadWorkoutsInBatches = async () => {
+      setIsLoading(true)
+      setAllData([])
+
+      try {
+        const accumulatedData: CustomWorkout[] = []
+
+        for await (const batch of getWorkouts()) {
+          if (abortController.signal.aborted) break
+
+          accumulatedData.push(...batch)
+          setAllData([...accumulatedData])
+        }
+      } catch (error) {
+        if (!abortController.signal.aborted) {
+          console.error('Error loading workouts:', error)
+        }
+      } finally {
+        if (!abortController.signal.aborted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    loadWorkoutsInBatches()
+
+    return () => {
+      abortController.abort()
+    }
   }, [])
 
   const layerData = useMemo(
     () =>
-      allData
-        ? [
+      allData.length == 0
+        ? []
+        : [
             {
               name: 'Bike Records',
               data: allData.filter((g) =>
@@ -78,14 +110,13 @@ export const App = () => {
               ),
               layerRef: walkLayerRef,
             },
-          ]
-        : null,
+          ],
     [allData],
   )
 
   const changeVisibleData = () => {
     const mapRefMap = mapRef.current
-    if (!mapRefMap || !layerData) return
+    if (!mapRefMap || layerData.length == 0) return
     setVisibleData(
       layerData
         .filter(({ layerRef }) => layerRef.current && mapRefMap.hasLayer(layerRef.current))
@@ -96,6 +127,10 @@ export const App = () => {
   useEffect(() => {
     changeVisibleData()
   }, [mapRef.current])
+
+  useEffect(() => {
+    changeVisibleData()
+  }, [layerData])
 
   function setBikeTrailsStyle() {
     const bikeTrails = document.getElementsByClassName('bike-trails')[0]
@@ -116,6 +151,7 @@ export const App = () => {
           <br />
           <div id="header-subtitle">
             <HeaderSubtitle data={visibleData} />
+            {isLoading && <div className="loading-routes-text">Loading Routes...</div>}
           </div>
         </div>
       </header>
@@ -166,7 +202,7 @@ export const App = () => {
               className="bike-trails"
             />
           </LayersControl.Overlay>
-          {layerData?.map(({ name, data, layerRef }) => (
+          {layerData.map(({ name, data, layerRef }) => (
             <LayersControl.Overlay name={name} checked key={name}>
               <RouteLayer
                 data={data}

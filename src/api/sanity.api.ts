@@ -19,18 +19,36 @@ export const SanityTypes = {
   WORKOUT: 'workout',
 } as const
 
-export async function getWorkouts(): Promise<CustomWorkout[]> {
-  const workouts = await sanityClient.fetch<SanityWorkoutResponse[]>(
-    `*[_type == "${SanityTypes.WORKOUT}" && (pathHasIssue == false)]`,
-  )
+function parseWorkoutResponse(workout: SanityWorkoutResponse): CustomWorkout {
+  return {
+    ...workout,
+    workout: JSON.parse(workout.workout),
+    geoJson: JSON.parse(workout.geoJson),
+    route: JSON.parse(workout.route),
+    activityType: JSON.parse(workout.activityType),
+  }
+}
 
-  return workouts.map((w) => ({
-    ...w,
-    workout: JSON.parse(w.workout),
-    geoJson: JSON.parse(w.geoJson),
-    route: JSON.parse(w.route),
-    activityType: JSON.parse(w.activityType),
-  }))
+export async function* getWorkouts(batchSize = 10): AsyncGenerator<CustomWorkout[], void, unknown> {
+  let start = 0
+
+  while (true) {
+    const query = `*[_type == "${SanityTypes.WORKOUT}" && (pathHasIssue == false)][${start}...${start + batchSize}]`
+
+    const batch = await sanityClient.fetch<SanityWorkoutResponse[]>(query)
+
+    if (batch.length === 0) {
+      break
+    }
+
+    yield batch.map(parseWorkoutResponse)
+
+    if (batch.length < batchSize) {
+      break
+    }
+
+    start += batchSize
+  }
 }
 
 export type SanityWorkoutResponse = { [K in keyof CustomWorkout]: string } & {

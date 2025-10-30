@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 
-if (typeof process !== 'undefined') {
+if (typeof process !== 'undefined' && process.env.SANITY_API_TOKEN_WRITE === undefined) {
   await dotenv.config({ path: '.env.local' })
 }
 
