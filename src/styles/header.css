@@ -59,8 +59,8 @@ header {
     text-shadow: var(--stats-text-shadow), var(--stats-text-shadow);
   }
 
-  .loading-text {
-    font-size: 1.5em;
-    color: limegreen;
+  .loading-routes-text {
+    font-size: 1.2em;
+    color: yellow;
   }
 }
