@@ -3,22 +3,20 @@ import type { LineString } from 'geojson'
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { DOMParser } from 'xmldom'
-import type { SanityWorkoutResponse } from '../src/api/sanity.api'
+import { SanityTypes, type SanityWorkoutResponse } from '../src/api/sanity.api'
 import { ActivityName, type ActivityType, type Route } from '../src/types/mapMyRide'
 import { getEnv } from '../src/utils'
+import { MapMyRideClient } from './api/map-my-ride.api'
+import { sanityClient } from './api/sanity.api'
 import type { Point } from './utils/coordinates'
 import { validatePointsDistance } from './utils/coordinates'
 import { simplifyGeoJson } from './utils/geoJson'
 
-// have to import after due to getting the config vars
-const mapMyRide = await import('./api/map-my-ride.api')
-const { sanityClient } = await import('./api/sanity.api')
-const { SanityTypes } = await import('../src/api/sanity.api')
-
 const { MMR_USER_ID } = getEnv('MMR_USER_ID')
 
 console.log('getting workouts from mapmyride...')
-const workouts = await mapMyRide.getWorkouts({ user_id: MMR_USER_ID })
+const mapMyRideClient = new MapMyRideClient()
+const workouts = await mapMyRideClient.getWorkouts({ user_id: MMR_USER_ID })
 console.log('# workouts', workouts.length)
 
 const sanityWorkouts = await sanityClient.fetch<
@@ -33,13 +31,13 @@ await Promise.all(
   workouts.map(async (workout) => {
     const workoutDate = DateTime.fromISO(workout.start_datetime, { zone: 'America/Denver' })
     try {
-      const route: Route = await mapMyRide.getRoute(workout)
-      const activityType: ActivityType = await mapMyRide.getActivityType(workout)
+      const route: Route = await mapMyRideClient.getRoute(workout)
+      const activityType: ActivityType = await mapMyRideClient.getActivityType(workout)
 
       if (!Object.values(ActivityName).includes(activityType.name))
         throw new Error(`unexpected activity name ${activityType.name}`)
 
-      const gpxText = await mapMyRide.getRoutePathData(route, 'gpx')
+      const gpxText = await mapMyRideClient.getRoutePathData(route, 'gpx')
       const gpxDoc = new DOMParser().parseFromString(gpxText)
       const geoJson = gpxToGeoJson(gpxDoc)
 
