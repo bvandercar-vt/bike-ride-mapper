@@ -11,7 +11,7 @@ import 'leaflet-polylinedecorator'
 import { max, round, sum } from 'lodash'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { LayersControl, MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
-import { getWorkouts } from './api/sanity.api'
+import { SanityWorkoutClient } from './api/sanity.api'
 import { RouteLayer } from './components/RouteLayer'
 import { METERS_TO_MILES } from './constants'
 import { type CustomWorkout } from './types'
@@ -47,6 +47,8 @@ const HeaderSubtitle = ({ data }: { data: CustomWorkout[] | null }) => {
   )
 }
 
+const sanityWorkoutClient = new SanityWorkoutClient()
+
 export const App = () => {
   const mapRef = useRef<Map>(null)
   const [isSatellite, setIsSatellite] = useState<boolean>(false)
@@ -67,7 +69,7 @@ export const App = () => {
       try {
         const accumulatedData: CustomWorkout[] = []
 
-        for await (const batch of getWorkouts()) {
+        for await (const batch of sanityWorkoutClient.getWorkouts()) {
           if (abortController.signal.aborted) break
 
           accumulatedData.push(...batch)
