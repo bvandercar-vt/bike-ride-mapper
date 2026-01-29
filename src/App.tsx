@@ -11,10 +11,10 @@ import 'leaflet-polylinedecorator'
 import { max, round, sum } from 'lodash'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { LayersControl, MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
-import { SanityWorkoutClient } from './api/sanity.api'
 import { HoveredRouteProvider } from './components/HoveredRouteContext'
 import { RouteLayer } from './components/RouteLayer'
 import { METERS_TO_MILES } from './constants'
+import { useWorkouts } from './hooks/useWorkouts'
 import { type CustomWorkout } from './types'
 import { ActivityName } from './types/mapMyRide'
 import { getEnv } from './utils'
@@ -48,51 +48,14 @@ const HeaderSubtitle = ({ data }: { data: CustomWorkout[] | null }) => {
   )
 }
 
-const sanityWorkoutClient = new SanityWorkoutClient()
-
 export const App = () => {
   const mapRef = useRef<Map>(null)
   const [isSatellite, setIsSatellite] = useState<boolean>(false)
-  const [allData, setAllData] = useState<CustomWorkout[]>([])
   const [visibleData, setVisibleData] = useState<CustomWorkout[] | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [allData, isLoading] = useWorkouts()
 
   const bikeLayerRef = useRef<LayerGroupType>(null)
   const walkLayerRef = useRef<LayerGroupType>(null)
-
-  useEffect(() => {
-    const abortController = new AbortController()
-
-    const loadWorkoutsInBatches = async () => {
-      setIsLoading(true)
-      setAllData([])
-
-      try {
-        const accumulatedData: CustomWorkout[] = []
-
-        for await (const batch of sanityWorkoutClient.getWorkouts()) {
-          if (abortController.signal.aborted) break
-
-          accumulatedData.push(...batch)
-          setAllData([...accumulatedData])
-        }
-      } catch (error) {
-        if (!abortController.signal.aborted) {
-          console.error('Error loading workouts:', error)
-        }
-      } finally {
-        if (!abortController.signal.aborted) {
-          setIsLoading(false)
-        }
-      }
-    }
-
-    loadWorkoutsInBatches()
-
-    return () => {
-      abortController.abort()
-    }
-  }, [])
 
   const layerData = useMemo(
     () =>

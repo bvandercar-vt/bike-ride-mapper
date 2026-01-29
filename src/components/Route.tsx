@@ -15,7 +15,7 @@ import { type Route as RouteType } from '../types/mapMyRide'
 import { useHoveredRoute } from './HoveredRouteContext'
 
 export interface RouteProps extends Pick<GeoJSONProps, 'data'> {
-    id: string
+  id: string
   date: DateTime
   route: Pick<RouteType, 'distance' | 'total_ascent'>
   color: string
