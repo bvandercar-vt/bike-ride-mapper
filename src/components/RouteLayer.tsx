@@ -13,7 +13,7 @@ export const RouteLayer = ({ data, color, hoverColor, layerRef }: RouteLayerProp
   return (
     <LayerGroup ref={layerRef}>
       {data.map(({ workout, route, geoJson }) => {
-        const id=workout.start_datetime
+        const id = workout.start_datetime
         return (
           <Route
             key={id}
