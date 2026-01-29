@@ -1,4 +1,3 @@
 eslint.config.js linguist-vendored
 .prettierrc.js linguist-vendored
-soundcloudWidget.js linguist-vendored
 postcss.config.cjs linguist-vendored

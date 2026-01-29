@@ -12,6 +12,7 @@ import { max, round, sum } from 'lodash'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { LayersControl, MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
 import { SanityWorkoutClient } from './api/sanity.api'
+import { HoveredRouteProvider } from './components/HoveredRouteContext'
 import { RouteLayer } from './components/RouteLayer'
 import { METERS_TO_MILES } from './constants'
 import { type CustomWorkout } from './types'
@@ -204,16 +205,18 @@ export const App = () => {
               className="bike-trails"
             />
           </LayersControl.Overlay>
-          {layerData.map(({ name, data, layerRef }) => (
-            <LayersControl.Overlay name={name} checked key={name}>
-              <RouteLayer
-                data={data}
-                layerRef={layerRef}
-                color={isSatellite ? 'magenta' : 'lime'}
-                hoverColor={isSatellite ? 'yellow' : 'orangered'}
-              />
-            </LayersControl.Overlay>
-          ))}
+          <HoveredRouteProvider>
+            {layerData.map(({ name, data, layerRef }) => (
+              <LayersControl.Overlay name={name} checked key={name}>
+                <RouteLayer
+                  data={data}
+                  layerRef={layerRef}
+                  color={isSatellite ? 'magenta' : 'lime'}
+                  hoverColor={isSatellite ? 'yellow' : 'orangered'}
+                />
+              </LayersControl.Overlay>
+            ))}
+          </HoveredRouteProvider>
         </LayersControl>
       </MapContainer>
     </>

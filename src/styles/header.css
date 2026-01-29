@@ -43,8 +43,9 @@ header {
     font-size: xx-large;
     color: yellow;
     --h1-text-shadow: indigo 0px 0px 10px;
-    text-shadow: var(--h1-text-shadow), var(--h1-text-shadow), var(--h1-text-shadow),
-      var(--h1-text-shadow), var(--h1-text-shadow), var(--h1-text-shadow);
+    text-shadow:
+      var(--h1-text-shadow), var(--h1-text-shadow), var(--h1-text-shadow), var(--h1-text-shadow),
+      var(--h1-text-shadow), var(--h1-text-shadow);
   }
 
   #header-subtitle {

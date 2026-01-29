@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 
 if (typeof process !== 'undefined' && process.env.SANITY_API_TOKEN_WRITE === undefined) {
+  console.log('loading .env.local file for environment variables')
   await dotenv.config({ path: '.env.local' })
 }
 

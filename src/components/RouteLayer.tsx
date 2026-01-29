@@ -12,10 +12,12 @@ export interface RouteLayerProps extends Pick<RouteProps, 'color' | 'hoverColor'
 export const RouteLayer = ({ data, color, hoverColor, layerRef }: RouteLayerProps) => {
   return (
     <LayerGroup ref={layerRef}>
-      {data.map(({ workout, route, geoJson }, index) => {
+      {data.map(({ workout, route, geoJson }) => {
+        const id=workout.start_datetime
         return (
           <Route
-            key={index}
+            key={id}
+            id={id}
             data={geoJson}
             date={DateTime.fromISO(workout.start_datetime)}
             route={route}
