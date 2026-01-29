@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: yarn install --frozen-lockfile
 
       - name: Get Data
         env:
@@ -28,4 +28,4 @@ jobs:
           SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
           SANITY_API_TOKEN_WRITE: ${{ secrets.SANITY_API_TOKEN_WRITE }}
           SANITY_API_TOKEN_READ: ${{ secrets.SANITY_API_TOKEN_READ }}
-        run: npm run get-data
+        run: yarn get-data

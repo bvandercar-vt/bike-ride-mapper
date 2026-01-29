@@ -1,5 +1,5 @@
 {
-  "name": "MapMyRideMapper",
+  "name": "bike-ride-mapper",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -11,9 +11,11 @@
     "dev": "vite --open",
     "build": "vite build",
     "preview": "yarn build && vite preview --open",
-    "lint": "yarn format && yarn ts:check && yarn eslint && yarn format:check",
+    "lint": "yarn format && yarn ts:check && yarn eslint:check && yarn format:check",
+    "lint:fix": "yarn format && yarn eslint:fix",
     "ts:check": "tsc",
-    "eslint": "eslint .",
+    "eslint:check": "eslint .",
+    "eslint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "get-data": "npx tsx ./get-data/get-workouts.ts"
@@ -30,14 +32,28 @@
   "bugs": {
     "url": "https://github.com/bvandercar-vt/TODO/issues"
   },
+  "dependencies": {
+    "@sanity/client": "^7.8",
+    "@sanity/vision": "^5.7",
+    "classnames": "^2",
+    "dotenv": "^16",
+    "leaflet": "^1.9",
+    "leaflet-polylinedecorator": "^1.6",
+    "lodash": "^4",
+    "luxon": "^3.7",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-leaflet": "^4",
+    "sanity": "^4"
+  },
   "devDependencies": {
-    "@tmcw/togeojson": "^7.1.2",
-    "@turf/simplify": "^7.2.0",
+    "@tmcw/togeojson": "^7",
+    "@turf/simplify": "^7",
     "@types/leaflet": "^1.9",
     "@types/leaflet-polylinedecorator": "^1.6",
     "@types/lodash": "^4",
     "@types/luxon": "^3.4",
-    "@types/node": "^20",
+    "@types/node": "^24",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/xmldom": "^0.1",
@@ -51,22 +67,10 @@
     "postcss-load-config": "^6",
     "prettier": "^3",
     "tsx": "^4.20.3",
-    "type-fest": "^4",
+    "type-fest": "^5",
     "typescript": "^5",
     "typescript-eslint": "^8",
     "vite": "^5.4",
     "xmldom": "^0.6"
-  },
-  "dependencies": {
-    "@sanity/client": "^7.8.1",
-    "classnames": "^2",
-    "dotenv": "^16",
-    "leaflet": "^1.9",
-    "leaflet-polylinedecorator": "^1.6",
-    "lodash": "^4",
-    "luxon": "^3.7",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-leaflet": "^4"
   }
 }
