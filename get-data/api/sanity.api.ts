@@ -1,4 +1,4 @@
-import { SanityWorkoutClient } from '../../src/api/sanity.api'
+import { SanityWorkoutClient } from '../../src/api/sanity-workouts.api'
 import { getEnv } from '../../src/utils'
 
 const { SANITY_API_TOKEN_WRITE } = getEnv('SANITY_API_TOKEN_WRITE')
