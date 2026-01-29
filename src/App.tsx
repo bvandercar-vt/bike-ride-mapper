@@ -52,7 +52,7 @@ export const App = () => {
   const mapRef = useRef<Map>(null)
   const [isSatellite, setIsSatellite] = useState<boolean>(false)
   const [visibleData, setVisibleData] = useState<CustomWorkout[] | null>(null)
-  const [allWorkouts, isLoading, total] = useWorkouts()
+  const { workouts: allWorkouts, isLoading, total } = useWorkouts()
 
   const bikeLayerRef = useRef<LayerGroupType>(null)
   const walkLayerRef = useRef<LayerGroupType>(null)

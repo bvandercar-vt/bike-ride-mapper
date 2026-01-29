@@ -3,7 +3,7 @@ import type { LineString } from 'geojson'
 import _ from 'lodash'
 import { DateTime } from 'luxon'
 import { DOMParser } from 'xmldom'
-import { SanityWorkoutClient, type SanityWorkoutResponse } from '../src/api/sanity.api'
+import { SanityWorkoutClient, type SanityWorkoutResponse } from '../src/api/sanity-workouts.api'
 import { ActivityName, type ActivityType, type Route } from '../src/types/mapMyRide'
 import { getEnv } from '../src/utils'
 import { MapMyRideClient } from './api/map-my-ride.api'
@@ -21,7 +21,7 @@ console.log('# workouts', workouts.length)
 
 const sanityWorkouts = await sanityClient.fetch<
   ({ _id: string } & Pick<SanityWorkoutResponse, 'pathHasIssue'>)[]
->(`*[_type == "${SanityWorkoutClient.SanityTypes.WORKOUT}"]{_id, pathHasIssue}`)
+>(`*[${SanityWorkoutClient.WORKOUT_FILTER}]{_id, pathHasIssue}`)
 
 console.log('converting GPX to GeoJson and uploading to Sanity..')
 let errored = false
@@ -86,7 +86,7 @@ await Promise.all(
         await sanityClient.patch(id).set(newData).commit()
       } else {
         await sanityClient.create({
-          _type: SanityWorkoutClient.SanityTypes.WORKOUT,
+          _type: SanityWorkoutClient.Types.WORKOUT,
           _id: id,
           ...newData,
         })
@@ -110,7 +110,7 @@ console.log(
 )
 
 const sanityWorkoutCount = await sanityClient.fetch(
-  `count(*[_type == "${SanityWorkoutClient.SanityTypes.WORKOUT}"])`,
+  `count(*[${SanityWorkoutClient.WORKOUT_FILTER}])`,
 )
 if (!(sanityWorkoutCount == workouts.length)) {
   throw new Error(
