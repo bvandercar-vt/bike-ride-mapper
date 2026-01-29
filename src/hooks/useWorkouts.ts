@@ -3,8 +3,9 @@ import { SanityWorkoutClient } from '../api/sanity.api'
 import { type CustomWorkout } from '../types'
 
 export function useWorkouts() {
-  const [allData, setAllData] = useState<CustomWorkout[]>([])
+  const [data, setData] = useState<CustomWorkout[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [total, setTotal] = useState<number | null>(null)
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -12,16 +13,22 @@ export function useWorkouts() {
 
     const loadWorkoutsInBatches = async () => {
       setIsLoading(true)
-      setAllData([])
+      setData([])
+      setTotal(null)
 
       try {
         const accumulatedData: CustomWorkout[] = []
+        let first = true
 
-        for await (const batch of sanityWorkoutClient.getWorkouts()) {
+        for await (const { batch, total } of sanityWorkoutClient.getWorkouts()) {
           if (abortController.signal.aborted) break
 
           accumulatedData.push(...batch)
-          setAllData([...accumulatedData])
+          setData([...accumulatedData])
+          if (first) {
+            setTotal(total)
+            first = false
+          }
         }
       } catch (error) {
         if (!abortController.signal.aborted) {
@@ -41,5 +48,5 @@ export function useWorkouts() {
     }
   }, [])
 
-  return [allData, isLoading] as const
+  return [data, isLoading, total] as const
 }
