@@ -39,25 +39,45 @@ export class SanityWorkoutClient {
     }
   }
 
-  async *getWorkouts(batchSize = 10): AsyncGenerator<CustomWorkout[], void, unknown> {
-    let start = 0
+  async *getWorkouts(
+    batchSize = 10,
+  ): AsyncGenerator<{ batch: CustomWorkout[]; total: number }, void, unknown> {
+    let offset = 0
+    let total: number | undefined = undefined
+
+    const FILTER = `_type == "${SanityWorkoutClient.SanityTypes.WORKOUT}" && (pathHasIssue == false)`
 
     while (true) {
-      const query = `*[_type == "${SanityWorkoutClient.SanityTypes.WORKOUT}" && (pathHasIssue == false)][${start}...${start + batchSize}]`
+      let items: SanityWorkoutResponse[] = []
+      if (offset === 0) {
+        const query = `{
+          "items": *[${FILTER}][0...${batchSize}],
+          "total": count(*[${FILTER}])
+        }`
+        const result = await this.client.fetch<{ items: SanityWorkoutResponse[]; total: number }>(
+          query,
+        )
+        items = result.items
+        total = result.total
+      } else {
+        const query = `*[${FILTER}][${offset}...${offset + batchSize}]`
+        items = await this.client.fetch<SanityWorkoutResponse[]>(query)
+      }
 
-      const batch = await this.client.fetch<SanityWorkoutResponse[]>(query)
-
-      if (batch.length === 0) {
+      if (items.length === 0) {
         break
       }
 
-      yield batch.map(SanityWorkoutClient.parseWorkoutResponse)
+      yield {
+        batch: items.map(SanityWorkoutClient.parseWorkoutResponse),
+        total: total!,
+      }
 
-      if (batch.length < batchSize) {
+      if (items.length < batchSize) {
         break
       }
 
-      start += batchSize
+      offset += batchSize
     }
   }
 }

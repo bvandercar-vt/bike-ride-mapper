@@ -52,32 +52,32 @@ export const App = () => {
   const mapRef = useRef<Map>(null)
   const [isSatellite, setIsSatellite] = useState<boolean>(false)
   const [visibleData, setVisibleData] = useState<CustomWorkout[] | null>(null)
-  const [allData, isLoading] = useWorkouts()
+  const [allWorkouts, isLoading, total] = useWorkouts()
 
   const bikeLayerRef = useRef<LayerGroupType>(null)
   const walkLayerRef = useRef<LayerGroupType>(null)
 
   const layerData = useMemo(
     () =>
-      allData.length == 0
+      allWorkouts.length == 0
         ? []
         : [
             {
               name: 'Bike Records',
-              data: allData.filter((g) =>
+              data: allWorkouts.filter((g) =>
                 [ActivityName.BIKE_RIDE, ActivityName.ROAD_CYCLING].includes(g.activityType.name),
               ),
               layerRef: bikeLayerRef,
             },
             {
               name: 'Walk Records',
-              data: allData.filter((g) =>
+              data: allWorkouts.filter((g) =>
                 [ActivityName.RUN, ActivityName.WALK].includes(g.activityType.name),
               ),
               layerRef: walkLayerRef,
             },
           ],
-    [allData],
+    [allWorkouts],
   )
 
   const changeVisibleData = () => {
@@ -117,7 +117,11 @@ export const App = () => {
           <br />
           <div id="header-subtitle">
             <HeaderSubtitle data={visibleData} />
-            {isLoading && <div className="loading-routes-text">Loading Routes...</div>}
+            {isLoading && (
+              <div className="loading-routes-text">
+                Loading Routes... {total && `${allWorkouts?.length}/${total}`}
+              </div>
+            )}
           </div>
         </div>
       </header>
