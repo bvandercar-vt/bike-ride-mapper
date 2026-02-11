@@ -1,0 +1,362 @@
+{
+  "title": "2024-01-12 Home to Ace",
+  "pathHasIssue": false,
+  "geoJson": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "_gpxType": "trk",
+          "name": "Home to Ace",
+          "coordinateProperties": {}
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -104.98234,
+              39.73296
+            ],
+            [
+              -104.98232,
+              39.73231
+            ],
+            [
+              -104.98221,
+              39.73231
+            ],
+            [
+              -104.98221,
+              39.732
+            ],
+            [
+              -104.97754,
+              39.73199
+            ],
+            [
+              -104.97648,
+              39.73201
+            ],
+            [
+              -104.97646,
+              39.73062
+            ],
+            [
+              -104.97646,
+              39.73048
+            ],
+            [
+              -104.97637,
+              39.73048
+            ],
+            [
+              -104.97578,
+              39.73049
+            ],
+            [
+              -104.97578,
+              39.73042
+            ],
+            [
+              -104.97532,
+              39.73041
+            ],
+            [
+              -104.97473,
+              39.73042
+            ],
+            [
+              -104.97424,
+              39.73042
+            ],
+            [
+              -104.97876,
+              39.7304
+            ],
+            [
+              -104.98199,
+              39.73041
+            ],
+            [
+              -104.98222,
+              39.73041
+            ],
+            [
+              -104.98221,
+              39.73049
+            ],
+            [
+              -104.98221,
+              39.73231
+            ],
+            [
+              -104.98232,
+              39.73231
+            ],
+            [
+              -104.98232,
+              39.73235
+            ],
+            [
+              -104.98234,
+              39.73296
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "workout": {
+    "contexts": null,
+    "name": "Home to Ace",
+    "is_default_name": false,
+    "notes": "",
+    "reference_key": "222187270-a283f824-66b9-472c-9cd9-871b2b92d01f-1705469272066-",
+    "is_verified": false,
+    "aggregates": {
+      "distance_total": 0,
+      "active_time_total": 3600,
+      "elapsed_time_total": 3600,
+      "metabolic_energy_total": 1376536
+    },
+    "source": "MapMyFitness Web",
+    "source_manufacturer": "mapmyfitness",
+    "source_name": "MapMyFitness Web",
+    "has_time_series": false,
+    "start_datetime": "2024-01-13T05:27:52+00:00",
+    "start_locale_timezone": "America/Denver",
+    "created_datetime": "2024-01-17T05:28:05+00:00",
+    "updated_datetime": "2024-01-17T05:28:31+00:00",
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/workout/7718929234/",
+          "id": "7718929234"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_type": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "route": [
+        {
+          "href": "/v7.2/route/5884807780/",
+          "id": "5884807780"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ]
+    }
+  },
+  "route": {
+    "city": "Denver",
+    "country": "us",
+    "updated_datetime": "2024-01-17T05:27:41+00:00",
+    "created_datetime": "2024-01-17T05:27:33+00:00",
+    "data_source": "run:RE",
+    "description": "Home to Ace Hardware",
+    "distance": 1951.6252039547446,
+    "name": "Home to Ace",
+    "postal_code": "",
+    "state": "CO",
+    "starting_location": {
+      "type": "Point",
+      "coordinates": [
+        -104.98234000000001,
+        39.732960000000006
+      ]
+    },
+    "start_point_type": "",
+    "points": null,
+    "climbs": null,
+    "total_ascent": 8.2,
+    "total_descent": -9.5,
+    "max_elevation": 1633.22,
+    "min_elevation": 1623.26,
+    "images": [],
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/route/5884807780/",
+          "id": "5884807780"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_types": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "thumbnail": [
+        {
+          "href": "//drzetlglcbfx.cloudfront.net/routes/thumbnail/5884807780/1705469261?size=100x100"
+        }
+      ],
+      "alternate": [
+        {
+          "href": "/v7.2/route/5884807780/?format=kml&field_set=detailed",
+          "id": "5884807780",
+          "name": "kml"
+        },
+        {
+          "href": "/v7.2/route/5884807780/?format=gpx&field_set=detailed",
+          "id": "5884807780",
+          "name": "gpx"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Route"
+        }
+      ]
+    }
+  },
+  "activityType": {
+    "mets": 3,
+    "mets_speed": [
+      {
+        "speed": 0.44704,
+        "mets": "2"
+      },
+      {
+        "speed": 0.89408,
+        "mets": "2.8"
+      },
+      {
+        "speed": 1.1176,
+        "mets": "3"
+      },
+      {
+        "speed": 1.34112,
+        "mets": "3.5"
+      },
+      {
+        "speed": 1.56464,
+        "mets": "4.3"
+      },
+      {
+        "speed": 1.78816,
+        "mets": "5"
+      },
+      {
+        "speed": 2.01168,
+        "mets": "7"
+      },
+      {
+        "speed": 2.2352,
+        "mets": "8.3"
+      },
+      {
+        "speed": 2.324608,
+        "mets": "9"
+      },
+      {
+        "speed": 2.68224,
+        "mets": "9.8"
+      },
+      {
+        "speed": 2.995168,
+        "mets": "10.5"
+      },
+      {
+        "speed": 3.12928,
+        "mets": "11"
+      },
+      {
+        "speed": 3.3528,
+        "mets": "11.5"
+      },
+      {
+        "speed": 3.57632,
+        "mets": "11.8"
+      },
+      {
+        "speed": 3.844544,
+        "mets": "12.3"
+      },
+      {
+        "speed": 4.02336,
+        "mets": "12.8"
+      },
+      {
+        "speed": 4.4704,
+        "mets": "14.5"
+      },
+      {
+        "speed": 4.872736,
+        "mets": "16"
+      },
+      {
+        "speed": 5.36448,
+        "mets": "19"
+      },
+      {
+        "speed": 5.81152,
+        "mets": "19.8"
+      },
+      {
+        "speed": 6.25856,
+        "mets": "23"
+      }
+    ],
+    "name": "Walk",
+    "short_name": "walk",
+    "has_children": true,
+    "template": {
+      "user_action_past": "{{user.name}} walked",
+      "user_action_present": "{{user.name}} is working out",
+      "activities_are": null
+    },
+    "location_aware": true,
+    "import_only": false,
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "root": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "icon_url": [
+        {
+          "href": "https://static.mapmyfitness.com/d/website/activity_icons/walk.png"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Activity_Type"
+        }
+      ]
+    }
+  }
+}

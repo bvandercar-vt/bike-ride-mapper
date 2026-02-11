@@ -9,6 +9,7 @@
   "scripts": {
     "start": "yarn dev",
     "dev": "vite --open",
+    "prebuild": "yarn build:workouts",
     "build": "vite build",
     "preview": "yarn build && vite preview --open",
     "lint": "yarn format && yarn ts:check && yarn eslint:check && yarn format:check",
@@ -18,7 +19,9 @@
     "eslint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "get-data": "npx tsx ./get-data/get-workouts.ts"
+    "get-data": "npx tsx ./scripts/get-workouts.ts",
+    "get-mmr-token": "npx tsx ./scripts/get-mmr-token.ts",
+    "build:workouts": "npx tsx ./scripts/build-workouts-ndjson.ts"
   },
   "repository": {
     "type": "git",
@@ -33,25 +36,22 @@
     "url": "https://github.com/bvandercar-vt/TODO/issues"
   },
   "dependencies": {
-    "@sanity/client": "^7.8",
-    "@sanity/vision": "^5.7",
     "classnames": "^2",
     "dotenv": "^16",
+    "es-toolkit": "^1.44",
     "leaflet": "^1.9",
     "leaflet-polylinedecorator": "^1.6",
-    "lodash": "^4",
     "luxon": "^3.7",
+    "ndjson-readablestream": "^1.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-leaflet": "^4",
-    "sanity": "^4"
+    "react-leaflet": "^4"
   },
   "devDependencies": {
     "@tmcw/togeojson": "^7",
     "@turf/simplify": "^7",
     "@types/leaflet": "^1.9",
     "@types/leaflet-polylinedecorator": "^1.6",
-    "@types/lodash": "^4",
     "@types/luxon": "^3.4",
     "@types/node": "^24",
     "@types/react": "^18",

@@ -1,3 +1,4 @@
+import { round } from 'es-toolkit'
 import {
   polylineDecorator,
   Symbol,
@@ -6,7 +7,6 @@ import {
   type Polyline,
   type PolylineDecorator,
 } from 'leaflet'
-import { round } from 'lodash'
 import { type DateTime } from 'luxon'
 import { useEffect, useRef } from 'react'
 import { GeoJSON, Tooltip, useMap, type GeoJSONProps } from 'react-leaflet'

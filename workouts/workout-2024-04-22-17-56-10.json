@@ -1,0 +1,430 @@
+{
+  "title": "2024-04-22 6.57mi Bike Ride",
+  "pathHasIssue": false,
+  "geoJson": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "_gpxType": "trk",
+          "name": "6.57mi Bike Ride",
+          "coordinateProperties": {}
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -104.98237,
+              39.7329
+            ],
+            [
+              -104.98236,
+              39.73238
+            ],
+            [
+              -104.98233,
+              39.73228
+            ],
+            [
+              -104.98233,
+              39.73196
+            ],
+            [
+              -104.98234216,
+              39.73196156
+            ],
+            [
+              -104.96976629,
+              39.73207698
+            ],
+            [
+              -104.96842512,
+              39.73191539
+            ],
+            [
+              -104.96853653,
+              39.73121711
+            ],
+            [
+              -104.96833349,
+              39.73032566
+            ],
+            [
+              -104.96776568,
+              39.73033967
+            ],
+            [
+              -104.96714349,
+              39.7298016
+            ],
+            [
+              -104.96611408,
+              39.72943491
+            ],
+            [
+              -104.96588089,
+              39.72917782
+            ],
+            [
+              -104.96589991,
+              39.72727667
+            ],
+            [
+              -104.96521656,
+              39.72701935
+            ],
+            [
+              -104.96522,
+              39.72707
+            ],
+            [
+              -104.96294,
+              39.72707
+            ],
+            [
+              -104.96293957,
+              39.7270514
+            ],
+            [
+              -104.94103391,
+              39.72708501
+            ],
+            [
+              -104.94011685,
+              39.72735591
+            ],
+            [
+              -104.9320401,
+              39.72736666
+            ],
+            [
+              -104.93151503,
+              39.72742662
+            ],
+            [
+              -104.93147352,
+              39.72754606
+            ],
+            [
+              -104.93157011,
+              39.72918479
+            ],
+            [
+              -104.93053435,
+              39.72907214
+            ],
+            [
+              -104.93071657,
+              39.72817317
+            ],
+            [
+              -104.93165015,
+              39.72809091
+            ],
+            [
+              -104.93169,
+              39.72809
+            ],
+            [
+              -104.93168,
+              39.72802
+            ],
+            [
+              -104.93169,
+              39.72746
+            ],
+            [
+              -104.93201,
+              39.72746
+            ],
+            [
+              -104.93201245,
+              39.727444
+            ],
+            [
+              -104.94059313,
+              39.72751121
+            ],
+            [
+              -104.94114095,
+              39.72734867
+            ],
+            [
+              -104.9432346,
+              39.7273259
+            ],
+            [
+              -104.94323,
+              39.72736
+            ],
+            [
+              -104.94703,
+              39.72738
+            ],
+            [
+              -104.94703123,
+              39.72733711
+            ],
+            [
+              -104.96713994,
+              39.72733982
+            ],
+            [
+              -104.96723634,
+              39.72758934
+            ],
+            [
+              -104.96702832,
+              39.72846874
+            ],
+            [
+              -104.96715991,
+              39.72889126
+            ],
+            [
+              -104.96938559,
+              39.72902346
+            ],
+            [
+              -104.97627477,
+              39.72898531
+            ],
+            [
+              -104.97637139,
+              39.73193259
+            ],
+            [
+              -104.98221812,
+              39.73209585
+            ],
+            [
+              -104.98222,
+              39.7321
+            ],
+            [
+              -104.98222,
+              39.7323
+            ],
+            [
+              -104.98233,
+              39.73229
+            ],
+            [
+              -104.98236,
+              39.73235
+            ],
+            [
+              -104.98237,
+              39.73281
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "workout": {
+    "contexts": null,
+    "name": "6.57mi Bike Ride",
+    "is_default_name": true,
+    "notes": "",
+    "reference_key": "222187270.1B8E963F-582E-4059-99D1-BF86D7BEAE3A-938-000000E4C8D9",
+    "is_verified": true,
+    "aggregates": {
+      "distance_total": 10568.8839168,
+      "active_time_total": 3351,
+      "elapsed_time_total": 3353,
+      "speed_max": 92.75901184,
+      "speed_avg": 3.15420248,
+      "metabolic_energy_total": 1707072
+    },
+    "source": "MapMyRide iPhone",
+    "source_manufacturer": "mapmyfitness",
+    "source_name": "MapMyRide iPhone",
+    "has_time_series": true,
+    "start_datetime": "2024-04-22T23:56:10+00:00",
+    "start_locale_timezone": "America/Denver",
+    "created_datetime": "2024-04-23T00:52:11+00:00",
+    "updated_datetime": "2024-04-23T00:52:11+00:00",
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/workout/7889711449/",
+          "id": "7889711449"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_type": [
+        {
+          "href": "/v7.2/activity_type/11/",
+          "id": "11"
+        }
+      ],
+      "route": [
+        {
+          "href": "/v7.2/route/6012956905/",
+          "id": "6012956905"
+        }
+      ],
+      "workout_attribution": [
+        {
+          "href": "/v7.2/workout_attribution/studio/",
+          "id": "studio"
+        },
+        {
+          "href": "/v7.2/workout_attribution/kalman_v2/",
+          "id": "kalman_v2"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ]
+    }
+  },
+  "route": {
+    "city": "Denver",
+    "country": "us",
+    "updated_datetime": "2024-06-20T15:36:16+00:00",
+    "created_datetime": "2024-04-23T00:52:11+00:00",
+    "data_source": "MapMyRide iPhon",
+    "description": "",
+    "distance": 10359.585370360188,
+    "name": "6.57mi Bike Ride",
+    "postal_code": "",
+    "state": "CO",
+    "starting_location": {
+      "type": "Point",
+      "coordinates": [
+        -104.98237,
+        39.7329
+      ]
+    },
+    "start_point_type": "",
+    "points": null,
+    "climbs": null,
+    "total_ascent": 30.2,
+    "total_descent": -31.3,
+    "max_elevation": 1644.44,
+    "min_elevation": 1624.5199999999995,
+    "images": [],
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/route/6012956905/",
+          "id": "6012956905"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_types": [
+        {
+          "href": "/v7.2/activity_type/16/",
+          "id": "16"
+        }
+      ],
+      "thumbnail": [
+        {
+          "href": "//drzetlglcbfx.cloudfront.net/routes/thumbnail/6012956905/1718897776?size=100x100"
+        }
+      ],
+      "alternate": [
+        {
+          "href": "/v7.2/route/6012956905/?format=kml&field_set=detailed",
+          "id": "6012956905",
+          "name": "kml"
+        },
+        {
+          "href": "/v7.2/route/6012956905/?format=gpx&field_set=detailed",
+          "id": "6012956905",
+          "name": "gpx"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Route"
+        }
+      ]
+    }
+  },
+  "activityType": {
+    "mets": 8,
+    "mets_speed": [
+      {
+        "speed": 4.4704,
+        "mets": "4"
+      },
+      {
+        "speed": 4.91744,
+        "mets": "6.8"
+      },
+      {
+        "speed": 5.81152,
+        "mets": "8"
+      },
+      {
+        "speed": 6.7056,
+        "mets": "10"
+      },
+      {
+        "speed": 7.8232,
+        "mets": "12"
+      },
+      {
+        "speed": 8.9408,
+        "mets": "15.8"
+      }
+    ],
+    "name": "Bike Ride",
+    "short_name": "ride",
+    "has_children": true,
+    "template": {
+      "user_action_past": "{{user.name}} rode",
+      "user_action_present": "{{user.name}} is working out",
+      "activities_are": null
+    },
+    "location_aware": true,
+    "import_only": false,
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/activity_type/11/",
+          "id": "11"
+        }
+      ],
+      "root": [
+        {
+          "href": "/v7.2/activity_type/11/",
+          "id": "11"
+        }
+      ],
+      "icon_url": [
+        {
+          "href": "https://static.mapmyfitness.com/d/website/activity_icons/bike.png"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Activity_Type"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,454 @@
+{
+  "title": "2024-08-06 1.77mi Walk",
+  "pathHasIssue": false,
+  "geoJson": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "_gpxType": "trk",
+          "name": "1.77mi Walk",
+          "coordinateProperties": {}
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -104.982389,
+              39.732734
+            ],
+            [
+              -104.982388,
+              39.732421
+            ],
+            [
+              -104.982386,
+              39.732136
+            ],
+            [
+              -104.98167,
+              39.732136
+            ],
+            [
+              -104.981158,
+              39.732134
+            ],
+            [
+              -104.981032,
+              39.732133
+            ],
+            [
+              -104.98094,
+              39.732133
+            ],
+            [
+              -104.979944,
+              39.732131
+            ],
+            [
+              -104.979761,
+              39.732131
+            ],
+            [
+              -104.978786,
+              39.732129
+            ],
+            [
+              -104.978607,
+              39.732129
+            ],
+            [
+              -104.978173,
+              39.732132
+            ],
+            [
+              -104.977693,
+              39.732135
+            ],
+            [
+              -104.977693,
+              39.732052
+            ],
+            [
+              -104.977691,
+              39.731947
+            ],
+            [
+              -104.97768556,
+              39.73193299
+            ],
+            [
+              -104.97430336,
+              39.73198424
+            ],
+            [
+              -104.97405001,
+              39.73086003
+            ],
+            [
+              -104.97344839,
+              39.73085142
+            ],
+            [
+              -104.97348934,
+              39.73110804
+            ],
+            [
+              -104.97365471,
+              39.73087399
+            ],
+            [
+              -104.97333012,
+              39.73113282
+            ],
+            [
+              -104.97346159,
+              39.73094507
+            ],
+            [
+              -104.9734569,
+              39.73106101
+            ],
+            [
+              -104.97378074,
+              39.73105832
+            ],
+            [
+              -104.97388584,
+              39.73082824
+            ],
+            [
+              -104.97333407,
+              39.73084135
+            ],
+            [
+              -104.97304466,
+              39.73051195
+            ],
+            [
+              -104.96833882,
+              39.73053021
+            ],
+            [
+              -104.96784691,
+              39.7307537
+            ],
+            [
+              -104.96863132,
+              39.73118816
+            ],
+            [
+              -104.96867262,
+              39.73201564
+            ],
+            [
+              -104.97834043,
+              39.73196267
+            ],
+            [
+              -104.97876393,
+              39.73197154
+            ],
+            [
+              -104.97876612,
+              39.73216438
+            ],
+            [
+              -104.98236444,
+              39.73209547
+            ],
+            [
+              -104.98235072,
+              39.73292478
+            ],
+            [
+              -104.9825424,
+              39.73296925
+            ],
+            [
+              -104.98234505,
+              39.73291337
+            ],
+            [
+              -104.98243617,
+              39.73285603
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "workout": {
+    "contexts": null,
+    "name": "1.77mi Walk",
+    "is_default_name": true,
+    "notes": "",
+    "reference_key": "222187270.7EA2CF61-BC19-451A-95AC-1E6DC688780E-54609-00000975BA",
+    "is_verified": true,
+    "aggregates": {
+      "distance_total": 2841.5382336,
+      "active_time_total": 2338,
+      "elapsed_time_total": 2341,
+      "speed_max": 14.663984895999999,
+      "speed_avg": 1.215859392,
+      "cadence_max": 65,
+      "cadence_min": 49,
+      "cadence_avg": 55,
+      "metabolic_energy_total": 958136,
+      "steps_total": 3594
+    },
+    "source": "MapMyRide iPhone",
+    "source_manufacturer": "mapmyfitness",
+    "source_name": "MapMyRide iPhone",
+    "has_time_series": true,
+    "start_datetime": "2024-08-07T01:43:23+00:00",
+    "start_locale_timezone": "America/Denver",
+    "created_datetime": "2024-08-07T02:22:30+00:00",
+    "updated_datetime": "2024-08-07T02:22:29+00:00",
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/workout/8091559192/",
+          "id": "8091559192"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_type": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "route": [
+        {
+          "href": "/v7.2/route/6180172621/",
+          "id": "6180172621"
+        }
+      ],
+      "workout_attribution": [
+        {
+          "href": "/v7.2/workout_attribution/studio/",
+          "id": "studio"
+        },
+        {
+          "href": "/v7.2/workout_attribution/kalman_v2/",
+          "id": "kalman_v2"
+        },
+        {
+          "href": "/v7.2/workout_attribution/ios/",
+          "id": "ios"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ]
+    }
+  },
+  "route": {
+    "city": "Denver",
+    "country": "us",
+    "updated_datetime": "2025-07-30T20:59:14+00:00",
+    "created_datetime": "2024-08-07T02:22:29+00:00",
+    "data_source": "MapMyRide iPhon",
+    "description": "",
+    "distance": 3193.1604326974543,
+    "name": "1.77mi Walk",
+    "postal_code": "",
+    "state": "CO",
+    "starting_location": {
+      "type": "Point",
+      "coordinates": [
+        -104.982389,
+        39.732734
+      ]
+    },
+    "start_point_type": "",
+    "points": null,
+    "climbs": null,
+    "total_ascent": 10.3,
+    "total_descent": -10.7,
+    "max_elevation": 1633.51,
+    "min_elevation": 1623.14,
+    "images": [],
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/route/6180172621/",
+          "id": "6180172621"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_types": [
+        {
+          "href": "/v7.2/activity_type/16/",
+          "id": "16"
+        }
+      ],
+      "thumbnail": [
+        {
+          "href": "//drzetlglcbfx.cloudfront.net/routes/thumbnail/6180172621/1753909154?size=100x100"
+        }
+      ],
+      "alternate": [
+        {
+          "href": "/v7.2/route/6180172621/?format=kml&field_set=detailed",
+          "id": "6180172621",
+          "name": "kml"
+        },
+        {
+          "href": "/v7.2/route/6180172621/?format=gpx&field_set=detailed",
+          "id": "6180172621",
+          "name": "gpx"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Route"
+        }
+      ]
+    }
+  },
+  "activityType": {
+    "mets": 3,
+    "mets_speed": [
+      {
+        "speed": 0.44704,
+        "mets": "2"
+      },
+      {
+        "speed": 0.89408,
+        "mets": "2.8"
+      },
+      {
+        "speed": 1.1176,
+        "mets": "3"
+      },
+      {
+        "speed": 1.34112,
+        "mets": "3.5"
+      },
+      {
+        "speed": 1.56464,
+        "mets": "4.3"
+      },
+      {
+        "speed": 1.78816,
+        "mets": "5"
+      },
+      {
+        "speed": 2.01168,
+        "mets": "7"
+      },
+      {
+        "speed": 2.2352,
+        "mets": "8.3"
+      },
+      {
+        "speed": 2.324608,
+        "mets": "9"
+      },
+      {
+        "speed": 2.68224,
+        "mets": "9.8"
+      },
+      {
+        "speed": 2.995168,
+        "mets": "10.5"
+      },
+      {
+        "speed": 3.12928,
+        "mets": "11"
+      },
+      {
+        "speed": 3.3528,
+        "mets": "11.5"
+      },
+      {
+        "speed": 3.57632,
+        "mets": "11.8"
+      },
+      {
+        "speed": 3.844544,
+        "mets": "12.3"
+      },
+      {
+        "speed": 4.02336,
+        "mets": "12.8"
+      },
+      {
+        "speed": 4.4704,
+        "mets": "14.5"
+      },
+      {
+        "speed": 4.872736,
+        "mets": "16"
+      },
+      {
+        "speed": 5.36448,
+        "mets": "19"
+      },
+      {
+        "speed": 5.81152,
+        "mets": "19.8"
+      },
+      {
+        "speed": 6.25856,
+        "mets": "23"
+      }
+    ],
+    "name": "Walk",
+    "short_name": "walk",
+    "has_children": true,
+    "template": {
+      "user_action_past": "{{user.name}} walked",
+      "user_action_present": "{{user.name}} is working out",
+      "activities_are": null
+    },
+    "location_aware": true,
+    "import_only": false,
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "root": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "icon_url": [
+        {
+          "href": "https://static.mapmyfitness.com/d/website/activity_icons/walk.png"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Activity_Type"
+        }
+      ]
+    }
+  }
+}
