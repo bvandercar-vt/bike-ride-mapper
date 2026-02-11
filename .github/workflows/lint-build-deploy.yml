@@ -42,8 +42,6 @@ jobs:
       - name: Build project
         env:
           MAPTILER_API_KEY: ${{ secrets.MAPTILER_API_KEY }}
-          SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
-          SANITY_API_TOKEN_READ: ${{ secrets.SANITY_API_TOKEN_READ }}
         run: yarn build
 
       - name: Upload production-ready build files

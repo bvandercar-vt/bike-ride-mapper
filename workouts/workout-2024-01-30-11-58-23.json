@@ -1,0 +1,485 @@
+{
+  "title": "2024-01-30 Capitol, Evo, KS",
+  "pathHasIssue": false,
+  "geoJson": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "_gpxType": "trk",
+          "name": "Walk",
+          "coordinateProperties": {}
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -104.98233,
+              39.73273
+            ],
+            [
+              -104.98232,
+              39.73207
+            ],
+            [
+              -104.98343,
+              39.73207
+            ],
+            [
+              -104.98354,
+              39.73208
+            ],
+            [
+              -104.98354,
+              39.732
+            ],
+            [
+              -104.98355,
+              39.73162
+            ],
+            [
+              -104.98355,
+              39.73048
+            ],
+            [
+              -104.98732,
+              39.73049
+            ],
+            [
+              -104.98491,
+              39.73049
+            ],
+            [
+              -104.98491,
+              39.73072
+            ],
+            [
+              -104.98492,
+              39.73343
+            ],
+            [
+              -104.9849,
+              39.73511
+            ],
+            [
+              -104.98491,
+              39.73624
+            ],
+            [
+              -104.98491,
+              39.7384
+            ],
+            [
+              -104.97995,
+              39.7384
+            ],
+            [
+              -104.97526,
+              39.73838
+            ],
+            [
+              -104.96891,
+              39.73838
+            ],
+            [
+              -104.9689,
+              39.73845
+            ],
+            [
+              -104.96848,
+              39.73845
+            ],
+            [
+              -104.96851,
+              39.73651
+            ],
+            [
+              -104.96856,
+              39.7365
+            ],
+            [
+              -104.96858,
+              39.73645
+            ],
+            [
+              -104.96859,
+              39.73623
+            ],
+            [
+              -104.96856,
+              39.73552
+            ],
+            [
+              -104.96857,
+              39.735
+            ],
+            [
+              -104.96855,
+              39.73424
+            ],
+            [
+              -104.96852,
+              39.73271
+            ],
+            [
+              -104.9685,
+              39.73205
+            ],
+            [
+              -104.96851,
+              39.73216
+            ],
+            [
+              -104.96881,
+              39.73216
+            ],
+            [
+              -104.96883,
+              39.73214
+            ],
+            [
+              -104.96884,
+              39.73211
+            ],
+            [
+              -104.97185,
+              39.73211
+            ],
+            [
+              -104.97302,
+              39.73209
+            ],
+            [
+              -104.97302,
+              39.73079
+            ],
+            [
+              -104.97311,
+              39.73079
+            ],
+            [
+              -104.97393,
+              39.73078
+            ],
+            [
+              -104.97396,
+              39.73075
+            ],
+            [
+              -104.974,
+              39.7307
+            ],
+            [
+              -104.97403,
+              39.7307
+            ],
+            [
+              -104.97403,
+              39.73049
+            ],
+            [
+              -104.97414,
+              39.73049
+            ],
+            [
+              -104.97415,
+              39.73062
+            ],
+            [
+              -104.97415,
+              39.73095
+            ],
+            [
+              -104.97416,
+              39.73201
+            ],
+            [
+              -104.97874,
+              39.73199
+            ],
+            [
+              -104.98108,
+              39.732
+            ],
+            [
+              -104.98171,
+              39.73199
+            ],
+            [
+              -104.98221,
+              39.732
+            ],
+            [
+              -104.98221,
+              39.73207
+            ],
+            [
+              -104.98232,
+              39.73207
+            ],
+            [
+              -104.98232,
+              39.73235
+            ],
+            [
+              -104.98233,
+              39.73273
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "workout": {
+    "contexts": null,
+    "name": "Capitol, Evo, KS",
+    "is_default_name": false,
+    "notes": "",
+    "reference_key": "222187270-b3f3eba6-ee30-493a-8d82-a141c0e9d243-1706727503476-",
+    "is_verified": false,
+    "aggregates": {
+      "distance_total": 0,
+      "active_time_total": 0,
+      "elapsed_time_total": 0
+    },
+    "source": "MapMyFitness Web",
+    "source_manufacturer": "mapmyfitness",
+    "source_name": "MapMyFitness Web",
+    "has_time_series": false,
+    "start_datetime": "2024-01-30T18:58:23+00:00",
+    "start_locale_timezone": "America/Denver",
+    "created_datetime": "2024-01-31T18:58:28+00:00",
+    "updated_datetime": "2024-01-31T18:58:27+00:00",
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/workout/7741939702/",
+          "id": "7741939702"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_type": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "route": [
+        {
+          "href": "/v7.2/route/5900816017/",
+          "id": "5900816017"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ]
+    }
+  },
+  "route": {
+    "city": "Denver",
+    "country": "us",
+    "updated_datetime": "2024-01-31T18:58:12+00:00",
+    "created_datetime": "2024-01-31T18:58:04+00:00",
+    "data_source": "run:RE",
+    "description": "",
+    "distance": 5513.530924844114,
+    "name": "Walk",
+    "postal_code": "",
+    "state": "CO",
+    "starting_location": {
+      "type": "Point",
+      "coordinates": [
+        -104.98233,
+        39.732730000000004
+      ]
+    },
+    "start_point_type": "",
+    "points": null,
+    "climbs": null,
+    "total_ascent": 33.9,
+    "total_descent": -35.2,
+    "max_elevation": 1640.3,
+    "min_elevation": 1607.6299999999999,
+    "images": [],
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/route/5900816017/",
+          "id": "5900816017"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_types": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "thumbnail": [
+        {
+          "href": "//drzetlglcbfx.cloudfront.net/routes/thumbnail/5900816017/1706727492?size=100x100"
+        }
+      ],
+      "alternate": [
+        {
+          "href": "/v7.2/route/5900816017/?format=kml&field_set=detailed",
+          "id": "5900816017",
+          "name": "kml"
+        },
+        {
+          "href": "/v7.2/route/5900816017/?format=gpx&field_set=detailed",
+          "id": "5900816017",
+          "name": "gpx"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Route"
+        }
+      ]
+    }
+  },
+  "activityType": {
+    "mets": 3,
+    "mets_speed": [
+      {
+        "speed": 0.44704,
+        "mets": "2"
+      },
+      {
+        "speed": 0.89408,
+        "mets": "2.8"
+      },
+      {
+        "speed": 1.1176,
+        "mets": "3"
+      },
+      {
+        "speed": 1.34112,
+        "mets": "3.5"
+      },
+      {
+        "speed": 1.56464,
+        "mets": "4.3"
+      },
+      {
+        "speed": 1.78816,
+        "mets": "5"
+      },
+      {
+        "speed": 2.01168,
+        "mets": "7"
+      },
+      {
+        "speed": 2.2352,
+        "mets": "8.3"
+      },
+      {
+        "speed": 2.324608,
+        "mets": "9"
+      },
+      {
+        "speed": 2.68224,
+        "mets": "9.8"
+      },
+      {
+        "speed": 2.995168,
+        "mets": "10.5"
+      },
+      {
+        "speed": 3.12928,
+        "mets": "11"
+      },
+      {
+        "speed": 3.3528,
+        "mets": "11.5"
+      },
+      {
+        "speed": 3.57632,
+        "mets": "11.8"
+      },
+      {
+        "speed": 3.844544,
+        "mets": "12.3"
+      },
+      {
+        "speed": 4.02336,
+        "mets": "12.8"
+      },
+      {
+        "speed": 4.4704,
+        "mets": "14.5"
+      },
+      {
+        "speed": 4.872736,
+        "mets": "16"
+      },
+      {
+        "speed": 5.36448,
+        "mets": "19"
+      },
+      {
+        "speed": 5.81152,
+        "mets": "19.8"
+      },
+      {
+        "speed": 6.25856,
+        "mets": "23"
+      }
+    ],
+    "name": "Walk",
+    "short_name": "walk",
+    "has_children": true,
+    "template": {
+      "user_action_past": "{{user.name}} walked",
+      "user_action_present": "{{user.name}} is working out",
+      "activities_are": null
+    },
+    "location_aware": true,
+    "import_only": false,
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "root": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "icon_url": [
+        {
+          "href": "https://static.mapmyfitness.com/d/website/activity_icons/walk.png"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Activity_Type"
+        }
+      ]
+    }
+  }
+}
