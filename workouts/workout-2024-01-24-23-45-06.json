@@ -1,0 +1,362 @@
+{
+  "title": "2024-01-24 13th Walk",
+  "pathHasIssue": false,
+  "geoJson": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "_gpxType": "trk",
+          "name": "13th Walk",
+          "coordinateProperties": {}
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -104.98233,
+              39.73274
+            ],
+            [
+              -104.98234,
+              39.73303
+            ],
+            [
+              -104.98222,
+              39.73303
+            ],
+            [
+              -104.98222,
+              39.73366
+            ],
+            [
+              -104.98224,
+              39.73663
+            ],
+            [
+              -104.98223,
+              39.73682
+            ],
+            [
+              -104.98223,
+              39.73685
+            ],
+            [
+              -104.97767,
+              39.73685
+            ],
+            [
+              -104.97307,
+              39.73684
+            ],
+            [
+              -104.97072,
+              39.73687
+            ],
+            [
+              -104.97072,
+              39.73672
+            ],
+            [
+              -104.97063,
+              39.73672
+            ],
+            [
+              -104.97063,
+              39.7351
+            ],
+            [
+              -104.97061,
+              39.73364
+            ],
+            [
+              -104.97061,
+              39.73369
+            ],
+            [
+              -104.97188,
+              39.73369
+            ],
+            [
+              -104.97417,
+              39.73366
+            ],
+            [
+              -104.97764,
+              39.73365
+            ],
+            [
+              -104.98131,
+              39.73366
+            ],
+            [
+              -104.98234,
+              39.73366
+            ],
+            [
+              -104.98234,
+              39.7331
+            ],
+            [
+              -104.98233,
+              39.73274
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "workout": {
+    "contexts": null,
+    "name": "13th Walk",
+    "is_default_name": false,
+    "notes": "",
+    "reference_key": "222187270-cf5ccd77-de7f-4534-bc5b-9f4e2cc342f7-1706165106056-",
+    "is_verified": false,
+    "aggregates": {
+      "distance_total": 2929.00608,
+      "active_time_total": 0,
+      "steps_total": 3705,
+      "elapsed_time_total": 0
+    },
+    "source": "MapMyFitness Web",
+    "source_manufacturer": "mapmyfitness",
+    "source_name": "MapMyFitness Web",
+    "has_time_series": false,
+    "start_datetime": "2024-01-25T06:45:06+00:00",
+    "start_locale_timezone": "America/Denver",
+    "created_datetime": "2024-01-25T06:45:06+00:00",
+    "updated_datetime": "2024-01-25T06:45:06+00:00",
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/workout/7730785642/",
+          "id": "7730785642"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_type": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "route": [
+        {
+          "href": "/v7.2/route/5892730447/",
+          "id": "5892730447"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ]
+    }
+  },
+  "route": {
+    "city": "Denver",
+    "country": "us",
+    "updated_datetime": "2024-01-25T06:44:39+00:00",
+    "created_datetime": "2024-01-25T06:44:31+00:00",
+    "data_source": "run:RE",
+    "description": "",
+    "distance": 2932.6251514022647,
+    "name": "13th Walk",
+    "postal_code": "",
+    "state": "CO",
+    "starting_location": {
+      "type": "Point",
+      "coordinates": [
+        -104.98233,
+        39.73274
+      ]
+    },
+    "start_point_type": "",
+    "points": null,
+    "climbs": null,
+    "total_ascent": 16.2,
+    "total_descent": -18.1,
+    "max_elevation": 1633.4,
+    "min_elevation": 1618.01,
+    "images": [],
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/route/5892730447/",
+          "id": "5892730447"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_types": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "thumbnail": [
+        {
+          "href": "//drzetlglcbfx.cloudfront.net/routes/thumbnail/5892730447/1706165079?size=100x100"
+        }
+      ],
+      "alternate": [
+        {
+          "href": "/v7.2/route/5892730447/?format=kml&field_set=detailed",
+          "id": "5892730447",
+          "name": "kml"
+        },
+        {
+          "href": "/v7.2/route/5892730447/?format=gpx&field_set=detailed",
+          "id": "5892730447",
+          "name": "gpx"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Route"
+        }
+      ]
+    }
+  },
+  "activityType": {
+    "mets": 3,
+    "mets_speed": [
+      {
+        "speed": 0.44704,
+        "mets": "2"
+      },
+      {
+        "speed": 0.89408,
+        "mets": "2.8"
+      },
+      {
+        "speed": 1.1176,
+        "mets": "3"
+      },
+      {
+        "speed": 1.34112,
+        "mets": "3.5"
+      },
+      {
+        "speed": 1.56464,
+        "mets": "4.3"
+      },
+      {
+        "speed": 1.78816,
+        "mets": "5"
+      },
+      {
+        "speed": 2.01168,
+        "mets": "7"
+      },
+      {
+        "speed": 2.2352,
+        "mets": "8.3"
+      },
+      {
+        "speed": 2.324608,
+        "mets": "9"
+      },
+      {
+        "speed": 2.68224,
+        "mets": "9.8"
+      },
+      {
+        "speed": 2.995168,
+        "mets": "10.5"
+      },
+      {
+        "speed": 3.12928,
+        "mets": "11"
+      },
+      {
+        "speed": 3.3528,
+        "mets": "11.5"
+      },
+      {
+        "speed": 3.57632,
+        "mets": "11.8"
+      },
+      {
+        "speed": 3.844544,
+        "mets": "12.3"
+      },
+      {
+        "speed": 4.02336,
+        "mets": "12.8"
+      },
+      {
+        "speed": 4.4704,
+        "mets": "14.5"
+      },
+      {
+        "speed": 4.872736,
+        "mets": "16"
+      },
+      {
+        "speed": 5.36448,
+        "mets": "19"
+      },
+      {
+        "speed": 5.81152,
+        "mets": "19.8"
+      },
+      {
+        "speed": 6.25856,
+        "mets": "23"
+      }
+    ],
+    "name": "Walk",
+    "short_name": "walk",
+    "has_children": true,
+    "template": {
+      "user_action_past": "{{user.name}} walked",
+      "user_action_present": "{{user.name}} is working out",
+      "activities_are": null
+    },
+    "location_aware": true,
+    "import_only": false,
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "root": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "icon_url": [
+        {
+          "href": "https://static.mapmyfitness.com/d/website/activity_icons/walk.png"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Activity_Type"
+        }
+      ]
+    }
+  }
+}

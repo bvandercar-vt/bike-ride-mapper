@@ -1,6 +1,7 @@
 import 'leaflet/dist/leaflet.css'
 import './styles/index.css'
 
+import { round, sum } from 'es-toolkit'
 import {
   latLng,
   type LayerGroup as LayerGroupType,
@@ -8,7 +9,6 @@ import {
   type Map,
 } from 'leaflet'
 import 'leaflet-polylinedecorator'
-import { max, round, sum } from 'lodash'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { LayersControl, MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
 import { HoveredRouteProvider } from './components/HoveredRouteContext'
@@ -43,7 +43,7 @@ const HeaderSubtitle = ({ data }: { data: CustomWorkout[] | null }) => {
       <br />
       Total Distance: {round(sum(distances) * METERS_TO_MILES, 1)}mi
       <br />
-      Longest Route: {round(max(distances)! * METERS_TO_MILES, 1)}mi
+      Longest Route: {round(Math.max(...distances) * METERS_TO_MILES, 1)}mi
     </>
   )
 }
@@ -52,7 +52,7 @@ export const App = () => {
   const mapRef = useRef<Map>(null)
   const [isSatellite, setIsSatellite] = useState<boolean>(false)
   const [visibleData, setVisibleData] = useState<CustomWorkout[] | null>(null)
-  const { workouts: allWorkouts, isLoading, total } = useWorkouts()
+  const { workouts: allWorkouts, isLoading } = useWorkouts()
 
   const bikeLayerRef = useRef<LayerGroupType>(null)
   const walkLayerRef = useRef<LayerGroupType>(null)
@@ -117,11 +117,7 @@ export const App = () => {
           <br />
           <div id="header-subtitle">
             <HeaderSubtitle data={visibleData} />
-            {isLoading && (
-              <div className="loading-routes-text">
-                Loading Routes... {total && `${allWorkouts?.length}/${total}`}
-              </div>
-            )}
+            {isLoading && <div className="loading-routes-text">Loading Routes...</div>}
           </div>
         </div>
       </header>

@@ -1,0 +1,562 @@
+{
+  "title": "2025-10-18 2.19mi Walk",
+  "pathHasIssue": false,
+  "geoJson": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "_gpxType": "trk",
+          "name": "2.19mi Walk",
+          "coordinateProperties": {}
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -104.98239,
+              39.732783
+            ],
+            [
+              -104.982391,
+              39.733064
+            ],
+            [
+              -104.982393,
+              39.733353
+            ],
+            [
+              -104.982394,
+              39.733611
+            ],
+            [
+              -104.982281,
+              39.733609
+            ],
+            [
+              -104.982184,
+              39.733606
+            ],
+            [
+              -104.982188,
+              39.733797
+            ],
+            [
+              -104.98168,
+              39.733795
+            ],
+            [
+              -104.981054,
+              39.7338
+            ],
+            [
+              -104.980957,
+              39.7338
+            ],
+            [
+              -104.980442,
+              39.733799
+            ],
+            [
+              -104.979782,
+              39.733799
+            ],
+            [
+              -104.978801,
+              39.733797
+            ],
+            [
+              -104.978698,
+              39.733797
+            ],
+            [
+              -104.978619,
+              39.733796
+            ],
+            [
+              -104.978183,
+              39.733786
+            ],
+            [
+              -104.978027,
+              39.733786
+            ],
+            [
+              -104.977701,
+              39.733785
+            ],
+            [
+              -104.977516,
+              39.733785
+            ],
+            [
+              -104.977525,
+              39.735055
+            ],
+            [
+              -104.977036,
+              39.735055
+            ],
+            [
+              -104.976543,
+              39.735059
+            ],
+            [
+              -104.976505,
+              39.735057
+            ],
+            [
+              -104.976454,
+              39.735059
+            ],
+            [
+              -104.976394,
+              39.73506
+            ],
+            [
+              -104.976359,
+              39.73506
+            ],
+            [
+              -104.97636516,
+              39.73501939
+            ],
+            [
+              -104.97526638,
+              39.73509431
+            ],
+            [
+              -104.97386182,
+              39.73505554
+            ],
+            [
+              -104.97373875,
+              39.73482935
+            ],
+            [
+              -104.97361113,
+              39.73507742
+            ],
+            [
+              -104.97068288,
+              39.7350607
+            ],
+            [
+              -104.97049247,
+              39.73376846
+            ],
+            [
+              -104.96844551,
+              39.7338267
+            ],
+            [
+              -104.96796171,
+              39.73426591
+            ],
+            [
+              -104.96736442,
+              39.73451164
+            ],
+            [
+              -104.96722587,
+              39.73384293
+            ],
+            [
+              -104.96739863,
+              39.73333906
+            ],
+            [
+              -104.96816855,
+              39.73277977
+            ],
+            [
+              -104.96879157,
+              39.73194712
+            ],
+            [
+              -104.9694427,
+              39.73197375
+            ],
+            [
+              -104.96952086,
+              39.73050279
+            ],
+            [
+              -104.972938,
+              39.73054239
+            ],
+            [
+              -104.9734829,
+              39.73088838
+            ],
+            [
+              -104.97333553,
+              39.73100047
+            ],
+            [
+              -104.97338764,
+              39.73118391
+            ],
+            [
+              -104.97336801,
+              39.73097568
+            ],
+            [
+              -104.97319275,
+              39.73100258
+            ],
+            [
+              -104.97341976,
+              39.73097396
+            ],
+            [
+              -104.97318689,
+              39.73107558
+            ],
+            [
+              -104.9731896,
+              39.73129428
+            ],
+            [
+              -104.97323287,
+              39.73110555
+            ],
+            [
+              -104.97373546,
+              39.73114416
+            ],
+            [
+              -104.97354283,
+              39.73124713
+            ],
+            [
+              -104.97351984,
+              39.73090961
+            ],
+            [
+              -104.97365212,
+              39.73098529
+            ],
+            [
+              -104.97422662,
+              39.73076217
+            ],
+            [
+              -104.97439478,
+              39.73054533
+            ],
+            [
+              -104.97772937,
+              39.73054849
+            ],
+            [
+              -104.97766534,
+              39.73194476
+            ],
+            [
+              -104.97994231,
+              39.73194303
+            ],
+            [
+              -104.98015785,
+              39.73215334
+            ],
+            [
+              -104.98238466,
+              39.73211217
+            ],
+            [
+              -104.98232982,
+              39.73307352
+            ],
+            [
+              -104.98241718,
+              39.73272481
+            ],
+            [
+              -104.982389,
+              39.732725
+            ],
+            [
+              -104.982389,
+              39.732664
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "workout": {
+    "contexts": null,
+    "name": "2.19mi Walk",
+    "is_default_name": true,
+    "notes": "",
+    "reference_key": "222187270.7C65EB11-DB8B-4D4C-A089-05F1599EABEC-37255-000005FB77",
+    "is_verified": true,
+    "aggregates": {
+      "distance_total": 3526.97393664,
+      "active_time_total": 2985,
+      "elapsed_time_total": 2987,
+      "speed_max": 12.697366528,
+      "speed_avg": 1.1821615168000001,
+      "cadence_max": 67,
+      "cadence_min": 43,
+      "cadence_avg": 57,
+      "metabolic_energy_total": 1192440,
+      "steps_total": 4563
+    },
+    "source": "MapMyRide iPhone",
+    "source_manufacturer": "mapmyfitness",
+    "source_name": "MapMyRide iPhone",
+    "has_time_series": true,
+    "start_datetime": "2025-10-18T23:53:44+00:00",
+    "start_locale_timezone": "America/Denver",
+    "created_datetime": "2025-10-19T00:43:35+00:00",
+    "updated_datetime": "2025-10-19T00:43:34+00:00",
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/workout/8692072078/",
+          "id": "8692072078"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_type": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "route": [
+        {
+          "href": "/v7.2/route/6641282022/",
+          "id": "6641282022"
+        }
+      ],
+      "workout_attribution": [
+        {
+          "href": "/v7.2/workout_attribution/studio/",
+          "id": "studio"
+        },
+        {
+          "href": "/v7.2/workout_attribution/kalman_v2/",
+          "id": "kalman_v2"
+        },
+        {
+          "href": "/v7.2/workout_attribution/ios/",
+          "id": "ios"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ]
+    }
+  },
+  "route": {
+    "city": "Denver",
+    "country": "us",
+    "updated_datetime": "2025-10-30T02:14:54+00:00",
+    "created_datetime": "2025-10-19T00:43:35+00:00",
+    "data_source": "MapMyRide iPhon",
+    "description": "GOOD",
+    "distance": 4010.1394907677236,
+    "name": "2.19mi Walk",
+    "postal_code": "",
+    "state": "CO",
+    "starting_location": {
+      "type": "Point",
+      "coordinates": [
+        -104.98239,
+        39.732783
+      ]
+    },
+    "start_point_type": "",
+    "points": null,
+    "climbs": null,
+    "total_ascent": 20,
+    "total_descent": -20.7,
+    "max_elevation": 1640.13,
+    "min_elevation": 1621.4599999999996,
+    "images": [],
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/route/6641282022/",
+          "id": "6641282022"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/3/",
+          "id": "3"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_types": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "thumbnail": [
+        {
+          "href": "//drzetlglcbfx.cloudfront.net/routes/thumbnail/6641282022/1761790494?size=100x100"
+        }
+      ],
+      "alternate": [
+        {
+          "href": "/v7.2/route/6641282022/?format=kml&field_set=detailed",
+          "id": "6641282022",
+          "name": "kml"
+        },
+        {
+          "href": "/v7.2/route/6641282022/?format=gpx&field_set=detailed",
+          "id": "6641282022",
+          "name": "gpx"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Route"
+        }
+      ]
+    }
+  },
+  "activityType": {
+    "mets": 3,
+    "mets_speed": [
+      {
+        "speed": 0.44704,
+        "mets": "2"
+      },
+      {
+        "speed": 0.89408,
+        "mets": "2.8"
+      },
+      {
+        "speed": 1.1176,
+        "mets": "3"
+      },
+      {
+        "speed": 1.34112,
+        "mets": "3.5"
+      },
+      {
+        "speed": 1.56464,
+        "mets": "4.3"
+      },
+      {
+        "speed": 1.78816,
+        "mets": "5"
+      },
+      {
+        "speed": 2.01168,
+        "mets": "7"
+      },
+      {
+        "speed": 2.2352,
+        "mets": "8.3"
+      },
+      {
+        "speed": 2.324608,
+        "mets": "9"
+      },
+      {
+        "speed": 2.68224,
+        "mets": "9.8"
+      },
+      {
+        "speed": 2.995168,
+        "mets": "10.5"
+      },
+      {
+        "speed": 3.12928,
+        "mets": "11"
+      },
+      {
+        "speed": 3.3528,
+        "mets": "11.5"
+      },
+      {
+        "speed": 3.57632,
+        "mets": "11.8"
+      },
+      {
+        "speed": 3.844544,
+        "mets": "12.3"
+      },
+      {
+        "speed": 4.02336,
+        "mets": "12.8"
+      },
+      {
+        "speed": 4.4704,
+        "mets": "14.5"
+      },
+      {
+        "speed": 4.872736,
+        "mets": "16"
+      },
+      {
+        "speed": 5.36448,
+        "mets": "19"
+      },
+      {
+        "speed": 5.81152,
+        "mets": "19.8"
+      },
+      {
+        "speed": 6.25856,
+        "mets": "23"
+      }
+    ],
+    "name": "Walk",
+    "short_name": "walk",
+    "has_children": true,
+    "template": {
+      "user_action_past": "{{user.name}} walked",
+      "user_action_present": "{{user.name}} is working out",
+      "activities_are": null
+    },
+    "location_aware": true,
+    "import_only": false,
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "root": [
+        {
+          "href": "/v7.2/activity_type/9/",
+          "id": "9"
+        }
+      ],
+      "icon_url": [
+        {
+          "href": "https://static.mapmyfitness.com/d/website/activity_icons/walk.png"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Activity_Type"
+        }
+      ]
+    }
+  }
+}
