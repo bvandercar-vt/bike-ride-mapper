@@ -2,7 +2,6 @@
 
 - React for frontend
 - Leaflet for the map
-- Sanity for CMS
 - Google Maps for map layers
 - MapMyRide for ride tracking
 

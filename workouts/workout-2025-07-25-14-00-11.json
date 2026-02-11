@@ -1,0 +1,484 @@
+{
+  "title": "2025-07-25 15.16mi Road Cycling",
+  "pathHasIssue": false,
+  "geoJson": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "_gpxType": "trk",
+          "name": "15.16mi Road Cycling",
+          "coordinateProperties": {}
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -104.98285341,
+              39.73266364
+            ],
+            [
+              -104.98191233,
+              39.7319756
+            ],
+            [
+              -104.97402926,
+              39.73190686
+            ],
+            [
+              -104.97410239,
+              39.72920708
+            ],
+            [
+              -104.97291952,
+              39.72910091
+            ],
+            [
+              -104.97302506,
+              39.72377608
+            ],
+            [
+              -104.96931981,
+              39.72359981
+            ],
+            [
+              -104.96948651,
+              39.72191028
+            ],
+            [
+              -104.96936272,
+              39.71832514
+            ],
+            [
+              -104.95337018,
+              39.71800466
+            ],
+            [
+              -104.95330371,
+              39.71927957
+            ],
+            [
+              -104.95296854,
+              39.71935711
+            ],
+            [
+              -104.95329289,
+              39.71935082
+            ],
+            [
+              -104.95317135,
+              39.71898766
+            ],
+            [
+              -104.95334215,
+              39.71823056
+            ],
+            [
+              -104.95364802,
+              39.71818892
+            ],
+            [
+              -104.95352066,
+              39.71808839
+            ],
+            [
+              -104.95072567,
+              39.71774882
+            ],
+            [
+              -104.94992905,
+              39.71713318
+            ],
+            [
+              -104.94999661,
+              39.71426603
+            ],
+            [
+              -104.94969163,
+              39.71354557
+            ],
+            [
+              -104.94690895,
+              39.71146804
+            ],
+            [
+              -104.94668638,
+              39.71099196
+            ],
+            [
+              -104.94230616,
+              39.70748566
+            ],
+            [
+              -104.94139191,
+              39.70722065
+            ],
+            [
+              -104.94076241,
+              39.70646161
+            ],
+            [
+              -104.93807823,
+              39.70645901
+            ],
+            [
+              -104.93590505,
+              39.70579933
+            ],
+            [
+              -104.9339728,
+              39.70489987
+            ],
+            [
+              -104.93288465,
+              39.70472014
+            ],
+            [
+              -104.93312016,
+              39.70464041
+            ],
+            [
+              -104.93405439,
+              39.70520674
+            ],
+            [
+              -104.93472341,
+              39.70524418
+            ],
+            [
+              -104.93808772,
+              39.70661594
+            ],
+            [
+              -104.93948783,
+              39.70646717
+            ],
+            [
+              -104.94170335,
+              39.7067377
+            ],
+            [
+              -104.94284552,
+              39.70757596
+            ],
+            [
+              -104.94305531,
+              39.70823731
+            ],
+            [
+              -104.94650267,
+              39.71118511
+            ],
+            [
+              -104.94782253,
+              39.71165013
+            ],
+            [
+              -104.94874903,
+              39.71258544
+            ],
+            [
+              -104.94909371,
+              39.71334306
+            ],
+            [
+              -104.94991673,
+              39.71403312
+            ],
+            [
+              -104.95173782,
+              39.71417497
+            ],
+            [
+              -104.95331191,
+              39.71501687
+            ],
+            [
+              -104.95539343,
+              39.71560202
+            ],
+            [
+              -104.95594391,
+              39.71622022
+            ],
+            [
+              -104.95963932,
+              39.71603458
+            ],
+            [
+              -104.95941076,
+              39.71639555
+            ],
+            [
+              -104.95952192,
+              39.7180967
+            ],
+            [
+              -104.96213048,
+              39.71834967
+            ],
+            [
+              -104.97174988,
+              39.71832144
+            ],
+            [
+              -104.97557378,
+              39.71922086
+            ],
+            [
+              -104.97716576,
+              39.71984938
+            ],
+            [
+              -104.9775619,
+              39.7201672
+            ],
+            [
+              -104.97764721,
+              39.72551628
+            ],
+            [
+              -104.97958817,
+              39.72527719
+            ],
+            [
+              -104.98025183,
+              39.72556875
+            ],
+            [
+              -104.98235748,
+              39.72555867
+            ],
+            [
+              -104.98224975,
+              39.72721013
+            ],
+            [
+              -104.98254209,
+              39.72732447
+            ],
+            [
+              -104.98235611,
+              39.73236718
+            ],
+            [
+              -104.98281834,
+              39.73251519
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "workout": {
+    "contexts": null,
+    "name": "15.16mi Road Cycling",
+    "is_default_name": true,
+    "notes": "",
+    "reference_key": "222187270.3D59CE6E-7AF8-4BA5-86CB-DDC43D855181-36185-000005D014",
+    "is_verified": true,
+    "aggregates": {
+      "distance_total": 24395.8847616,
+      "active_time_total": 24264,
+      "elapsed_time_total": 24270,
+      "speed_max": 45.43848672,
+      "speed_avg": 1.005460016,
+      "metabolic_energy_total": 12355352
+    },
+    "source": "MapMyRide iPhone",
+    "source_manufacturer": "mapmyfitness",
+    "source_name": "MapMyRide iPhone",
+    "has_time_series": true,
+    "start_datetime": "2025-07-25T20:00:11+00:00",
+    "start_locale_timezone": "America/Denver",
+    "created_datetime": "2025-07-26T02:44:51+00:00",
+    "updated_datetime": "2025-07-26T02:44:50+00:00",
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/workout/8639808946/",
+          "id": "8639808946"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_type": [
+        {
+          "href": "/v7.2/activity_type/36/",
+          "id": "36"
+        }
+      ],
+      "route": [
+        {
+          "href": "/v7.2/route/6599177107/",
+          "id": "6599177107"
+        }
+      ],
+      "workout_attribution": [
+        {
+          "href": "/v7.2/workout_attribution/studio/",
+          "id": "studio"
+        },
+        {
+          "href": "/v7.2/workout_attribution/kalman_v2/",
+          "id": "kalman_v2"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ]
+    }
+  },
+  "route": {
+    "city": "Denver",
+    "country": "us",
+    "updated_datetime": "2025-07-30T20:35:23+00:00",
+    "created_datetime": "2025-07-26T02:44:50+00:00",
+    "data_source": "MapMyRide iPhon",
+    "description": "",
+    "distance": 13472.941708741191,
+    "name": "15.16mi Road Cycling",
+    "postal_code": "",
+    "state": "CO",
+    "starting_location": {
+      "type": "Point",
+      "coordinates": [
+        -104.98285341,
+        39.73266364
+      ]
+    },
+    "start_point_type": "",
+    "points": null,
+    "climbs": null,
+    "total_ascent": 50.9,
+    "total_descent": -53.7,
+    "max_elevation": 1635.7999999999997,
+    "min_elevation": 1608.54,
+    "images": [],
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/route/6599177107/",
+          "id": "6599177107"
+        }
+      ],
+      "privacy": [
+        {
+          "href": "/v7.2/privacy_option/1/",
+          "id": "1"
+        }
+      ],
+      "user": [
+        {
+          "href": "/v7.2/user/222187270/",
+          "id": "222187270"
+        }
+      ],
+      "activity_types": [
+        {
+          "href": "/v7.2/activity_type/16/",
+          "id": "16"
+        }
+      ],
+      "thumbnail": [
+        {
+          "href": "//drzetlglcbfx.cloudfront.net/routes/thumbnail/6599177107/1753907723?size=100x100"
+        }
+      ],
+      "alternate": [
+        {
+          "href": "/v7.2/route/6599177107/?format=kml&field_set=detailed",
+          "id": "6599177107",
+          "name": "kml"
+        },
+        {
+          "href": "/v7.2/route/6599177107/?format=gpx&field_set=detailed",
+          "id": "6599177107",
+          "name": "gpx"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Route"
+        }
+      ]
+    }
+  },
+  "activityType": {
+    "mets": 8,
+    "mets_speed": [
+      {
+        "speed": 4.4704,
+        "mets": "4"
+      },
+      {
+        "speed": 4.91744,
+        "mets": "6.8"
+      },
+      {
+        "speed": 5.81152,
+        "mets": "8"
+      },
+      {
+        "speed": 6.7056,
+        "mets": "10"
+      },
+      {
+        "speed": 7.8232,
+        "mets": "12"
+      },
+      {
+        "speed": 8.9408,
+        "mets": "15.8"
+      }
+    ],
+    "name": "Road Cycling",
+    "short_name": null,
+    "has_children": true,
+    "template": {
+      "user_action_past": "{{user.name}} rode",
+      "user_action_present": "{{user.name}} is working out",
+      "activities_are": null
+    },
+    "location_aware": true,
+    "import_only": false,
+    "_links": {
+      "self": [
+        {
+          "href": "/v7.2/activity_type/36/",
+          "id": "36"
+        }
+      ],
+      "parent": [
+        {
+          "href": "/v7.2/activity_type/11/",
+          "id": "11"
+        }
+      ],
+      "root": [
+        {
+          "href": "/v7.2/activity_type/11/",
+          "id": "11"
+        }
+      ],
+      "icon_url": [
+        {
+          "href": "https://static.mapmyfitness.com/d/website/activity_icons/road.png"
+        }
+      ],
+      "documentation": [
+        {
+          "href": "https://developer.mapmyfitness.com/docs/v72_Activity_Type"
+        }
+      ]
+    }
+  }
+}
