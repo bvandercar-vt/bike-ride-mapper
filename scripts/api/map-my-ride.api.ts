@@ -1,4 +1,9 @@
-import type { ActivityType, OAuthResponse, Route, Workout } from '../../src/types/mapMyRide'
+import type {
+  ActivityType,
+  OAuthResponse,
+  Route,
+  Workout,
+} from '../../src/types/mapMyRide'
 import { getEnv } from '../../src/utils'
 import { getInput } from '../utils/get-input'
 
@@ -9,15 +14,21 @@ export class MapMyRideClient {
   private readonly authHeader: { Authorization: string }
 
   constructor() {
-    const { MMR_CLIENT_ID, MMR_AUTH_TOKEN } = getEnv('MMR_CLIENT_ID', 'MMR_AUTH_TOKEN')
+    const { MMR_CLIENT_ID, MMR_AUTH_TOKEN } = getEnv(
+      'MMR_CLIENT_ID',
+      'MMR_AUTH_TOKEN',
+    )
     this.CLIENT_ID = MMR_CLIENT_ID
     this.apiKeyHeader = { 'Api-Key': MMR_CLIENT_ID }
-    this.authHeader = { Authorization: 'Bearer ' + MMR_AUTH_TOKEN }
+    this.authHeader = { Authorization: `Bearer ${MMR_AUTH_TOKEN}` }
   }
 
   async request(endpoint: string, args: RequestInit) {
     try {
-      const response = await fetch(`${MapMyRideClient.MMR_API_URL}${endpoint}`, args)
+      const response = await fetch(
+        `${MapMyRideClient.MMR_API_URL}${endpoint}`,
+        args,
+      )
 
       if (!response.ok) {
         throw new Error(
@@ -49,18 +60,21 @@ export class MapMyRideClient {
     refresh_token?: string
   }) {
     const { MMR_CLIENT_SECRET } = getEnv('MMR_CLIENT_SECRET')
-    const response: OAuthResponse = await this.request('/v7.2/oauth2/access_token/', {
-      method: 'POST',
-      headers: {
-        ...this.apiKeyHeader,
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response: OAuthResponse = await this.request(
+      '/v7.2/oauth2/access_token/',
+      {
+        method: 'POST',
+        headers: {
+          ...this.apiKeyHeader,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          ...params,
+          client_id: this.CLIENT_ID,
+          client_secret: MMR_CLIENT_SECRET,
+        }),
       },
-      body: new URLSearchParams({
-        ...params,
-        client_id: this.CLIENT_ID,
-        client_secret: MMR_CLIENT_SECRET,
-      }),
-    }).then((r) => r.json())
+    ).then((r) => r.json())
     return response
   }
 
@@ -74,14 +88,24 @@ export class MapMyRideClient {
     console.log(`${baseUrl}?${params.toString()}`)
     console.log('The code is in the code param at the URL')
     const code = await getInput('Enter the code: ')
-    const tokenResponse = await this.getOAuthToken({ grant_type: 'authorization_code', code })
+    const tokenResponse = await this.getOAuthToken({
+      grant_type: 'authorization_code',
+      code,
+    })
 
-    console.log('Enter to environment MMR_AUTH_TOKEN :\n', tokenResponse.access_token)
+    console.log(
+      'Enter to environment MMR_AUTH_TOKEN :\n',
+      tokenResponse.access_token,
+    )
     console.log(`Expires in: ${tokenResponse.expires_in / (24 * 60 * 60)} days`)
     process.exit(0)
   }
 
-  async getAll<T>(endpoint: string, key: string, params: Record<string, string>) {
+  async getAll<T>(
+    endpoint: string,
+    key: string,
+    params: Record<string, string>,
+  ) {
     const getBatch = async (limit: number, offset: number) => {
       const response = await this.get(
         `/v7.2/${endpoint}/?` +
@@ -97,7 +121,7 @@ export class MapMyRideClient {
     const items: T[] = []
     while (true) {
       const newItems = await getBatch(10, items.length)
-      if (newItems.length == 0) break
+      if (newItems.length === 0) break
       items.push(...newItems)
     }
 
@@ -116,12 +140,15 @@ export class MapMyRideClient {
   }
 
   async getActivityType(workout: Workout): Promise<ActivityType> {
-    return await this.get(workout._links.activity_type[0].href).then((r) => r.json())
+    return await this.get(workout._links.activity_type[0].href).then((r) =>
+      r.json(),
+    )
   }
 
   async getRoutePathData(route: Route, type: 'gpx' | 'kml') {
-    return await this.get(route._links.alternate.find((l) => l.name == type)!.href).then((r) =>
-      r.text(),
-    )
+    return await this.get(
+      // biome-ignore lint/style/noNonNullAssertion: always present
+      route._links.alternate.find((l) => l.name === type)!.href,
+    ).then((r) => r.text())
   }
 }

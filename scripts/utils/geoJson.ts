@@ -7,13 +7,18 @@ export function simplifyGeoJson(
 ) {
   const geoJsonSimplified = simplifyGeoJson_(geoJson, options)
 
-  if (geoJson.features.length !== 1 || geoJsonSimplified.features.length !== 1) {
+  if (
+    geoJson.features.length !== 1 ||
+    geoJsonSimplified.features.length !== 1
+  ) {
     throw new Error('more than 1 geoJson feature?')
   }
 
-  const numPointsUnsimplified = (geoJson.features[0].geometry as LineString).coordinates.length
-  const numPointsSimplified = (geoJsonSimplified.features[0].geometry as LineString).coordinates
-    .length
+  const numPointsUnsimplified = (geoJson.features[0].geometry as LineString)
+    .coordinates.length
+  const numPointsSimplified = (
+    geoJsonSimplified.features[0].geometry as LineString
+  ).coordinates.length
 
   return {
     geoJsonSimplified,

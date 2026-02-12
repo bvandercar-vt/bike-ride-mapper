@@ -14,7 +14,10 @@ export interface Link {
   name?: string
 }
 
-type Links<Req extends string | undefined = undefined, Opt extends string | undefined = undefined> =
+type Links<
+  Req extends string | undefined = undefined,
+  Opt extends string | undefined = undefined,
+> =
   // @ts-expect-error doesnt actually create an error
   Simplify<Record<Req, Link[]> & Partial<Record<Opt, Link[]>>>
 

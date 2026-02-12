@@ -1,0 +1,115 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80
+  },
+  "javascript": {
+    "formatter": {
+      "bracketSameLine": false,
+      "quoteStyle": "single",
+      "semicolons": "asNeeded"
+    },
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUndeclaredDependencies": "error",
+        "noUnusedFunctionParameters": "error",
+        "noUnusedImports": {
+          "level": "error",
+          "fix": "safe"
+        },
+        "useJsonImportAttributes": "error",
+        "useParseIntRadix": "off"
+      },
+      "nursery": {
+        "noDeprecatedImports": "off",
+        "noFloatingPromises": "error",
+        "noImportCycles": "error",
+        "noShadow": "error"
+      },
+      "performance": {
+        "noAccumulatingSpread": "error",
+        "noAwaitInLoops": "off",
+        "noDelete": "error",
+        // "noNamespaceImport": "error",
+        "noReExportAll": "off"
+      },
+      "style": {
+        "noCommonJs": "error",
+        "noInferrableTypes": "error",
+        "noParameterAssign": "error",
+        "noSubstr": "error",
+        "noUnusedTemplateLiteral": {
+          "level": "error",
+          "fix": "safe"
+        },
+        "noYodaExpression": "error",
+        "useArrayLiterals": "error",
+        "useAsConstAssertion": "error",
+        "useAtIndex": "error",
+        "useCollapsedElseIf": "error",
+        "useCollapsedIf": "error",
+        "useDefaultParameterLast": "error",
+        "useDefaultSwitchClause": "error",
+        "useEnumInitializers": "error",
+        "useFilenamingConvention": "error",
+        "useImportType": "error",
+        "useLiteralEnumMembers": "off",
+        "useNumberNamespace": "error",
+        "useSelfClosingElements": "error",
+        "useShorthandAssign": "error",
+        "useSingleVarDeclarator": "error",
+        "useConsistentObjectDefinitions": {
+          "level": "error",
+          "fix": "unsafe"
+        },
+        "useNumericSeparators": "error",
+        "useObjectSpread": "error",
+        "useReadonlyClassProperties": {
+          "level": "error",
+          "fix": "unsafe"
+        }
+      },
+      "suspicious": {
+        "noEmptyBlockStatements": "error",
+        "noEvolvingTypes": "error",
+        "useAwait": "error",
+        "noConstantBinaryExpressions": "error",
+        "noTsIgnore": "error",
+        "noUnassignedVariables": "error",
+        "noUselessEscapeInString": "error",
+        "noUnknownAtRules": "off"
+      }
+    }
+  },
+  "files": {
+    "includes": [
+      "**",
+      "!!**/coverage",
+      "!!**/dist",
+      "!**/node_modules",
+      "!workouts"
+    ]
+  }
+}

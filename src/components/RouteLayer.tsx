@@ -1,15 +1,22 @@
-import { type LayerGroup as LayerGroupType } from 'leaflet'
+import type { LayerGroup as LayerGroupType } from 'leaflet'
 import { DateTime } from 'luxon'
 import { LayerGroup } from 'react-leaflet'
-import { type CustomWorkout } from '../types'
+
+import type { CustomWorkout } from '../types'
 import { Route, type RouteProps } from './Route'
 
-export interface RouteLayerProps extends Pick<RouteProps, 'color' | 'hoverColor'> {
+export interface RouteLayerProps
+  extends Pick<RouteProps, 'color' | 'hoverColor'> {
   data: CustomWorkout[]
   layerRef: React.Ref<LayerGroupType>
 }
 
-export const RouteLayer = ({ data, color, hoverColor, layerRef }: RouteLayerProps) => {
+export const RouteLayer = ({
+  data,
+  color,
+  hoverColor,
+  layerRef,
+}: RouteLayerProps) => {
   return (
     <LayerGroup ref={layerRef}>
       {data.map(({ workout, route, geoJson }) => {

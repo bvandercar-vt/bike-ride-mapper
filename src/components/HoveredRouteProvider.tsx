@@ -5,9 +5,15 @@ interface HoveredRouteContextType {
   setHoveredRouteId: (id: string | null) => void
 }
 
-const HoveredRouteContext = createContext<HoveredRouteContextType | undefined>(undefined)
+const HoveredRouteContext = createContext<HoveredRouteContextType | undefined>(
+  undefined,
+)
 
-export const HoveredRouteProvider = ({ children }: { children: React.ReactNode }) => {
+export const HoveredRouteProvider = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   const [hoveredRouteId, setHoveredRouteId] = useState<string | null>(null)
   return (
     <HoveredRouteContext.Provider value={{ hoveredRouteId, setHoveredRouteId }}>
@@ -18,6 +24,7 @@ export const HoveredRouteProvider = ({ children }: { children: React.ReactNode }
 
 export const useHoveredRoute = () => {
   const ctx = useContext(HoveredRouteContext)
-  if (!ctx) throw new Error('useHoveredRoute must be used within HoveredRouteProvider')
+  if (!ctx)
+    throw new Error('useHoveredRoute must be used within HoveredRouteProvider')
   return ctx
 }
