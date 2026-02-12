@@ -1,18 +1,59 @@
-@import 'header.css';
-@import 'map.css';
+@import 'tailwindcss';
 
-/* General */
-
-:root {
-  --tooltip-bg-color: rgba(255, 255, 255, 0.85);
-  --overlay-bg-color: rgba(0, 0, 0, 0.4);
+@utility shadow-panel {
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.4);
 }
 
-body {
-  background-color: Black;
-  color: white;
+@utility text-shadow-black {
+  text-shadow: black 0 0 10px, black 0 0 10px;
 }
 
-.error-text {
-  color: red;
+@utility purple-shadow-bold {
+  text-shadow:
+    indigo 0 0 10px,
+    indigo 0 0 10px,
+    indigo 0 0 10px,
+    indigo 0 0 10px,
+    indigo 0 0 10px,
+    indigo 0 0 10px;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-black text-white;
+  }
+}
+
+header {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Leaflet DOM – we can't add Tailwind classes to these elements */
+.leaflet-popup-content-wrapper {
+  background-color: rgb(255 255 255 / 0.85);
+}
+.leaflet-popup-tip {
+  background-color: rgb(255 255 255 / 0.85);
+}
+.leaflet-control-layers {
+  color: lightgray;
+  background-color: rgb(0 0 0 / 0.4);
+  border-radius: 10px;
+}
+.leaflet-control-layers-overlays label:first-of-type {
+  color: silver;
+  font-style: italic;
+}
+
+/* Bike trail tile layer filters (toggled via JS) */
+.bike-trails-dark {
+  filter: invert(100%) hue-rotate(350deg) saturate(1.5) brightness(85%) contrast(100%);
+}
+.bike-trails-satellite {
+  filter: invert(0%) hue-rotate(120deg) saturate(2) brightness(100%) contrast(100%);
 }

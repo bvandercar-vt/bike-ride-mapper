@@ -99,7 +99,7 @@ export const Route = ({ id, data, date, route, color, hoverColor }: RouteProps) 
         }}
       >
         {isHovered && (
-          <Tooltip className="route-popover" direction="top" sticky={true}>
+          <Tooltip className="text-xs m-0 px-2 py-0" direction="top" sticky={true}>
             <b>{date.toFormat('EEE. MMMM d, yyyy h:mma')}</b>
             <br />
             <i>
