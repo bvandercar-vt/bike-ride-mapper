@@ -23,7 +23,7 @@ import { METERS_TO_MILES } from './constants'
 import { useWorkouts } from './hooks/useWorkouts'
 import type { CustomWorkout } from './types'
 import { ActivityName } from './types/mapMyRide'
-import { getEnv } from './utils'
+import { getEnv } from './utils/get-env'
 
 const { MAPTILER_API_KEY } = getEnv('MAPTILER_API_KEY')
 
