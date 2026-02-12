@@ -58,7 +58,7 @@ export const App = () => {
   const mapRef = useRef<LeafletMap>(null)
   const [isSatellite, setIsSatellite] = useState<boolean>(false)
   const [visibleData, setVisibleData] = useState<CustomWorkout[] | null>(null)
-  const { workouts: allWorkouts, isLoading } = useWorkouts()
+  const { workouts: allWorkouts, isLoading, total } = useWorkouts()
 
   const bikeLayerRef = useRef<LayerGroupType>(null)
   const walkLayerRef = useRef<LayerGroupType>(null)
@@ -129,7 +129,9 @@ export const App = () => {
           <div className="inline-block mb-0.5 leading-5 text-amber-500 font-medium text-base italic text-shadow-black">
             <HeaderSubtitle data={visibleData} />
             {isLoading && (
-              <div className="text-lg text-yellow-300">Loading Routes...</div>
+              <div className="text-lg text-yellow-300">
+                Loading Routes... ({allWorkouts.length}/{total})
+              </div>
             )}
           </div>
         </div>
