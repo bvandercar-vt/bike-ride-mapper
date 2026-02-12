@@ -31,7 +31,7 @@ const HeaderSubtitle = ({ data }: { data: CustomWorkout[] | null }) => {
     return
   }
   if (data.length == 0) {
-    return <b className="error-text">No data! Select layers!</b>
+    return <b className="text-red-500">No data! Select layers!</b>
   }
 
   const numRoutes = data.length
@@ -110,14 +110,16 @@ export const App = () => {
   }, [isSatellite])
 
   return (
-    <>
-      <header>
-        <div id="header-text">
-          <h1>My Bike Rides</h1>
+    <div className="relative h-full">
+      <header className="absolute inset-x-0 top-0 z-[2] pointer-events-none text-center max-sm:text-right">
+        <div className="inline-block m-2 px-3 bg-black/40 shadow-panel rounded-lg max-sm:text-center max-sm:shadow-none">
+          <h1 className="inline-block m-0.5 text-3xl font-bold text-[yellow] purple-shadow-bold max-sm:text-2xl">
+            My Bike Rides
+          </h1>
           <br />
-          <div id="header-subtitle">
+          <div className="inline-block mb-0.5 leading-5 text-amber-500 font-medium text-base italic text-shadow-black">
             <HeaderSubtitle data={visibleData} />
-            {isLoading && <div className="loading-routes-text">Loading Routes...</div>}
+            {isLoading && <div className="text-lg text-yellow-300">Loading Routes...</div>}
           </div>
         </div>
       </header>
@@ -126,6 +128,7 @@ export const App = () => {
         zoom={13}
         zoomControl={false}
         id="map"
+        className="absolute inset-0 z-[1]"
         ref={mapRef}
       >
         <MapHandlers
@@ -182,6 +185,6 @@ export const App = () => {
           </HoveredRouteProvider>
         </LayersControl>
       </MapContainer>
-    </>
+    </div>
   )
 }
