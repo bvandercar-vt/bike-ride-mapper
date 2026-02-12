@@ -3,19 +3,25 @@ import './styles/index.css'
 
 import { round, sum } from 'es-toolkit'
 import {
-  latLng,
   type LayerGroup as LayerGroupType,
   type LeafletEventHandlerFnMap,
-  type Map,
+  type Map as LeafletMap,
+  latLng,
 } from 'leaflet'
 import 'leaflet-polylinedecorator'
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { LayersControl, MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
-import { HoveredRouteProvider } from './components/HoveredRouteContext'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  LayersControl,
+  MapContainer,
+  TileLayer,
+  useMapEvents,
+} from 'react-leaflet'
+
+import { HoveredRouteProvider } from './components/HoveredRouteProvider'
 import { RouteLayer } from './components/RouteLayer'
 import { METERS_TO_MILES } from './constants'
 import { useWorkouts } from './hooks/useWorkouts'
-import { type CustomWorkout } from './types'
+import type { CustomWorkout } from './types'
 import { ActivityName } from './types/mapMyRide'
 import { getEnv } from './utils'
 
@@ -30,7 +36,7 @@ const HeaderSubtitle = ({ data }: { data: CustomWorkout[] | null }) => {
   if (data === null) {
     return
   }
-  if (data.length == 0) {
+  if (data.length === 0) {
     return <b className="text-red-500">No data! Select layers!</b>
   }
 
@@ -49,7 +55,7 @@ const HeaderSubtitle = ({ data }: { data: CustomWorkout[] | null }) => {
 }
 
 export const App = () => {
-  const mapRef = useRef<Map>(null)
+  const mapRef = useRef<LeafletMap>(null)
   const [isSatellite, setIsSatellite] = useState<boolean>(false)
   const [visibleData, setVisibleData] = useState<CustomWorkout[] | null>(null)
   const { workouts: allWorkouts, isLoading } = useWorkouts()
@@ -59,20 +65,24 @@ export const App = () => {
 
   const layerData = useMemo(
     () =>
-      allWorkouts.length == 0
+      allWorkouts.length === 0
         ? []
         : [
             {
               name: 'Bike Records',
               data: allWorkouts.filter((g) =>
-                [ActivityName.BIKE_RIDE, ActivityName.ROAD_CYCLING].includes(g.activityType.name),
+                [ActivityName.BIKE_RIDE, ActivityName.ROAD_CYCLING].includes(
+                  g.activityType.name,
+                ),
               ),
               layerRef: bikeLayerRef,
             },
             {
               name: 'Walk Records',
               data: allWorkouts.filter((g) =>
-                [ActivityName.RUN, ActivityName.WALK].includes(g.activityType.name),
+                [ActivityName.RUN, ActivityName.WALK].includes(
+                  g.activityType.name,
+                ),
               ),
               layerRef: walkLayerRef,
             },
@@ -80,34 +90,33 @@ export const App = () => {
     [allWorkouts],
   )
 
-  const changeVisibleData = () => {
+  const changeVisibleData = useCallback(() => {
     const mapRefMap = mapRef.current
-    if (!mapRefMap || layerData.length == 0) return
+    if (!mapRefMap || layerData.length === 0) return
     setVisibleData(
       layerData
-        .filter(({ layerRef }) => layerRef.current && mapRefMap.hasLayer(layerRef.current))
+        .filter(
+          ({ layerRef }) =>
+            layerRef.current && mapRefMap.hasLayer(layerRef.current),
+        )
         .flatMap(({ data }) => data),
     )
-  }
-
-  useEffect(() => {
-    changeVisibleData()
-  }, [mapRef.current])
-
-  useEffect(() => {
-    changeVisibleData()
   }, [layerData])
 
-  function setBikeTrailsStyle() {
+  useEffect(() => {
+    changeVisibleData()
+  }, [changeVisibleData])
+
+  const setBikeTrailsStyle = useCallback(() => {
     const bikeTrails = document.getElementsByClassName('bike-trails')[0]
     if (!bikeTrails) return
     bikeTrails.classList.toggle('bike-trails-satellite', isSatellite)
     bikeTrails.classList.toggle('bike-trails-dark', !isSatellite)
-  }
+  }, [isSatellite])
 
   useEffect(() => {
     setBikeTrailsStyle()
-  }, [isSatellite])
+  }, [setBikeTrailsStyle])
 
   return (
     <div className="relative h-full">
@@ -119,12 +128,14 @@ export const App = () => {
           <br />
           <div className="inline-block mb-0.5 leading-5 text-amber-500 font-medium text-base italic text-shadow-black">
             <HeaderSubtitle data={visibleData} />
-            {isLoading && <div className="text-lg text-yellow-300">Loading Routes...</div>}
+            {isLoading && (
+              <div className="text-lg text-yellow-300">Loading Routes...</div>
+            )}
           </div>
         </div>
       </header>
       <MapContainer
-        center={latLng(39.7327258, -104.9851469)}
+        center={latLng(39.732_725_8, -104.985_146_9)}
         zoom={13}
         zoomControl={false}
         id="map"

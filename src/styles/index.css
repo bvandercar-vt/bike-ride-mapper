@@ -1,11 +1,13 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @utility shadow-panel {
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.4);
 }
 
 @utility text-shadow-black {
-  text-shadow: black 0 0 10px, black 0 0 10px;
+  text-shadow:
+    black 0 0 10px,
+    black 0 0 10px;
 }
 
 @utility purple-shadow-bold {
@@ -52,8 +54,10 @@ header {
 
 /* Bike trail tile layer filters (toggled via JS) */
 .bike-trails-dark {
-  filter: invert(100%) hue-rotate(350deg) saturate(1.5) brightness(85%) contrast(100%);
+  filter: invert(100%) hue-rotate(350deg) saturate(1.5) brightness(85%)
+    contrast(100%);
 }
 .bike-trails-satellite {
-  filter: invert(0%) hue-rotate(120deg) saturate(2) brightness(100%) contrast(100%);
+  filter: invert(0%) hue-rotate(120deg) saturate(2) brightness(100%)
+    contrast(100%);
 }

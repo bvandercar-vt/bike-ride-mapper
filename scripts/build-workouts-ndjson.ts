@@ -5,21 +5,27 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
+
 import type { CustomWorkout, NdJsonMeta } from '../src/types'
 
 const WORKOUTS_DIR = path.join(process.cwd(), 'workouts')
 const OUT_DIR = path.join(process.cwd(), 'public')
 const OUT_FILE = path.join(OUT_DIR, 'workouts.ndjson')
 
+function writeFile(lines: string[]) {
+  fs.mkdirSync(OUT_DIR, { recursive: true })
+  const total = lines.length
+  const content = `${[
+    JSON.stringify({ _meta: { total } } satisfies NdJsonMeta),
+    ...lines,
+  ].join('\n')}\n`
+  fs.writeFileSync(OUT_FILE, content, 'utf-8')
+  console.log(`Wrote ${OUT_FILE} with ${total} workouts`)
+}
+
 function build() {
   if (!fs.existsSync(WORKOUTS_DIR)) {
-    fs.mkdirSync(OUT_DIR, { recursive: true })
-    fs.writeFileSync(
-      OUT_FILE,
-      JSON.stringify({ _meta: { total: 0 } } satisfies NdJsonMeta) + '\n',
-      'utf-8',
-    )
-    console.log('No workouts folder found; wrote empty workouts.ndjson')
+    writeFile([])
     return
   }
 
@@ -29,19 +35,18 @@ function build() {
     const raw = fs.readFileSync(path.join(WORKOUTS_DIR, file), 'utf-8')
     const data: CustomWorkout = JSON.parse(raw)
     if (data.pathHasIssue === true) continue
-    if ([data.geoJson, data.workout, data.route, data.activityType].some((field) => !field)) {
+    if (
+      [data.geoJson, data.workout, data.route, data.activityType].some(
+        (field) => !field,
+      )
+    ) {
       console.warn(`Skipping ${file}: missing required fields`)
       continue
     }
     lines.push(JSON.stringify(data))
   }
 
-  const total = lines.length
-  fs.mkdirSync(OUT_DIR, { recursive: true })
-  const content =
-    [JSON.stringify({ _meta: { total } } satisfies NdJsonMeta), ...lines].join('\n') + '\n'
-  fs.writeFileSync(OUT_FILE, content, 'utf-8')
-  console.log(`Wrote ${OUT_FILE} with ${total} workouts`)
+  writeFile(lines)
 }
 
 build()

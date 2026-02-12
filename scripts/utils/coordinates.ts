@@ -1,14 +1,19 @@
-const FEET_PER_DEGREE_LAT = 364000 // ~69 miles × 5280 ft/mile
-const FEET_PER_DEGREE_LON_AT_EQUATOR = 365000 // Approx
+const FEET_PER_DEGREE_LAT = 364_000 // ~69 miles × 5280 ft/mile
+const FEET_PER_DEGREE_LON_AT_EQUATOR = 365_000 // Approx
 
 export type Point = [number, number]
 
 /** FLAT distance */
-export function getDistanceFeet([lat1, lon1]: Point, [lat2, lon2]: Point): number {
+export function getDistanceFeet(
+  [lat1, lon1]: Point,
+  [lat2, lon2]: Point,
+): number {
   const avgLat = (lat1 + lat2) / 2
   const latFeet = (lat2 - lat1) * FEET_PER_DEGREE_LAT
   const lonFeet =
-    (lon2 - lon1) * FEET_PER_DEGREE_LON_AT_EQUATOR * Math.cos((avgLat * Math.PI) / 180)
+    (lon2 - lon1) *
+    FEET_PER_DEGREE_LON_AT_EQUATOR *
+    Math.cos((avgLat * Math.PI) / 180)
   return Math.sqrt(latFeet ** 2 + lonFeet ** 2)
 }
 
@@ -41,7 +46,11 @@ export function validatePointsDistance(
     maxStartEndDistanceFt,
   }: { maxRouteDistanceFt: number; maxStartEndDistanceFt: number },
 ) {
-  const startEndDistanceFt = getDistanceFeet(points[0], points.at(-1)!)
+  const lastPoint = points.at(-1)
+  if (!lastPoint) {
+    throw new Error('No points provided')
+  }
+  const startEndDistanceFt = getDistanceFeet(points[0], lastPoint)
   if (startEndDistanceFt > maxStartEndDistanceFt) {
     throw new Error(
       `Start and End points are ${startEndDistanceFt.toFixed(0)} feet apart, exceeding limit of ${maxStartEndDistanceFt}.`,

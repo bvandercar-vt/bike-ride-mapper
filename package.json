@@ -12,13 +12,9 @@
     "prebuild": "yarn build:workouts",
     "build": "vite build",
     "preview": "yarn build && vite preview --open",
-    "lint": "yarn format && yarn ts:check && yarn eslint:check && yarn format:check",
-    "lint:fix": "yarn format && yarn eslint:fix",
+    "lint": "yarn lint:fix && yarn ts:check",
+    "lint:fix": "npx biome check . --fix",
     "ts:check": "tsc",
-    "eslint:check": "eslint .",
-    "eslint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
     "get-data": "npx tsx ./scripts/get-workouts.ts",
     "get-mmr-token": "npx tsx ./scripts/get-mmr-token.ts",
     "build:workouts": "npx tsx ./scripts/build-workouts-ndjson.ts"
@@ -48,6 +44,7 @@
     "react-leaflet": "^4"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.3",
     "@tailwindcss/vite": "^4.1",
     "@tmcw/togeojson": "^7",
     "@turf/simplify": "^7",
@@ -60,18 +57,13 @@
     "@types/xmldom": "^0.1",
     "@vitejs/plugin-react": "^4",
     "autoprefixer": "^10",
-    "eslint": "^9",
-    "eslint-config-prettier": "^9",
-    "eslint-plugin-prettier": "^5",
-    "eslint-plugin-react": "^7",
+    "geojson": "^0.5.0",
     "postcss": "^8",
     "postcss-load-config": "^6",
-    "prettier": "^3",
     "tailwindcss": "^4.1",
     "tsx": "^4.20.3",
     "type-fest": "^5",
     "typescript": "^5",
-    "typescript-eslint": "^8",
     "vite": "^5.4",
     "xmldom": "^0.6"
   }

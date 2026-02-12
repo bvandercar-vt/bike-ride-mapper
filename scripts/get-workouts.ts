@@ -1,10 +1,15 @@
+import { readFileSync, writeFileSync } from 'node:fs'
 import { gpx as gpxToGeoJson } from '@tmcw/togeojson'
-import { readFileSync, writeFileSync } from 'fs'
 import type { LineString } from 'geojson'
 import { DateTime } from 'luxon'
 import { DOMParser } from 'xmldom'
+
 import type { CustomWorkout } from '../src/types'
-import { ActivityName, type ActivityType, type Route } from '../src/types/mapMyRide'
+import {
+  ActivityName,
+  type ActivityType,
+  type Route,
+} from '../src/types/mapMyRide'
 import { getEnv } from '../src/utils'
 import { MapMyRideClient } from './api/map-my-ride.api'
 import type { Point } from './utils/coordinates'
@@ -24,10 +29,13 @@ let totalNumPointsUnsimplified = 0
 let totalNumPointsSimplified = 0
 await Promise.all(
   workouts.map(async (workout) => {
-    const workoutDate = DateTime.fromISO(workout.start_datetime, { zone: 'America/Denver' })
+    const workoutDate = DateTime.fromISO(workout.start_datetime, {
+      zone: 'America/Denver',
+    })
     try {
       const route: Route = await mapMyRideClient.getRoute(workout)
-      const activityType: ActivityType = await mapMyRideClient.getActivityType(workout)
+      const activityType: ActivityType =
+        await mapMyRideClient.getActivityType(workout)
 
       if (!Object.values(ActivityName).includes(activityType.name))
         throw new Error(`unexpected activity name ${activityType.name}`)
@@ -47,13 +55,16 @@ await Promise.all(
         }
       })()
 
-      let pathError: Error | undefined = undefined
+      let pathError: Error | undefined
       if (
         (!existingWorkout &&
-          ![route.description, workout.notes].some((note) => note?.includes('GOOD'))) ||
+          ![route.description, workout.notes].some((note) =>
+            note?.includes('GOOD'),
+          )) ||
         existingWorkout?.pathHasIssue
       ) {
-        const pathPoints = (geoJson.features[0].geometry as LineString).coordinates as Point[]
+        const pathPoints = (geoJson.features[0].geometry as LineString)
+          .coordinates as Point[]
         try {
           validatePointsDistance(pathPoints, {
             maxRouteDistanceFt: 500,
@@ -66,15 +77,13 @@ await Promise.all(
 
       if (pathError) throw pathError
 
-      const { geoJsonSimplified, numPointsUnsimplified, numPointsSimplified } = simplifyGeoJson(
-        geoJson,
-        { tolerance: 0.0000001, highQuality: true },
-      )
+      const { geoJsonSimplified, numPointsUnsimplified, numPointsSimplified } =
+        simplifyGeoJson(geoJson, { tolerance: 0.000_000_1, highQuality: true })
       totalNumPointsUnsimplified += numPointsUnsimplified
       totalNumPointsSimplified += numPointsSimplified
 
       const newData: CustomWorkout = {
-        title: workoutDate.toFormat('yyyy-LL-dd') + ' ' + workout.name,
+        title: `${workoutDate.toFormat('yyyy-LL-dd')} ${workout.name}`,
         pathHasIssue: Boolean(pathError),
         geoJson: geoJsonSimplified,
         workout,
@@ -84,7 +93,9 @@ await Promise.all(
 
       writeFileSync(filePath, JSON.stringify(newData, null, 2))
     } catch (error) {
-      console.error(`Error for workout: ${workout.name} (${workoutDate.toFormat('yyyy-LL-dd')})`)
+      console.error(
+        `Error for workout: ${workout.name} (${workoutDate.toFormat('yyyy-LL-dd')})`,
+      )
       errored = true
       if (error instanceof Error) {
         console.error('Error:', error.message)
