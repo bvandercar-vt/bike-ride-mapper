@@ -10,11 +10,11 @@ import {
   type ActivityType,
   type Route,
 } from '../src/types/mapMyRide'
-import { getEnv } from '../src/utils'
 import { MapMyRideClient } from './api/map-my-ride.api'
 import type { Point } from './utils/coordinates'
 import { validatePointsDistance } from './utils/coordinates'
 import { simplifyGeoJson } from './utils/geoJson'
+import { getEnv } from './utils/get-env'
 
 const { MMR_USER_ID } = getEnv('MMR_USER_ID')
 

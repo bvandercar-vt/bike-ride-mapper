@@ -33,7 +33,6 @@
   },
   "dependencies": {
     "classnames": "^2",
-    "dotenv": "^16",
     "es-toolkit": "^1.44",
     "leaflet": "^1.9",
     "leaflet-polylinedecorator": "^1.6",
@@ -57,6 +56,7 @@
     "@types/xmldom": "^0.1",
     "@vitejs/plugin-react": "^4",
     "autoprefixer": "^10",
+    "dotenv": "^16",
     "geojson": "^0.5.0",
     "postcss": "^8",
     "postcss-load-config": "^6",
